@@ -17,20 +17,24 @@ const Home: React.SFC <HomeProps> = ({user}) => {
             <Header/>
             <main className="c-home">
                 <div className="o-container">
-                    <section className="c-app__title-container">
-                        <h1 className="o-h1 c-app__main-title">Laravel + react + redux + typescript + sass</h1>
-                        <h2 className="c-app__sub-title">is awesome</h2>
-                        <a href="https://github.com/CezSew" className="c-app__title-author">with love by cezsew @2020</a>
+                    <section className="c-home__introduction c-introduction">
+                        <div className="c-introduction__description-box">
+                            <h1 className="c-introduction__title">
+                                Ucz się <span className="o-underlined">wydajniej</span>
+                            </h1>
+                            <p className="c-introduction__description">
+                                Wiedza to potęga. Pozwolimy Ci ją ujarzmić dzięki zestawowi darmowych narzędzi. Ucz się, udostępniaj, oceniaj, popularyzuj!
+                            </p>
+                            <div className="c-introduction__buttons">
+                                <Link className="o-button o-button--gradient" to="/">
+                                    Dowiedz się więcej
+                                </Link>
+                                <Link className="o-link o-link--secondary" to="/">
+                                    Szukaj testów
+                                </Link>
+                            </div>
+                        </div>
                     </section>
-                    <section className="o-page-content">
-                        <p className="o-main-title c-home__title">
-                            Homepage
-                        </p>
-                        <p>
-                            Visit protected site: <br/>
-                            <Link to="/protected">Protected</Link>
-                        </p>  
-                    </section>                        
                 </div>
             </main>
         </AuthOverlord>

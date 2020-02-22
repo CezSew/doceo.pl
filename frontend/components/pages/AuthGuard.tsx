@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import store from "../../store";
+import Header from '../parts/Header';
 
 interface AuthGuardProps {
     history: any,
@@ -38,7 +39,14 @@ class AuthGuard extends Component<AuthGuardProps> {
 
   render() {
     if(!this.props.isUserLoggedIn) {
-      return <div className="o-container"><p>Loading ...</p></div>;
+      return (
+      <React.Fragment>
+        <Header/>
+        <div className="o-container">
+          <p>Loading ...</p>
+        </div>
+      </React.Fragment>
+      );
     } else {
       return this.props.children;
     }

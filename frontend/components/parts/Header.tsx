@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import '../../css/parts/header.scss';
-import AuthComponent from '../pages/AuthGuard';
-import {USER_LOGOUT} from '../../constants/action-types';
 import {handleLogout} from '../../actions';
 
 interface HeaderProps {
@@ -18,15 +16,22 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout}) =
     return (
         <header className="c-header">
             <div className="o-container o-container--space-between">
-                <p className="c-header__logo">
-                    <a href="/">Logo</a>
-                </p>
+                <Link className="c-header__logo c-logo" to="/">
+                   KOTUTOR <span  className="c-logo__text-bold">E-LEARNING</span>
+                </Link>
                 {isUserLoggedIn 
-                    ? <React.Fragment>
-                        <p>Logged in as {user.name}</p>
-                        <button className="c-header__logout" onClick={() => dispatchLogout()}><a href="/">logout</a></button>
-                      </React.Fragment> 
-                    : <Link to="/login">login</Link>}
+                ?   <React.Fragment>
+                        <p className="c-header__login-information">Logged in as {user.name}</p>
+                        <button className="c-header__logout" onClick={() => dispatchLogout()}>
+                            <Link className="c-header__link" to="/">
+                                logout
+                            </Link>
+                        </button>
+                    </React.Fragment> 
+                :   <Link className="c-header__link" to="/login">
+                        login
+                    </Link>
+                }
             </div>
         </header>
     )
