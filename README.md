@@ -13,8 +13,7 @@ Description will be added soon
 * Install composer dependencies using composer install
 * Run:
  ```php artisan key:generate``` 
- ```php artisan migrate``` 
  ```php artisan jwt:secret```
  ```php artisan storage:link```
 * Install NPM dependencies using npm install
-* create a database (remeber to define it in .envrc) and ```run php artisan migrate```
+* create a database (remeber to define it in .envrc) and ```php artisan migrate```
