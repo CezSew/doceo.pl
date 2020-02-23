@@ -4,6 +4,7 @@ import '../../css/pages/home.scss';
 import Header from '../parts/Header';
 import { connect } from 'react-redux';
 import AuthOverlord from '../auth/AuthOverlord';
+import RegistrationForm from '../parts/RegistrationForm';
 
 interface HomeProps {
     user: {
@@ -33,6 +34,9 @@ const Home: React.SFC <HomeProps> = ({user}) => {
                                     Szukaj testów
                                 </Link>
                             </div>
+                        </div>
+                        <div className="c-introduction__registration-box">
+                            <RegistrationForm />
                         </div>
                     </section>
                 </div>

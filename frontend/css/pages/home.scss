@@ -7,6 +7,7 @@
 .c-introduction { 
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 10rem;
     align-items: center;
     min-height: 100vh;
 }
