@@ -102,8 +102,7 @@ module.exports = {
                 ],
             },
             // static assets
-            { test: /\.png$/, use: "url-loader?limit=10000" },
-            { test: /\.jpg$/, use: "file-loader" }
+            { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
         ]
     },
     plugins: [

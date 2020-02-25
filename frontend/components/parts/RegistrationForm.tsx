@@ -5,11 +5,11 @@ import InputLine from '../parts/InputLine';
 
 const RegistrationForm: React.SFC  = () => {
     return (
-       <form className="o-registration-form">
-           <p className="o-registration-form__title o-title o-title--h2 o-title--line">
+       <form className="o-form">
+           <p className="o-form__title o-title o-title--h2 o-title--line">
                Rejestracja
             </p>
-            <p className="o-registration-form__desc">
+            <p className="o-form__desc">
                 Rejestrując się otrzymasz szereg udogodnień, takich jak dostęp do statystyk, możliwość zapisywania i tworzenia testów, jak i oceniania testów innych użytkowników.
             </p>
             <InputLine name="login" type="text" icon="user" placeholder="login"/>

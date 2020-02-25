@@ -9,7 +9,9 @@ interface InputLineInterface {
     type: string,
     name: string,
     classes?: string,
-    value?: string
+    value?: string,
+    handleOnChange?: Function,
+    handleClick?: Function
 }
 
 class InputLine extends React.Component<InputLineInterface> {
@@ -18,7 +20,7 @@ class InputLine extends React.Component<InputLineInterface> {
     }
 
     render() {
-        const {classes = '', name= 'input', type = 'text', icon = '', placeholder = '', value = ''} = this.props;
+        const {classes = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}} = this.props;
         
         let svgElement;
         
@@ -45,7 +47,10 @@ class InputLine extends React.Component<InputLineInterface> {
                         {svgElement}
                     </div>
                 </div>}
-                <input className={`o-input o-input--${icon} ${classes}`} type={type} name={name} placeholder={placeholder} value={value}/>
+                {type === "submit" 
+                    ? <input className={`o-input o-input--${icon} ${classes}`} type={type} name={name} placeholder={placeholder} value={value} onClick={e => handleClick(e)}/>
+                    : <input className={`o-input o-input--${icon} ${classes}`} type={type} name={name} placeholder={placeholder} onChange={e => handleOnChange(e)} onClick={e => handleClick(e)}/>
+                }
             </div>
         );
     }

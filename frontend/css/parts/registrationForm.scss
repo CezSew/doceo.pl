@@ -1,16 +1,23 @@
 @import '../utils/variables.scss';
 
-.o-registration-form {
+.o-form {
     display: grid;
     justify-content: center;
     align-items: center;
     padding: 5rem;
     border: 1px solid $clay;
     border-radius: 1.8rem;
-    box-shadow: 6px 6px 19px 0px rgba(0, 0, 0, 0.18)
+    box-shadow: 6px 6px 19px 0px rgba(0, 0, 0, 0.18);
+    background-color: $white;
+    box-sizing: border-box;
+
+    &--login {
+        justify-content: stretch;
+        min-width: 45rem;
+    }
 }
 
-.o-registration-form__desc {
+.o-form__desc {
     display: block;
     font-size: 1.8rem;
     color: $clay;
@@ -18,6 +25,6 @@
     font-weight: 300;
 }
 
-.o-registration-form__title {
+.o-form__title {
     margin-bottom: 3rem;
 }
