@@ -30,7 +30,7 @@ const Home: React.SFC <HomeProps> = ({user}) => {
                                 <Link className="o-button o-button--gradient" to="/">
                                     Dowiedz się więcej
                                 </Link>
-                                <Link className="o-link o-link--secondary" to="/">
+                                <Link className="o-link o-link--secondary" to="/tests-main">
                                     Szukaj testów
                                 </Link>
                             </div>
