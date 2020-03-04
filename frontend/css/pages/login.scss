@@ -7,28 +7,9 @@
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    background-color: $lightgray;
 
-    &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: $clay;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        opacity: 0.78;
+    .o-form {
+        border: 0;
     }
-}
-
-.c-login__background {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }

@@ -39,7 +39,7 @@ h4, h5, h6 {
             margin-right: 1rem;
             width: .3rem;
             height: 3rem;
-            background-color: $purple2;
+            background-color: $lightred;
         }
     }
 
@@ -106,21 +106,20 @@ h4, h5, h6 {
     font-size: 1.8rem;
 
     &--secondary {
-        color: $purple2;
+        color: $lightred;
     }   
 }
 
 .o-button {
     display: block;
-    padding: 2rem 4.5rem;
-    border-radius: 3rem;
+    padding: 1.75rem 3.5rem;
+    border-radius: 0.5rem;
     text-decoration: none;
 
-    &--gradient {
+    &--primary {
         color: $white;
-        font-size: 1.8rem;
-        background: $purple2;
-        background: linear-gradient(170deg, $purple2 0%, $purple3 100%);
+        font-size: 1.6rem;
+        background-color: $purple;
     }
 }
 
@@ -132,15 +131,16 @@ h4, h5, h6 {
     border: 0;
     border-bottom: 1px solid $clay;
     width: 100%;
+    cursor: pointer;
 
     &--submit {
-        border-radius: 3rem;
+        border-radius: 0.5rem;
         padding: 1rem 5rem;
         font-size: 1.6rem;
         color: $white;
-        background-color: $purple2;
+        background-color: $purple;
         width: auto;
-        font-weight: 600;
+        font-weight: 400;
     }
 }
 
@@ -168,7 +168,7 @@ h4, h5, h6 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(170deg, $purple2 0%, $purple3 100%);
+    background-color: $purple;
     border-radius: 49%;
     width: 3rem;
     height: 3rem;

@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import '../../css/pages/login.scss';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import Header from '../parts/Header';
 import InputLine from '../parts/InputLine';
-import books from '../../img/books.jpg';
 
 interface LoginProps {
     history: any
@@ -63,7 +61,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             <React.Fragment>
                 <Header/>
                 <main className="c-login">
-                    <img className="c-login__background" src={books} alt="books"/>
                     <div className="o-container">
                         <form className="o-form o-form--login">
                             <h1 className="o-form__title o-title o-title--h2 o-title--line">Logowanie</h1>

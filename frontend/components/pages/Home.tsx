@@ -27,7 +27,7 @@ const Home: React.SFC <HomeProps> = ({user}) => {
                                 Wiedza to potęga. Pozwolimy Ci ją ujarzmić dzięki zestawowi darmowych narzędzi. Ucz się, udostępniaj, oceniaj, popularyzuj!
                             </p>
                             <div className="c-introduction__buttons">
-                                <Link className="o-button o-button--gradient" to="/">
+                                <Link className="o-button o-button--primary" to="/">
                                     Dowiedz się więcej
                                 </Link>
                                 <Link className="o-link o-link--secondary" to="/tests-main">
