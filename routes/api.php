@@ -22,3 +22,5 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
     Route::get('closed', 'DataController@closed');
 });
+
+Route::post('quiz','QuizesController@store');
