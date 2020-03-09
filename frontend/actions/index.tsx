@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { SET_USER, USER_LOGOUT, CREATE_TEST } from '../constants/action-types';
+import { 
+    SET_USER, 
+    USER_LOGOUT, 
+    CREATE_TEST, 
+    GET_TOP_QUIZES, 
+    REQUEST_TOP_QUIZES_START 
+} from '../constants/action-types';
 import { getJwt } from '../helpers';
 
 export function setUser(user) {
@@ -21,5 +27,24 @@ export function createTest(e) {
     ).then(res => {
       console.log(res);
     });
-    return { type: CREATE_TEST }
+}
+
+const getTopQuizes = data => {
+    console.log('getTopQuizes')
+    return { type: GET_TOP_QUIZES, payload: { ...data }}
+}
+
+const requestTopQuizesStarted = () => {
+    console.log('requestTopQuizesStarted')
+    return { type: REQUEST_TOP_QUIZES_START }
+}
+
+export const requestTopQuizes = () => {
+    return (dispatch, getState) => {
+        dispatch(requestTopQuizesStarted());
+
+        axios.post('http://localhost:8000/api/get-top-quizes').then((res => {
+            dispatch(getTopQuizes(res.data));
+        }));
+    }
 }

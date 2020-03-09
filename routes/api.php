@@ -24,3 +24,4 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 });
 
 Route::post('quiz','QuizesController@store');
+Route::post('get-top-quizes', 'QuizesController@getBestQuizes');

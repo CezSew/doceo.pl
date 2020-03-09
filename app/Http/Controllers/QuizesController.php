@@ -40,4 +40,10 @@ class QuizesController extends Controller
         $quiz = Quiz::create($request->all());
         return response()->json($quiz, 201);
     }
+
+    public function getBestQuizes() {
+        $quizes = Quiz::orderBy('rating', 'DESC')->get();
+            
+        return response()->json($quizes, 201);
+    }
 }
