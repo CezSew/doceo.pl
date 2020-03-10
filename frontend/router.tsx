@@ -6,6 +6,7 @@ import Login from './components/pages/Login';
 import AuthGuard from './components/pages/AuthGuard';
 import Protected from './components/pages/Protected';
 import TestsHub from './components/pages/TestsHub';
+import QuizCreator from './components/pages/QuizCreator';
 
 export const RouterComponent = () => (
     <BrowserRouter>
@@ -15,6 +16,7 @@ export const RouterComponent = () => (
         <Route path="/tests-main" component={TestsHub} />
         <AuthGuard>
           <Route path={'/protected'} component={Protected} />
+          <Route path={'/create-quiz'} component={QuizCreator} />
         </AuthGuard>
       </Switch>
     </BrowserRouter>

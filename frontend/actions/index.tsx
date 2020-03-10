@@ -18,24 +18,28 @@ export function handleLogout() {
 }
 
 export function createTest(e) {
-    axios.post('http://localhost:8000/api/quiz', {
-        title: `test random ${Math.random() * 100}`,
-        type: 'abcd',
-        questions: 'TESTESTESTEST'
-    },
-    { headers: { Authorization: getJwt() } }
-    ).then(res => {
-      console.log(res);
-    });
+    e.preventDefault();
+    const title = e.target.querySelector('.o-input[name=name]').value;
+    const type = e.target.querySelector('.o-input[name=type]').value;
+
+    if(title && type) {
+        axios.post('http://localhost:8000/api/quiz', {
+            title: title,
+            type: type,
+            questions: 'TESTESTESTEST'
+        },
+        { headers: { Authorization: getJwt() } }
+        ).then(res => {
+            console.log(res);
+        });
+    }
 }
 
 const getTopQuizes = data => {
-    console.log('getTopQuizes')
     return { type: GET_TOP_QUIZES, payload: { ...data }}
 }
 
 const requestTopQuizesStarted = () => {
-    console.log('requestTopQuizesStarted')
     return { type: REQUEST_TOP_QUIZES_START }
 }
 

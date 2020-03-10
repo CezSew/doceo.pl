@@ -5,7 +5,7 @@ import Header from '../parts/Header';
 import { connect } from 'react-redux';
 import AuthOverlord from '../auth/AuthOverlord';
 import '../../css/pages/testHub.scss';
-import { createTest, requestTopQuizes } from '../../actions';
+import { requestTopQuizes } from '../../actions';
 
 interface TestsHubProps {
     user: {
@@ -26,7 +26,7 @@ const TestsHub: React.SFC <TestsHubProps> = ({user, quizes_all_by_rating, reques
             <Header/>
             <main className="c-test-hub">
                 <div className="o-container">
-                    <button onClick={(e) => createTest(e)}>Add new test</button> 
+                    <Link to="/create-quiz">Utwórz quiz</Link>
                     <button onClick={() => onRequestTopQuizes()}>Get top quizes</button>
                 </div>
                 <ul>{quizes}</ul>
