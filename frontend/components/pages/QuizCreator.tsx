@@ -5,6 +5,7 @@ import Header from "../parts/Header";
 import InputLine from "../parts/InputLine";
 import '../../css/pages/quizCreator.scss';
 import { createTest } from '../../actions';
+import fileLoadModule from '../../helpers/fileLoadModule';
 
 interface QuizCreatorProps {
     user: {
@@ -12,7 +13,12 @@ interface QuizCreatorProps {
     }
 }
 
-const QuizCreator: React.SFC <QuizCreatorProps> = ({user}) => {
+class QuizCreator extends React.Component<QuizCreatorProps> {   
+    componentDidMount() {
+        fileLoadModule();
+    }
+
+   render() {
     return (
         <AuthOverlord>
             <Header />
@@ -24,13 +30,19 @@ const QuizCreator: React.SFC <QuizCreatorProps> = ({user}) => {
                         </p>
                         <InputLine name="name" type="text" placeholder="nazwa"/>
                         <InputLine name="type" type="text" placeholder="typ"/>
-                        <InputLine name="file" type="file" placeholder="Dodaj plik"/>
+                        <InputLine name="hidden-questions" type="text" placeholder="pytania"/>
+                        <div>
+                            <div className="js-file-holder" id="holder"></div> 
+                            <p id="status">Przeciągnij plik .txt</p>
+                        </div>
                         <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
+                
                     </form>
                 </div>
             </main>
         </AuthOverlord>
     )
+   }
 }
 
 const mapStateToProps = state => ({
