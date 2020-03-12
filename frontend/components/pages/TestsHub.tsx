@@ -16,23 +16,32 @@ interface TestsHubProps {
     onRequestTopQuizes: Function       
 }
 
-const TestsHub: React.SFC <TestsHubProps> = ({user, quizes_all_by_rating, request_in_progress, onRequestTopQuizes}) => {
-    const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => {
-        return <li key={i}><b>{quizes_all_by_rating[keyName].title}</b></li>
-    });
-    
-    return (
-        <AuthOverlord>
-            <Header/>
-            <main className="c-test-hub">
-                <div className="o-container">
-                    <Link to="/create-quiz">Utwórz quiz</Link>
-                    <button onClick={() => onRequestTopQuizes()}>Get top quizes</button>
-                </div>
-                <ul>{quizes}</ul>
-            </main>
-        </AuthOverlord>
-    );
+class TestsHub extends React.Component <TestsHubProps> {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.onRequestTopQuizes();
+    }
+
+    render() {
+        const {quizes_all_by_rating} = this.props;
+        const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => {
+            return <li key={i}><b>{quizes_all_by_rating[keyName].title}</b></li>
+        });
+        return (
+            <AuthOverlord>
+                <Header/>
+                <main className="c-test-hub">
+                    <div className="o-container">
+                        <Link to="/create-quiz">Utwórz quiz</Link>
+                    </div>
+                    <ul>{quizes}</ul>
+                </main>
+            </AuthOverlord>
+        );
+    }
 }
 
 const mapStateToProps = state => ({

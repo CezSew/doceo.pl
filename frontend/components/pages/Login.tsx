@@ -46,7 +46,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 <Header/>
                 <main className="c-login">
                     <div className="o-container">
-                        <form className="o-form o-form--login" onSubmit={(e) => handleLogin(e, this.state.username, this.state.password, this.props.history)}>
+                        <form 
+                        className="o-form o-form--login" 
+                        onSubmit={(e) => handleLogin(e, this.state.username, this.state.password, this.props.history)}>
                             <h1 className="o-form__title o-title o-title--h2 o-title--line">Logowanie</h1>
                             <InputLine name="username" type="text" icon="user" placeholder="login" handleOnChange={this.onChange}/>
                             <InputLine name="password" type="password" icon="user" placeholder="hasło" handleOnChange={this.onChange}/>
