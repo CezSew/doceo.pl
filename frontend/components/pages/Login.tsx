@@ -1,8 +1,8 @@
 import React from "react";
 import '../../css/pages/login.scss';
-import axios from 'axios';
 import Header from '../parts/Header';
 import InputLine from '../parts/InputLine';
+import { handleLogin } from '../../helpers/login';
 
 interface LoginProps {
     history: any
@@ -23,23 +23,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             error: false
         }
 
-        this.handleLogin = this.handleLogin.bind(this);
         this.onChange = this.onChange.bind(this);
-    }
-
-    handleLogin(e) {
-        e.preventDefault();
-        axios.post('http://localhost:8000/api/login', {
-            email: this.state.username,
-            password: this.state.password
-        }).then(res => {
-          localStorage.setItem('jwt', res.data.token);
-          this.props.history.push('/')
-        }).catch(() => {
-            this.setState({
-                error: true
-            });
-        });
     }
 
     onChange(e) {
@@ -62,14 +46,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 <Header/>
                 <main className="c-login">
                     <div className="o-container">
-                        <form className="o-form o-form--login">
+                        <form className="o-form o-form--login" onSubmit={(e) => handleLogin(e, this.state.username, this.state.password, this.props.history)}>
                             <h1 className="o-form__title o-title o-title--h2 o-title--line">Logowanie</h1>
                             <InputLine name="username" type="text" icon="user" placeholder="login" handleOnChange={this.onChange}/>
                             <InputLine name="password" type="password" icon="user" placeholder="hasło" handleOnChange={this.onChange}/>
                             <div className="o-error-container">
                                 {errorElem}
                             </div>
-                            <InputLine name="Login" type="submit" value="Zaloguj się" classes="o-input--submit" handleClick={this.handleLogin}/>
+                            <InputLine name="Login" type="submit" value="Zaloguj się" classes="o-input--submit"/>
                         </form>
                     </div>
                 </main>
