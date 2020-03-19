@@ -1,5 +1,140 @@
 @import '../utils/variables.scss';
 
 .c-test-hub {
-    margin-top: 10rem;
+    padding-top: 7rem;
+    background-color: $lightgray;
+
+    .o-container {
+        display: grid;
+        grid-template-columns: 32rem auto;
+        grid-template-areas: 'aside main';
+    }
+}
+
+.c-test-hub__menu {
+    grid-area: aside;
+    background-color: $white;
+    padding-top: 6rem;
+}
+
+.c-test-hub__main {
+    grid-area: main;
+}
+
+.c-test-hub__menu-item {
+    display: block;
+    font-size: 1.2rem;
+    color: $darkgray;
+    padding: 1.7rem 3.5rem;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $lightpurple;
+        color: $purple;
+    }
+}
+
+.c-test-hub__title-container {
+    background-color: $white;
+    padding: 2rem;
+}
+
+.c-test-hub__title {
+    color: $purple;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.c-test-hub__quiz-list {
+    padding: 0;
+}
+
+.c-test-hub__table-header {
+    display: grid;
+    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
+    align-items: start;
+    margin-top: 7rem;
+}
+
+.c-test-hub__table-th {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    text-align: center;
+
+    &--name {
+        grid-column: 1/4;
+    }
+
+    &--type {
+        grid-column: 4;
+    }
+
+    &--score {
+        grid-column: 5;
+    }
+
+    &--rating {
+        grid-column: 6;
+    }
+}
+
+.c-quiz-line {
+    display: grid;
+    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
+    align-items: stretch;
+    justify-items: stretch;
+    background-color: $white;
+    border-bottom: 1px dashed $lightpurple;
+    margin-bottom: 2rem;
+}
+
+.c-quiz-line__short {
+    grid-column: 1;
+}
+
+.c-test-hub__table {
+    padding-left: 2rem;
+}
+
+.c-quiz-line__circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: $purple;
+    color: $white;
+    font-size: 2.5rem;
+    border-radius: 49%;
+    margin: 1rem;   
+    width: 5rem;
+    height: 5rem;
+}
+
+.c-quiz-line__title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-column: 3;
+    font-size: 1.8rem;
+    overflow: hidden;
+}
+
+.c-quiz-line__type, .c-quiz-line__score, .c-quiz-line__rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-quiz-line__type {
+    grid-column: 4;
+}
+
+.c-quiz-line__score {
+    grid-column: 5;
+}
+
+.c-quiz-line__rating {
+    grid-column: 6;
 }
