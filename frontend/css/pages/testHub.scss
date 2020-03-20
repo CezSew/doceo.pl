@@ -14,7 +14,8 @@
 .c-test-hub__menu {
     grid-area: aside;
     background-color: $white;
-    padding-top: 6rem;
+    padding-top: 7rem;
+    z-index: 2;
 }
 
 .c-test-hub__main {
@@ -23,10 +24,16 @@
 
 .c-test-hub__menu-item {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     color: $darkgray;
-    padding: 1.7rem 3.5rem;
+    padding: 1.2rem 3.5rem;
     text-decoration: none;
+    border-bottom: 2px dashed $lightpurple;
+    font-weight: 600;
+    
+    &:first-of-type {
+        border-top: 2px dashed $lightpurple;
+    }
 
     &:hover {
         background-color: $lightpurple;
@@ -36,13 +43,15 @@
 
 .c-test-hub__title-container {
     background-color: $white;
-    padding: 2rem;
+    padding: 1.85rem;
+    box-shadow: -10px 1px 12px 2px rgba(0,0,0,0.18);
 }
 
 .c-test-hub__title {
     color: $purple;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 300;
+    font-weight: 400;
 }
 
 .c-test-hub__quiz-list {
@@ -53,7 +62,7 @@
     display: grid;
     grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
     align-items: start;
-    margin-top: 7rem;
+    margin-top: 3rem;
 }
 
 .c-test-hub__table-th {
@@ -86,8 +95,7 @@
     align-items: stretch;
     justify-items: stretch;
     background-color: $white;
-    border-bottom: 1px dashed $lightpurple;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .c-quiz-line__short {
@@ -105,11 +113,11 @@
     flex-shrink: 0;
     background-color: $purple;
     color: $white;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     border-radius: 49%;
     margin: 1rem;   
-    width: 5rem;
-    height: 5rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 .c-quiz-line__title {
@@ -117,8 +125,9 @@
     justify-content: flex-start;
     align-items: center;
     grid-column: 3;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .c-quiz-line__type, .c-quiz-line__score, .c-quiz-line__rating {
@@ -128,13 +137,16 @@
 }
 
 .c-quiz-line__type {
+    font-size: 1.2rem;
     grid-column: 4;
 }
 
 .c-quiz-line__score {
+    font-size: 1.2rem;
     grid-column: 5;
 }
 
 .c-quiz-line__rating {
+    font-size: 1.2rem;
     grid-column: 6;
 }
