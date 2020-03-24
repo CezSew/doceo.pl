@@ -3,10 +3,11 @@
 .c-test-hub {
     padding-top: 7rem;
     background-color: $lightgray;
+    min-height: 100vh;
 
     .o-container {
         display: grid;
-        grid-template-columns: 32rem auto;
+        grid-template-columns: 22rem auto;
         grid-template-areas: 'aside main';
     }
 }
@@ -15,7 +16,9 @@
     grid-area: aside;
     background-color: $white;
     padding-top: 7rem;
+    padding-bottom: 5rem;
     z-index: 2;
+    align-self: flex-start;
 }
 
 .c-test-hub__main {
@@ -29,7 +32,7 @@
     padding: 1.2rem 3.5rem;
     text-decoration: none;
     border-bottom: 2px dashed $lightpurple;
-    font-weight: 600;
+    font-weight: 400;
     
     &:first-of-type {
         border-top: 2px dashed $lightpurple;
@@ -44,7 +47,7 @@
 .c-test-hub__title-container {
     background-color: $white;
     padding: 1.85rem;
-    box-shadow: -10px 1px 12px 2px rgba(0,0,0,0.18);
+    box-shadow: -10px -9px 20px 2px rgba(0, 0, 0, 0.18);
 }
 
 .c-test-hub__title {
@@ -103,7 +106,7 @@
 }
 
 .c-test-hub__table {
-    padding-left: 2rem;
+    padding-left: 4rem;
 }
 
 .c-quiz-line__circle {

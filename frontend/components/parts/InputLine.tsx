@@ -21,35 +21,41 @@ class InputLine extends React.Component<InputLineInterface> {
 
     render() {
         const {classes = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}} = this.props;
-        
-        let svgElement;
+        const iconModifierClass = icon 
+        ? `o-input--${icon}` 
+        : '';
+
+        let iconContent;
         
         switch(icon) {
             case 'user':
-                svgElement = <UserSVG/>;
+                iconContent = <UserSVG/>;
                 break;
             case 'email':
-                svgElement = <EmailSVG/>;
+                iconContent = <EmailSVG/>;
                 break;
             case 'password':
-                svgElement = <PasswordSVG/>;
+                iconContent = <PasswordSVG/>;
+                break;
+            case 'letter':
+                iconContent = <span className="o-input__icon-letter">{name[0].toUpperCase()}</span>;
                 break;
             default:
-                svgElement = '';
+                iconContent = '';
                 break;
         };
         
         return (
             <div className="o-input__line">
-                {svgElement &&
+                {iconContent &&
                 <div className="o-input__icon-container">
                     <div className="o-input__icon">
-                        {svgElement}
+                        {iconContent}
                     </div>
                 </div>}
                 {type === "submit" 
-                    ? <input className={`o-input o-input--${icon} ${classes}`} type={type} name={name} placeholder={placeholder} value={value} onClick={e => handleClick(e)}/>
-                    : <input className={`o-input o-input--${icon} ${classes}`} type={type} name={name} placeholder={placeholder} onChange={e => handleOnChange(e)} onClick={e => handleClick(e)}/>
+                    ? <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} value={value} onClick={e => handleClick(e)}/>
+                    : <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} onChange={e => handleOnChange(e)} onClick={e => handleClick(e)}/>
                 }
             </div>
         );

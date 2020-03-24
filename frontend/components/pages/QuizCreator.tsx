@@ -15,6 +15,7 @@ interface QuizCreatorProps {
 }
 
 class QuizCreator extends React.Component<QuizCreatorProps> {   
+
     componentDidMount() {
         fileLoadModule();
     }
@@ -25,16 +26,20 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
             <Header />
             <main className="c-quiz-creator">
                 <div className="o-container">
-                    <form className="o-form" onSubmit={(e) => createTest(e, this.props.history)}>
+                    <form className="o-form c-quiz-creator-form" onSubmit={(e) => createTest(e, this.props.history)}>
                         <p className="o-form__title o-title o-title--h2 o-title--line">
                             Dodaj quiz
                         </p>
-                        <InputLine name="name" type="text" placeholder="nazwa"/>
-                        <InputLine name="type" type="text" placeholder="typ"/>
-                        <InputLine name="hidden-questions" type="text" placeholder="pytania"/>
-                        <div>
-                            <div className="js-file-holder" id="holder"></div> 
-                            <p id="status">Przeciągnij plik .txt</p>
+                        <div className="c-quiz-creator-form__content">
+                            <div className="c-quiz-creator-form__inputs">
+                                <InputLine name="name" type="text" placeholder="nazwa testu" icon="letter"/>
+                                <InputLine name="type" type="text" placeholder="typ testu" icon="letter"/>
+                                <InputLine name="hidden-questions" type="text" placeholder="pytania" classes="o-hidden"/>
+                            </div>
+                            <div className="c-quiz-creator-form__dropfile">
+                                <div className="js-file-holder" id="holder"></div> 
+                                <p id="status">Przeciągnij plik .txt</p>
+                            </div>
                         </div>
                         <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
                     </form>
