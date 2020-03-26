@@ -66,14 +66,16 @@
     grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
     align-items: start;
     margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 
 .c-test-hub__table-th {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
+    font-size: 1.4rem;
 
     &--name {
         grid-column: 1/4;
@@ -99,6 +101,7 @@
     justify-items: stretch;
     background-color: $white;
     margin-bottom: 1rem;
+    padding: 1rem 0;
 }
 
 .c-quiz-line__short {

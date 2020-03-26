@@ -29,9 +29,8 @@ const requestTopQuizesStarted = () => {
 export const requestTopQuizes = () => {
     return (dispatch, getState) => {
         dispatch(requestTopQuizesStarted());
-
         axios.post('http://localhost:8000/api/get-top-quizes').then((res => {
             dispatch(getTopQuizes(res.data));
-        }));
+        })); 
     }
 }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import AuthOverlord from '../auth/AuthOverlord';
 import '../../css/pages/testHub.scss';
 import { requestTopQuizes } from '../../actions';
+import { Loader } from '../utils/Loader';
 
 interface TestsHubProps {
     user: {
@@ -27,7 +28,6 @@ class TestsHub extends React.Component <TestsHubProps> {
 
     render() {
         const {quizes_all_by_rating} = this.props;
-        console.log(quizes_all_by_rating)
         const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => {
             return (
             <li key={i} className="c-quiz-line">
@@ -39,6 +39,7 @@ class TestsHub extends React.Component <TestsHubProps> {
             </li>
             )
         });
+
         return (
             <AuthOverlord>
                 <Header/>
@@ -47,7 +48,6 @@ class TestsHub extends React.Component <TestsHubProps> {
                         <aside className="c-test-hub__menu">
                             <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
                         </aside>
-
                         <section className="c-test-hub__main">
                             <div className="c-test-hub__title-container">
                                 <h1 className="o-title o-title--h2 o-title--line c-test-hub__title">
@@ -70,7 +70,7 @@ class TestsHub extends React.Component <TestsHubProps> {
                                     </div>
                                 </div>
                                 <ul className="c-test-hub__quiz-list">
-                                    {quizes}
+                                    {(quizes.length && quizes) || <Loader/>}
                                 </ul>
                             </div>
                         </section>
