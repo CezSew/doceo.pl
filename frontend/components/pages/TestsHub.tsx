@@ -45,15 +45,17 @@ class TestsHub extends React.Component <TestsHubProps> {
                 <Header/>
                 <main className="c-test-hub">
                     <div className="o-container">
+                        <div className="c-test-hub__title-container">
+                            <h1 className="o-title o-title--h2 o-title--line c-test-hub__title">
+                                Dostępne testy
+                            </h1>
+                        </div>
                         <aside className="c-test-hub__menu">
+                        <Link to="/" className="c-test-hub__menu-item">Strona główna</Link>
                             <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
                         </aside>
                         <section className="c-test-hub__main">
-                            <div className="c-test-hub__title-container">
-                                <h1 className="o-title o-title--h2 o-title--line c-test-hub__title">
-                                    Dostępne testy
-                                </h1>
-                            </div>
+
                             <div className="c-test-hub__table">
                                 <div className="c-test-hub__table-header">
                                     <div className="c-test-hub__table-th c-test-hub__table-th--name">

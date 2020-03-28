@@ -1,53 +1,54 @@
 @import '../utils/variables.scss';
 
 .c-test-hub {
-    padding-top: 7rem;
+    padding-top: 9rem;
     background-color: $lightgray;
     min-height: 100vh;
 
     .o-container {
         display: grid;
         grid-template-columns: 22rem auto;
-        grid-template-areas: 'aside main';
+        grid-template-rows: auto auto;
+        grid-template-areas: 'test-hub-title test-hub-title' 'test-hub-aside test-hub-main';
+        grid-gap: 2rem;
     }
 }
 
 .c-test-hub__menu {
-    grid-area: aside;
+    grid-area: test-hub-aside;
     background-color: $white;
-    padding-top: 7rem;
     padding-bottom: 5rem;
     z-index: 2;
     align-self: flex-start;
 }
 
 .c-test-hub__main {
-    grid-area: main;
+    grid-area: test-hub-main;
 }
 
 .c-test-hub__menu-item {
     display: block;
     font-size: 1.6rem;
-    color: $darkgray;
+    color: $black;
     padding: 1.2rem 3.5rem;
     text-decoration: none;
-    border-bottom: 2px dashed $lightpurple;
+    border-bottom: 2px solid $lightgray;
     font-weight: 400;
-    
-    &:first-of-type {
-        border-top: 2px dashed $lightpurple;
+
+    &:first-of-type { 
+        border-top: 0;
     }
 
     &:hover {
-        background-color: $lightpurple;
-        color: $purple;
+        background-color: $purple;
+        color: $white;
     }
 }
 
 .c-test-hub__title-container {
-    background-color: $white;
+    grid-area: test-hub-title;
     padding: 1.85rem;
-    box-shadow: -10px -9px 20px 2px rgba(0, 0, 0, 0.18);
+    background-color: $white;
 }
 
 .c-test-hub__title {
@@ -65,8 +66,9 @@
     display: grid;
     grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
     align-items: start;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    background-color: $white;
+    padding: 1rem 0;
 }
 
 .c-test-hub__table-th {
@@ -106,10 +108,6 @@
 
 .c-quiz-line__short {
     grid-column: 1;
-}
-
-.c-test-hub__table {
-    padding-left: 4rem;
 }
 
 .c-quiz-line__circle {
