@@ -28,7 +28,7 @@
 
 .c-test-hub__menu-item {
     display: block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: $black;
     padding: 1.2rem 3.5rem;
     text-decoration: none;
@@ -104,6 +104,30 @@
     background-color: $white;
     margin-bottom: 1rem;
     padding: 1rem 0;
+
+    &:nth-child(4n - 3) {
+        .c-quiz-line__circle {
+            background-color: $lightred;
+        }
+    }
+
+    &:nth-child(4n - 2) {
+        .c-quiz-line__circle {
+            background-color: $green;
+        }
+    }
+
+    &:nth-child(4n - 1) {
+        .c-quiz-line__circle {
+            background-color: $yellow;
+        }
+    }
+
+    &:nth-child(4n) {
+        .c-quiz-line__circle {
+            background-color: $turquoise;
+        }
+    }
 }
 
 .c-quiz-line__short {
@@ -122,16 +146,24 @@
     margin: 1rem;   
     width: 3.5rem;
     height: 3.5rem;
+    text-transform: uppercase;
 }
 
-.c-quiz-line__title {
+.c-quiz-line__title-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     grid-column: 3;
-    font-size: 1.6rem;
-    overflow: hidden;
+}
+
+.c-quiz-line__title {
+    display: block;
     white-space: nowrap;
+    max-width: 100%;
+    font-size: 1.6rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1;
 }
 
 .c-quiz-line__type, .c-quiz-line__score, .c-quiz-line__rating {

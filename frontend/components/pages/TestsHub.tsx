@@ -7,6 +7,7 @@ import AuthOverlord from '../auth/AuthOverlord';
 import '../../css/pages/testHub.scss';
 import { requestTopQuizes } from '../../actions';
 import { Loader } from '../utils/Loader';
+import { testNameLetters } from '../../helpers/testNameLetters';
 
 interface TestsHubProps {
     user: {
@@ -29,10 +30,12 @@ class TestsHub extends React.Component <TestsHubProps> {
     render() {
         const {quizes_all_by_rating} = this.props;
         const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => {
+            const shortTestName = testNameLetters(quizes_all_by_rating[keyName].title);
+            
             return (
             <li key={i} className="c-quiz-line">
-                <div className="c-quiz-line__short"><span className="c-quiz-line__circle">XD</span></div>
-                <div className="c-quiz-line__title">{quizes_all_by_rating[keyName].title}</div>
+                <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{shortTestName}</span></div>
+                <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quizes_all_by_rating[keyName].title}</span></div>
                 <div className="c-quiz-line__type">{quizes_all_by_rating[keyName].type}</div>
                 <div className="c-quiz-line__score">-</div>
                 <div className="c-quiz-line__rating">{quizes_all_by_rating[keyName].rating} ({quizes_all_by_rating[keyName].votes} głosów)</div>
