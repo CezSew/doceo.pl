@@ -30,6 +30,7 @@ const fileLoadModule = () => {
                 state.textContent = 'Pomyślnie odczytano plik';
                 test.name = 'user-test';
                 setLocalStorage(test, 'user-test');
+                setQuestionFieldContent(JSON.stringify(test));
             } else {
                 state.textContent = validation.error;
             };
@@ -121,17 +122,16 @@ const isTestFileValid = (testObject) => {
         error = 'Przesłany test jest zbyt krótki!';
         return {status: false, error: error};
     }
-    console.log('testObject:')
-    console.log(testObject)
+
     return {status: true, error: ''};
 }
 
-const removeEmptyLines = (file) => {
-    let result = file.filter(value => value);
-
-    console.log(result)
-
-    return result;
+const setQuestionFieldContent = (json) => {
+    const questionsInput = document.querySelector('[name=hidden-questions]');
+    
+    if(questionsInput) {
+        questionsInput.value = json;
+    }
 }
 
 export default fileLoadModule;
