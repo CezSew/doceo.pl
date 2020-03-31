@@ -34,11 +34,20 @@ class TestsHub extends React.Component <TestsHubProps> {
             
             return (
             <li key={i} className="c-quiz-line">
-                <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{shortTestName}</span></div>
-                <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quizes_all_by_rating[keyName].title}</span></div>
-                <div className="c-quiz-line__type">{quizes_all_by_rating[keyName].type}</div>
-                <div className="c-quiz-line__score">-</div>
-                <div className="c-quiz-line__rating">{quizes_all_by_rating[keyName].rating} ({quizes_all_by_rating[keyName].votes} głosów)</div>
+                <Link to={{
+                    pathname: '/test-page',
+                    state: {
+                        quizId: 0,
+                        quizName: quizes_all_by_rating[keyName].title
+                    }
+                }} className="c-test-hub__quiz-link"
+                >
+                    <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{shortTestName}</span></div>
+                    <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quizes_all_by_rating[keyName].title}</span></div>
+                    <div className="c-quiz-line__type">{quizes_all_by_rating[keyName].type}</div>
+                    <div className="c-quiz-line__score">-</div>
+                    <div className="c-quiz-line__rating">{quizes_all_by_rating[keyName].rating} ({quizes_all_by_rating[keyName].votes} głosów)</div>
+                </Link>
             </li>
             )
         });

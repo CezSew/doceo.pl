@@ -96,13 +96,21 @@
 }
 
 .c-quiz-line {
-    display: grid;
-    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
-    align-items: stretch;
-    justify-items: stretch;
+    display: block;
     background-color: $white;
     margin-bottom: 1rem;
     padding: 1rem 0;
+    transition: 0.1s background-color;
+
+    &:hover {
+        background-color: $purple;
+        .c-quiz-line__title,
+        .c-quiz-line__type,
+        .c-quiz-line__score,
+        .c-quiz-line__rating {
+            color: $white;
+        }
+    }
 
     &:nth-child(4n - 3) {
         .c-quiz-line__circle {
@@ -127,6 +135,15 @@
             background-color: $turquoise;
         }
     }
+}
+
+.c-test-hub__quiz-link {
+    display: grid;
+    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
+    align-items: stretch;
+    justify-items: stretch;
+    text-decoration: none;
+    color: initial;
 }
 
 .c-quiz-line__short {
