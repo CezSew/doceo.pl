@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { 
-    SET_USER, 
-    USER_LOGOUT, 
-    CREATE_TEST, 
-    GET_TOP_QUIZES, 
-    REQUEST_TOP_QUIZES_START 
+import {
+    SET_USER,
+    USER_LOGOUT,
+    CREATE_TEST,
+    GET_TOP_QUIZES,
+    REQUEST_TOP_QUIZES_START
 } from '../constants/action-types';
 
 export function setUser(user) {
@@ -15,8 +15,6 @@ export function handleLogout() {
     localStorage.removeItem('jwt');
     return { type: USER_LOGOUT }
 }
-
-
 
 const getTopQuizes = data => {
     return { type: GET_TOP_QUIZES, payload: { ...data }}
@@ -31,6 +29,7 @@ export const requestTopQuizes = () => {
         dispatch(requestTopQuizesStarted());
         axios.post('http://localhost:8000/api/get-top-quizes').then((res => {
             dispatch(getTopQuizes(res.data));
-        })); 
+            console.log(res.data)
+        }));
     }
 }

@@ -1,27 +1,24 @@
+import '../../../css/pages/home.scss';
+import '../../../css/pages/testHub.scss';
 import React from "react";
 import {Link} from 'react-router-dom';
-import '../../css/pages/home.scss';
-import Header from '../parts/Header';
+import Header from '../../parts/Header';
 import { connect } from 'react-redux';
-import AuthOverlord from '../auth/AuthOverlord';
-import '../../css/pages/testHub.scss';
-import { requestTopQuizes } from '../../actions';
-import { Loader } from '../utils/Loader';
-import { testNameLetters } from '../../helpers/testNameLetters';
+import AuthOverlord from '../../auth/AuthOverlord';
+import { requestTopQuizes } from '../../../actions';
+import { Loader } from '../../utils/Loader';
+import { QuizLine } from "./QuizLine";
 
 interface TestsHubProps {
     user: {
         name: string|undefined
-    }, 
+    },
     quizes_all_by_rating: Array<string>|undefined,
     request_in_progress: boolean,
-    onRequestTopQuizes: Function       
+    onRequestTopQuizes: Function
 }
 
 class TestsHub extends React.Component <TestsHubProps> {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.onRequestTopQuizes();
@@ -29,31 +26,11 @@ class TestsHub extends React.Component <TestsHubProps> {
 
     render() {
         const {quizes_all_by_rating} = this.props;
-        const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => {
-            const shortTestName = testNameLetters(quizes_all_by_rating[keyName].title);
-            
-            return (
-            <li key={i} className="c-quiz-line">
-                <Link to={{
-                    pathname: '/test-page',
-                    state: {
-                        quizId: 0,
-                        quizName: quizes_all_by_rating[keyName].title
-                    }
-                }} className="c-test-hub__quiz-link"
-                >
-                    <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{shortTestName}</span></div>
-                    <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quizes_all_by_rating[keyName].title}</span></div>
-                    <div className="c-quiz-line__type">{quizes_all_by_rating[keyName].type}</div>
-                    <div className="c-quiz-line__score">-</div>
-                    <div className="c-quiz-line__rating">{quizes_all_by_rating[keyName].rating} ({quizes_all_by_rating[keyName].votes} głosów)</div>
-                </Link>
-            </li>
-            )
-        });
+        const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => <QuizLine key={i} quiz={quizes_all_by_rating[keyName]}/>);
 
         return (
             <AuthOverlord>
+
                 <Header/>
                 <main className="c-test-hub">
                     <div className="o-container">
@@ -96,7 +73,7 @@ class TestsHub extends React.Component <TestsHubProps> {
 }
 
 const mapStateToProps = state => ({
-    user: state.user, 
+    user: state.user,
     quizes_all_by_rating: state.quizes_all_by_rating,
     request_in_progress: state.request_in_progress
 });
