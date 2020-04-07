@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import AuthOverlord from '../../auth/AuthOverlord';
 import { requestTopQuizes } from '../../../actions';
 import { Loader } from '../../utils/Loader';
-import { QuizLine } from "./QuizLine";
+import getTestHubListContent from './utils/getTestHubListContent';
 
 interface TestsHubProps {
     user: {
@@ -26,7 +26,7 @@ class TestsHub extends React.Component <TestsHubProps> {
 
     render() {
         const {quizes_all_by_rating} = this.props;
-        const quizes = Object.keys(quizes_all_by_rating).map((keyName, i) => <QuizLine key={i} quiz={quizes_all_by_rating[keyName]}/>);
+        const renderListContent = getTestHubListContent(quizes_all_by_rating);
 
         return (
             <AuthOverlord>
@@ -61,7 +61,7 @@ class TestsHub extends React.Component <TestsHubProps> {
                                     </div>
                                 </div>
                                 <ul className="c-test-hub__quiz-list">
-                                    {(quizes.length && quizes) || <Loader/>}
+                                    {(typeof renderListContent !== 'undefined' && renderListContent) || <Loader/>}
                                 </ul>
                             </div>
                         </section>

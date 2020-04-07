@@ -8,7 +8,8 @@ interface QuizLineInterface {
         title: string,
         type: string,
         rating: string,
-        votes:string
+        votes: string,
+        msg?: string
     }
 }
 

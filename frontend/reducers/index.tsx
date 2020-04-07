@@ -1,7 +1,7 @@
 import {
-  SET_USER, 
-  USER_LOGOUT, 
-  GET_TOP_QUIZES, 
+  SET_USER,
+  USER_LOGOUT,
+  GET_TOP_QUIZES,
   REQUEST_TOP_QUIZES_START
 } from '../constants/action-types';
 

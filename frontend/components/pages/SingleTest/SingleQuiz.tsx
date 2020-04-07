@@ -1,22 +1,9 @@
 import React from "react";
-import Header from "../parts/Header";
+import Header from "../../parts/Header";
 import { Redirect } from 'react-router-dom';
-
+import { decodeQuestions } from './utils/decodeQuestions';
 // import '../../css/pages/singleQuiz.scss';
-
-interface SingleTestProps {
-    location: {
-        state: {
-            quiz: {
-                id: string,
-                title: string,
-                type: string,
-                rating: string,
-                votes:string
-            }
-        }
-    }
-}
+import { SingleTestProps } from './utils/types'
 
 class SingleTest extends React.Component<SingleTestProps> {
     constructor(props) {
@@ -29,7 +16,9 @@ class SingleTest extends React.Component<SingleTestProps> {
 
     render() {
         const quiz = this.props.location.state.quiz;
+        const questions = decodeQuestions(quiz.questions);
 
+        console.log(questions)
         return (
             <React.Fragment>
                 <Header/>

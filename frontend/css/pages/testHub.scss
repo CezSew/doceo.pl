@@ -3,7 +3,7 @@
 .c-test-hub {
     padding-top: 9rem;
     background-color: $lightgray;
-    min-height: 100vh;
+    min-height: calc(100vh - 9rem);
 
     .o-container {
         display: grid;
@@ -12,6 +12,13 @@
         grid-template-areas: 'test-hub-title test-hub-title' 'test-hub-aside test-hub-main';
         grid-gap: 2rem;
     }
+}
+
+.c-test-hub__table-no-quiz-found {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5rem;
 }
 
 .c-test-hub__menu {
@@ -34,7 +41,7 @@
     border-bottom: 2px solid $lightgray;
     font-weight: 400;
 
-    &:first-of-type { 
+    &:first-of-type {
         border-top: 0;
     }
 
@@ -159,7 +166,7 @@
     color: $white;
     font-size: 1.8rem;
     border-radius: 49%;
-    margin: 1rem;   
+    margin: 1rem;
     width: 3.5rem;
     height: 3.5rem;
     text-transform: uppercase;

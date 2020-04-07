@@ -14,7 +14,7 @@ interface QuizCreatorProps {
     history: Object
 }
 
-class QuizCreator extends React.Component<QuizCreatorProps> {   
+class QuizCreator extends React.Component<QuizCreatorProps> {
 
     componentDidMount() {
         fileLoadModule();
@@ -37,7 +37,7 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
                                 <InputLine name="hidden-questions" type="text" placeholder="pytania" classes="o-hidden"/>
                             </div>
                             <div className="c-quiz-creator-form__dropfile">
-                                <div className="js-file-holder" id="holder"></div> 
+                                <div className="js-file-holder" id="holder"></div>
                                 <p id="status">Przeciągnij plik .txt</p>
                             </div>
                         </div>

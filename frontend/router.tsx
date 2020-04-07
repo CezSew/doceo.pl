@@ -7,13 +7,13 @@ import AuthGuard from './components/pages/AuthGuard';
 import Protected from './components/pages/Protected';
 import TestsHub from './components/pages/TestsHub/TestsHub';
 import QuizCreator from './components/pages/QuizCreator';
-import SingleTest from './components/pages/SingleQuiz';
+import SingleTest from './components/pages/SingleTest/SingleQuiz';
 import ErrorBoundary from './components/utils/ErrorBoundary';
 
 export const RouterComponent = () => (
     <BrowserRouter>
-      <Switch>
-          <ErrorBoundary>
+        <ErrorBoundary>
+          <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/tests-main" component={TestsHub} />
@@ -22,7 +22,7 @@ export const RouterComponent = () => (
               <Route path={'/protected'} component={Protected} />
               <Route path={'/create-quiz'} component={QuizCreator} />
             </AuthGuard>
-          </ErrorBoundary>
-      </Switch>
+          </Switch>
+        </ErrorBoundary>
     </BrowserRouter>
 );
