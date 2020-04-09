@@ -8,6 +8,7 @@ import AuthOverlord from '../../auth/AuthOverlord';
 import { requestTopQuizes } from '../../../actions';
 import { Loader } from '../../utils/Loader';
 import getTestHubListContent from './utils/getTestHubListContent';
+import shouldListContentRender from './utils/shouldListContentRender';
 
 interface TestsHubProps {
     user: {
@@ -27,7 +28,7 @@ class TestsHub extends React.Component <TestsHubProps> {
     render() {
         const {quizes_all_by_rating} = this.props;
         const renderListContent = getTestHubListContent(quizes_all_by_rating);
-
+        const shouldRender = shouldListContentRender(renderListContent);
         return (
             <AuthOverlord>
 
@@ -61,7 +62,7 @@ class TestsHub extends React.Component <TestsHubProps> {
                                     </div>
                                 </div>
                                 <ul className="c-test-hub__quiz-list">
-                                    {(typeof renderListContent !== 'undefined' && renderListContent) || <Loader/>}
+                                    {(shouldRender && renderListContent) || <Loader/>}
                                 </ul>
                             </div>
                         </section>
