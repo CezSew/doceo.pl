@@ -29,6 +29,7 @@ class TestsHub extends React.Component <TestsHubProps> {
         const {quizes_all_by_rating} = this.props;
         const renderListContent = getTestHubListContent(quizes_all_by_rating);
         const shouldRender = shouldListContentRender(renderListContent);
+
         return (
             <AuthOverlord>
 
@@ -45,7 +46,6 @@ class TestsHub extends React.Component <TestsHubProps> {
                             <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
                         </aside>
                         <section className="c-test-hub__main">
-
                             <div className="c-test-hub__table">
                                 <div className="c-test-hub__table-header">
                                     <div className="c-test-hub__table-th c-test-hub__table-th--name">

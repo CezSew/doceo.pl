@@ -13,7 +13,6 @@ class Question extends React.Component<QuestionInterface> {
            <div></div>
         )
     }
-
 }
 
 export default Question;

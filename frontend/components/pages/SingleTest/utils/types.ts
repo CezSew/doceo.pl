@@ -12,3 +12,8 @@ export interface SingleTestProps {
         }
     }
 }
+
+export interface SingleTestState {
+    stats: any,
+    lastQuestionIndex: number
+}
