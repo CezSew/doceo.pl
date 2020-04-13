@@ -33,6 +33,18 @@
         color: $purple;
         background-color: $white;
     }
+
+    &.correct {
+        pointer-events: none;
+        color: $green;
+        background-color: $white;
+    }
+
+    &.incorrect {
+        pointer-events: none;
+        color: $lightred;
+        background-color: $white;
+    }
 }
 
 .c-test__question-title {

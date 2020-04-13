@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { decodeQuestions } from './utils/decodeQuestions';
 import { SingleTestProps, SingleTestState } from './utils/types';
 import getQuestion from './utils/getQuestion';
+import highlightAnswerElement from './utils/highlightAnswerElement';
 import Answers from "./Question/Answers";
 import '../../../css/pages/test.scss';
 
@@ -39,10 +40,12 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         }
     }
 
-    handleAnswer(isCorrect) {
-        console.log(this.state.lastQuestionIndex)
-        console.log(isCorrect)
-        this.goToTheNextQuestion();
+    handleAnswer(target, isCorrect) {
+        highlightAnswerElement(target, isCorrect);
+
+        setTimeout(() => {
+            this.goToTheNextQuestion();
+        }, 1500);
         //create stats
     }
 
