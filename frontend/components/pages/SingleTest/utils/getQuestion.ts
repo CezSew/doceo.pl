@@ -1,4 +1,4 @@
-const getQuestion = (questions, nextQuestionNumber, state, singleTest) => {
+const getQuestion = (questions, nextQuestionNumber) => {
     const questionsNumber = Object.keys(questions).length;
     let question;
 

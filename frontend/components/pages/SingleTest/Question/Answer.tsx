@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Answer = () => {
+const Answer = ({isCorrect, text, handleAnswer}) => {
 
     return (
-        <div>
-
-        </div>
+        <li className="c-test__answer" onClick={() => handleAnswer(isCorrect)}>
+            {text}
+        </li>
     )
 }
 

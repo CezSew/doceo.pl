@@ -1,0 +1,41 @@
+@import '../utils/variables.scss';
+
+.c-test {
+    padding-top: 12rem;
+}
+
+.c-test__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $purple;
+    margin-bottom: 5rem;
+}
+
+.c-test__answers {
+    max-width: 700px;
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.c-test__answer {
+    display: block;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: $purple;
+    border: 1px solid $purple;
+    list-style: none;
+    font-size: 1.6rem;
+    color: $white;
+    transition: 0.1s background-color, color;
+    cursor: pointer;
+
+    &:hover {
+        color: $purple;
+        background-color: $white;
+    }
+}
+
+.c-test__question-title {
+    text-decoration: underline;
+    font-size: 2rem;
+}
