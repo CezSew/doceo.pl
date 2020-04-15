@@ -15,5 +15,8 @@ export interface SingleTestProps {
 
 export interface SingleTestState {
     stats: any,
-    lastQuestionIndex: number
+    lastQuestionIndex: number,
+    questionsProbabilityArray: Array<number>,
+    currentQuestion: any,
+    questions: any
 }

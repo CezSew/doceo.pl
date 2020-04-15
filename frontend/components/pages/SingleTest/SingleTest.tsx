@@ -7,14 +7,18 @@ import getQuestion from './utils/getQuestion';
 import highlightAnswerElement from './utils/highlightAnswerElement';
 import Answers from "./Question/Answers";
 import '../../../css/pages/test.scss';
+import {Loader} from "../../utils/Loader";
 
 class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     constructor(props) {
         super(props);
 
         this.state = {
-           stats: {},
-           lastQuestionIndex: 0
+            stats: {},
+            lastQuestionIndex: 0,
+            questionsProbabilityArray: [],
+            currentQuestion: [],
+            questions: []
         };
 
         this.goToTheNextQuestion = this.goToTheNextQuestion.bind(this);
@@ -28,47 +32,92 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         return true;
     }
 
-    goToTheNextQuestion() {
+    goToTheNextQuestion(isCorrect) {
         const quiz = this.props.location.state.quiz;
-        const questions = decodeQuestions(quiz.questions);
+        const questions = Object.assign({}, this.state.questions);
+        let newQuestionsProbabilityArray = [...this.state.questionsProbabilityArray];
 
-        if(this.state.lastQuestionIndex + 1 < Object.keys(questions).length - 1) {
-            this.setState({lastQuestionIndex: this.state.lastQuestionIndex + 1})
+        if(!isCorrect) {
+            newQuestionsProbabilityArray.push(this.state.lastQuestionIndex);
         } else {
-            //last question action
-            alert('To było ostatnie pytanie')
+            const indexToDelete = newQuestionsProbabilityArray.indexOf(this.state.lastQuestionIndex);
+            newQuestionsProbabilityArray.splice(indexToDelete, 1);
         }
+
+       const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
+
+        console.log('last question was ' + this.state.lastQuestionIndex);
+        console.log('next question is ' + nextQuestion[1]);
+
+        this.setState({
+            questionsProbabilityArray: newQuestionsProbabilityArray,
+            currentQuestion: nextQuestion,
+            lastQuestionIndex: nextQuestion[1]
+        })
+
+
+        console.log(newQuestionsProbabilityArray)
+
     }
 
     handleAnswer(target, isCorrect) {
         highlightAnswerElement(target, isCorrect);
 
         setTimeout(() => {
-            this.goToTheNextQuestion();
+            this.goToTheNextQuestion(isCorrect);
         }, 1500);
         //create stats
     }
 
+    initModule() {
+        if(!this.state.currentQuestion.length && this.shouldRender()) {
+            const quiz = this.props.location.state.quiz;
+            const questions = decodeQuestions(quiz.questions);
+            const keys = Object.keys(questions).map(key => Number(key) - 1).filter(num => { return !isNaN(num)});
+            const questionsProbabilityArray = [...keys, ...keys];
+            const currentQuestion = getQuestion(questions, this.state.lastQuestionIndex, this.state.questionsProbabilityArray);
+
+            this.setState({
+                questionsProbabilityArray: questionsProbabilityArray,
+                currentQuestion: currentQuestion,
+                questions: questions
+            })
+        }
+    }
+
     render() {
         if(!this.shouldRender()) return <Redirect to="tests-main" />;
+        this.initModule();
 
-        const quiz = this.props.location.state.quiz;
-        const questions = decodeQuestions(quiz.questions);
-        const currentQuestion = getQuestion(questions, this.state.lastQuestionIndex);
-
-        return (
-            <React.Fragment>
-                <Header/>
-                <main className="c-test">
-                    <div className="o-container">
-                        <h1 className="c-test__title">{quiz.title}</h1>
-                        <p className="c-test__question-number">Pytanie {currentQuestion[1]}</p>
-                        <h2 className="c-test__question-title">{currentQuestion[0]['question']}</h2><br/>
-                        <Answers question={currentQuestion[0]} handleAnswer={this.handleAnswer}/>
-                    </div>
-                </main>
-            </React.Fragment>
-        );
+        if(this.state.currentQuestion.length) {
+            return (
+                <React.Fragment>
+                    <Header/>
+                    <main className="c-test">
+                        <div className="o-container">
+                            <h1 className="c-test__title">
+                                Quiz
+                                {/*{quiz.title}*/}
+                            </h1>
+                            <p className="c-test__question-number">Pytanie {this.state.currentQuestion[1] + 1}</p>
+                            <h2 className="c-test__question-title">{this.state.currentQuestion[0]['question']}</h2><br/>
+                            <Answers question={this.state.currentQuestion[0]} handleAnswer={this.handleAnswer}/>
+                        </div>
+                    </main>
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <Header/>
+                    <main className="c-test">
+                        <div className="o-container">
+                            <Loader />
+                        </div>
+                    </main>
+                </React.Fragment>
+            )
+        }
     }
 }
 
