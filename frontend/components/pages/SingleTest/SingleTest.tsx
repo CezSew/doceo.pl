@@ -44,20 +44,21 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
             newQuestionsProbabilityArray.splice(indexToDelete, 1);
         }
 
-       const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
+        const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
 
-        console.log('last question was ' + this.state.lastQuestionIndex);
-        console.log('next question is ' + nextQuestion[1]);
-
-        this.setState({
-            questionsProbabilityArray: newQuestionsProbabilityArray,
-            currentQuestion: nextQuestion,
-            lastQuestionIndex: nextQuestion[1]
-        })
+        if(newQuestionsProbabilityArray.length > 1) {
+            this.setState({
+                questionsProbabilityArray: newQuestionsProbabilityArray,
+                currentQuestion: nextQuestion,
+                lastQuestionIndex: nextQuestion[1]
+            })
+        } else {
+            //show stats
+            alert('congrats!')
+        }
 
 
         console.log(newQuestionsProbabilityArray)
-
     }
 
     handleAnswer(target, isCorrect) {
@@ -66,7 +67,6 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         setTimeout(() => {
             this.goToTheNextQuestion(isCorrect);
         }, 1500);
-        //create stats
     }
 
     initModule() {
@@ -95,11 +95,6 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                     <Header/>
                     <main className="c-test">
                         <div className="o-container">
-                            <h1 className="c-test__title">
-                                Quiz
-                                {/*{quiz.title}*/}
-                            </h1>
-                            <p className="c-test__question-number">Pytanie {this.state.currentQuestion[1] + 1}</p>
                             <h2 className="c-test__question-title">{this.state.currentQuestion[0]['question']}</h2><br/>
                             <Answers question={this.state.currentQuestion[0]} handleAnswer={this.handleAnswer}/>
                         </div>
