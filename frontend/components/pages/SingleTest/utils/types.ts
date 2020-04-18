@@ -10,6 +10,9 @@ export interface SingleTestProps {
                 questions:string
             }
         }
+    },
+    user: {
+        name: string|undefined
     }
 }
 

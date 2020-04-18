@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../parts/Header";
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { decodeQuestions } from './utils/decodeQuestions';
 import { SingleTestProps, SingleTestState } from './utils/types';
@@ -7,7 +8,8 @@ import getQuestion from './utils/getQuestion';
 import highlightAnswerElement from './utils/highlightAnswerElement';
 import Answers from "./Question/Answers";
 import '../../../css/pages/test.scss';
-import {Loader} from "../../utils/Loader";
+import { Loader } from "../../utils/Loader";
+import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
 
 class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     constructor(props) {
@@ -33,8 +35,6 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     }
 
     goToTheNextQuestion(isCorrect) {
-        const quiz = this.props.location.state.quiz;
-        const questions = Object.assign({}, this.state.questions);
         let newQuestionsProbabilityArray = [...this.state.questionsProbabilityArray];
 
         if(!isCorrect) {
@@ -53,10 +53,13 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                 lastQuestionIndex: nextQuestion[1]
             })
         } else {
-            //show stats
-            alert('congrats!')
-        }
+            const quizId = this.props.location.state.quiz['id'];
+            const userId = typeof this.props.user['id'] !== 'undefined'
+                ? this.props.user['id']
+                : 'guest';
 
+            sendQuizFinishedByUser(userId, quizId);
+        }
 
         console.log(newQuestionsProbabilityArray)
     }
@@ -74,7 +77,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
             const quiz = this.props.location.state.quiz;
             const questions = decodeQuestions(quiz.questions);
             const keys = Object.keys(questions).map(key => Number(key) - 1).filter(num => { return !isNaN(num)});
-            const questionsProbabilityArray = [...keys, ...keys];
+            const questionsProbabilityArray = [...keys];
             const currentQuestion = getQuestion(questions, this.state.lastQuestionIndex, this.state.questionsProbabilityArray);
 
             this.setState({
@@ -116,4 +119,8 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     }
 }
 
-export default SingleTest
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+export default connect(mapStateToProps, null)(SingleTest)
