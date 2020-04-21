@@ -1,3 +1,5 @@
+@import '../utils/variables.scss';
+
 .c-quiz-creator {
     margin-top: 10rem;
 
@@ -22,10 +24,7 @@
 }
 
 .c-quiz-creator-form__content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
-    grid-template-areas: 'qr-form-inputs qr-form-drop';
+    min-width: 50rem;
 }
 
 .c-quiz-creator-form__inputs {
@@ -33,13 +32,53 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    grid-area: qr-form-inputs;
 }
 
 .c-quiz-creator-form__dropfile {
-    display: flex;    
+    display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    grid-area: qr-form-drop;
+    &.o-hidden {
+        display: none;
+    }
+}
+
+.c-quiz-creator__quiz-types {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.c-quiz-creator__quiz-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 7rem;
+    height: 7rem;
+    background-color: $white;
+    border: 1px solid $purple;
+    color: $black;
+    font-weight: 500;
+    margin: 1rem 1rem 1rem 0;
+    font-size: 1.4rem;
+    transition: 0.1s background-color;
+
+    &:hover {
+        background-color: $purple;
+        color: $white;
+    }
+
+    &.active {
+        background-color: $purple;
+        color: $white;
+    }
+}
+
+.c-quiz-creator__tool {
+    &.o-hidden {
+        display: none;
+    }
 }
