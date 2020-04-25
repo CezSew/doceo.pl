@@ -14,17 +14,20 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch(action.type) {
     case SET_USER:
-      if (typeof action.payload.name === 'undefined') {
-        return Object.assign({}, state, {
-          user: 'null',
-          isUserLoggedIn: false
-        })
-      } else {
-        return Object.assign({}, state, {
-          user: action.payload,
-          isUserLoggedIn: true
-        })
-      }
+        const user = typeof action.payload.user === 'undefined'
+            ? action.payload
+            : action.payload.user
+        if (typeof user.name === 'undefined') {
+            return Object.assign({}, state, {
+              user: 'null',
+              isUserLoggedIn: false
+            })
+        } else {
+            return Object.assign({}, state, {
+              user: user,
+              isUserLoggedIn: true
+            })
+        }
     case USER_LOGOUT:
       return Object.assign({}, state, {
         user: undefined,

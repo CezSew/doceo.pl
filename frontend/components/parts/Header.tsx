@@ -13,24 +13,23 @@ interface HeaderProps {
 }
 
 const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout}) => {
-    console.log(isUserLoggedIn)
     return (
         <header className="c-header">
             <div className="o-container o-container--space-between">
                 <Link className="c-header__logo c-logo" to="/">
-                   KOTUTOR <span  className="c-logo__text-bold">E-LEARNING</span>
+                    przyjazna-nauka.pl
                 </Link>
                 {isUserLoggedIn
-                ?   <React.Fragment>
-                        <p className="c-header__login-information">Logged in as {user.name}</p>
+                ?   <div className="c-header__login-section">
+                        <p className="c-header__login-information">Witaj, {user.name}</p>
                         <button className="c-header__logout" onClick={() => dispatchLogout()}>
                             <Link className="c-header__link" to="/">
-                                logout
+                                wyloguj się
                             </Link>
                         </button>
-                    </React.Fragment>
+                    </div>
                 :   <Link className="c-header__link" to="/login">
-                        login
+                        zaloguj się
                     </Link>
                 }
             </div>

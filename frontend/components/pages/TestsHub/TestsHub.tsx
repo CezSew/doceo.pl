@@ -32,7 +32,6 @@ class TestsHub extends React.Component <TestsHubProps> {
 
         return (
             <AuthOverlord>
-
                 <Header/>
                 <main className="c-test-hub">
                     <div className="o-container">

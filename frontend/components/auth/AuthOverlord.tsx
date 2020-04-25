@@ -20,7 +20,7 @@ class AuthOverlord extends Component<AuthOverlordProps> {
 
   getUser() {
     const jwt = getJwt();
-    
+
     if (!jwt) {
       this.props.setUser(undefined);
       return;
@@ -28,7 +28,8 @@ class AuthOverlord extends Component<AuthOverlordProps> {
 
     if (!this.props.isUserLoggedIn) {
       axios.get('http://localhost:8000/api/user', { headers: { Authorization: getJwt() } }).then(res => {
-        this.props.setUser(res.data.user);
+          const user = res.data.user;
+          this.props.setUser(user);
       });
     }
   }

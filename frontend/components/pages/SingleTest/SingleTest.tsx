@@ -10,6 +10,7 @@ import Answers from "./Question/Answers";
 import '../../../css/pages/test.scss';
 import { Loader } from "../../utils/Loader";
 import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
+import AuthOverlord from '../../auth/AuthOverlord';
 
 class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     constructor(props) {
@@ -92,7 +93,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
 
         if(this.state.currentQuestion.length) {
             return (
-                <React.Fragment>
+                <AuthOverlord>
                     <Header/>
                     <main className="c-test">
                         <div className="o-container">
@@ -100,18 +101,18 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                             <Answers question={this.state.currentQuestion[0]} handleAnswer={this.handleAnswer}/>
                         </div>
                     </main>
-                </React.Fragment>
+                </AuthOverlord>
             );
         } else {
             return (
-                <React.Fragment>
+                <AuthOverlord>
                     <Header/>
                     <main className="c-test">
                         <div className="o-container">
                             <Loader />
                         </div>
                     </main>
-                </React.Fragment>
+                </AuthOverlord>
             )
         }
     }
