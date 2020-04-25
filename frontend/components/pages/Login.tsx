@@ -2,10 +2,12 @@ import React from "react";
 import '../../css/pages/login.scss';
 import Header from '../parts/Header';
 import InputLine from '../parts/InputLine';
-import { handleLogin } from '../../helpers/login';
+import { requestLogin } from "../../actions";
+import { connect } from 'react-redux';
 
 interface LoginProps {
-    history: any
+    history: any,
+    dispatchLogin: Function
 }
 interface LoginState {
     username: string,
@@ -13,8 +15,8 @@ interface LoginState {
     error: boolean
 }
 
-export default class Login extends React.Component<LoginProps, LoginState> {
-    
+class Login extends React.Component<LoginProps, LoginState> {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -36,7 +38,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
     render() {
         let errorElem = <React.Fragment></React.Fragment>;
-        
+
         if(this.state.error) {
             errorElem = <p className="o-error-container__text">Login or password is incorrect.</p>
         }
@@ -46,9 +48,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 <Header/>
                 <main className="c-login">
                     <div className="o-container">
-                        <form 
-                        className="o-form o-form--login" 
-                        onSubmit={(e) => handleLogin(e, this.state.username, this.state.password, this.props.history)}>
+                        <form
+                        className="o-form o-form--login"
+                        onSubmit={(e) => this.props.dispatchLogin(e, this.state.username, this.state.password, this.props.history)}>
                             <h1 className="o-form__title o-title o-title--h2 o-title--line">Logowanie</h1>
                             <InputLine name="username" type="text" icon="user" placeholder="login" handleOnChange={this.onChange}/>
                             <InputLine name="password" type="password" icon="user" placeholder="hasło" handleOnChange={this.onChange}/>
@@ -63,3 +65,17 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    user: state.user,
+    isUserLoggedIn: state.isUserLoggedIn
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatchLogin: (e, email, password, history) => dispatch(requestLogin(e, email, password, history)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
+

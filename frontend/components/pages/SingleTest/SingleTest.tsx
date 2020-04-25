@@ -60,8 +60,6 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
 
             sendQuizFinishedByUser(userId, quizId);
         }
-
-        console.log(newQuestionsProbabilityArray)
     }
 
     handleAnswer(target, isCorrect) {

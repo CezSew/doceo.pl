@@ -3,3 +3,4 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const CREATE_TEST = 'CREATE_TEST';
 export const GET_TOP_QUIZES = 'GET_TOP_QUIZES';
 export const REQUEST_TOP_QUIZES_START = 'REQUEST_TOP_QUIZES_START';
+export const HANDLE_LOGIN = 'HANDLE_LOGIN';
