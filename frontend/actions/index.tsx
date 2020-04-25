@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearInputs } from './utils';
 import {
     SET_USER,
     USER_LOGOUT,
@@ -8,16 +9,20 @@ import {
     HANDLE_LOGIN
 } from '../constants/action-types';
 
-export function requestLogin(e, email, password, history) {
-    e.preventDefault();
+export function requestLogin(event, email, password, history) {
+    event.preventDefault();
+    const form = event.target;
 
     return (dispatch) => {
         axios.post('http://localhost:8000/api/login', {
             email: email,
             password: password
-        }).then((res => {
+        }).then(res => {
             dispatch(handleLogin(res.data, history));
-        }));
+        }).catch(e => {
+            clearInputs(form);
+            alert('Błędne dane logowania, spróbuj ponownie.')
+        });
     }
 }
 

@@ -1,20 +1,19 @@
 import {
-  SET_USER,
-  USER_LOGOUT,
-  GET_TOP_QUIZES,
-  REQUEST_TOP_QUIZES_START
+    SET_USER,
+    USER_LOGOUT,
+    GET_TOP_QUIZES,
+    REQUEST_TOP_QUIZES_START
 } from '../constants/action-types';
 
 const initialState = {
-  user: {},
-  isUserLoggedIn: null,
-  quizes_all_by_rating: []
+    user: {},
+    isUserLoggedIn: null,
+    quizes_all_by_rating: []
 };
 
 function rootReducer(state = initialState, action) {
   switch(action.type) {
     case SET_USER:
-        console.log(typeof action.payload.name === 'undefined')
       if (typeof action.payload.name === 'undefined') {
         return Object.assign({}, state, {
           user: 'null',
