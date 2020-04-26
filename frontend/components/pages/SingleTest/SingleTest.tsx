@@ -11,6 +11,9 @@ import '../../../css/pages/test.scss';
 import { Loader } from "../../utils/Loader";
 import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
 import AuthOverlord from '../../auth/AuthOverlord';
+import { shouldGenerateNextQuestion } from './utils/utils';
+import {getQuestionsArray} from "./utils/getQuestionsArray";
+import {getUserId} from "./utils/getUserId";
 
 class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     constructor(props) {
@@ -36,18 +39,11 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
     }
 
     goToTheNextQuestion(isCorrect) {
-        let newQuestionsProbabilityArray = [...this.state.questionsProbabilityArray];
+        let newQuestionsProbabilityArray = getQuestionsArray(this.state.questionsProbabilityArray, isCorrect, this.state.lastQuestionIndex);
 
-        if(!isCorrect) {
-            newQuestionsProbabilityArray.push(this.state.lastQuestionIndex);
-        } else {
-            const indexToDelete = newQuestionsProbabilityArray.indexOf(this.state.lastQuestionIndex);
-            newQuestionsProbabilityArray.splice(indexToDelete, 1);
-        }
+        if(shouldGenerateNextQuestion(newQuestionsProbabilityArray, this.state.lastQuestionIndex)) {
+            const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
 
-        const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
-
-        if(newQuestionsProbabilityArray.length > 1) {
             this.setState({
                 questionsProbabilityArray: newQuestionsProbabilityArray,
                 currentQuestion: nextQuestion,
@@ -55,9 +51,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
             })
         } else {
             const quizId = this.props.location.state.quiz['id'];
-            const userId = typeof this.props.user['id'] !== 'undefined'
-                ? this.props.user['id']
-                : 'guest';
+            const userId = getUserId(this.props.user);
 
             sendQuizFinishedByUser(userId, quizId);
         }
@@ -69,6 +63,10 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         setTimeout(() => {
             this.goToTheNextQuestion(isCorrect);
         }, 1500);
+    }
+
+    componentDidMount(): void {
+        this.initModule();
     }
 
     initModule() {
@@ -89,7 +87,6 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
 
     render() {
         if(!this.shouldRender()) return <Redirect to="tests-main" />;
-        this.initModule();
 
         if(this.state.currentQuestion.length) {
             return (
