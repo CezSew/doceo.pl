@@ -26,10 +26,10 @@ h1, h2, h3 {
 h4, h5, h6 {
     font-size: 1.8rem;
     margin: 0;
-} 
+}
 
 .o-title {
-    
+
     &--line {
         display: flex;
         align-items: center;
@@ -41,6 +41,10 @@ h4, h5, h6 {
             height: 3rem;
             background-color: $lightred;
         }
+    }
+
+    &--underline {
+        text-decoration: underline;
     }
 
     &--h2 {
@@ -56,6 +60,10 @@ h4, h5, h6 {
         font-weight: 700;
         font-size: 2.5rem;
     }
+
+    &--thin {
+        font-weight: 300;
+    }
 }
 
 .o-main-title {
@@ -66,11 +74,11 @@ h4, h5, h6 {
 .o-container {
     max-width: 300px;
     margin: 0 auto;
-    
+
     @media(min-width: 800px) {
         max-width: 750px;
     }
-    
+
     @media(min-width:1200px) {
         max-width: 1150px;
     }
@@ -99,7 +107,7 @@ h4, h5, h6 {
 .o-page-content {
     margin-top: 3rem;
     padding: 1rem 2rem;
-    border: 0.4rem dashed $purple; 
+    border: 0.4rem dashed $purple;
 }
 
 .o-link {
@@ -107,7 +115,7 @@ h4, h5, h6 {
 
     &--secondary {
         color: $lightred;
-    }   
+    }
 }
 
 .o-button {

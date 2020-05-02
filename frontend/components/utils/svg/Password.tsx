@@ -1,6 +1,6 @@
 import React from "react";
 
-const PasswordSVG: React.SFC  = () => {
+const PasswordSVG = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="9.882" height="12.106" viewBox="0 0 9.882 12.106">
             <g id="Group_16" data-name="Group 16" transform="translate(0 0.499)">

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { getJwt } from '../../helpers';
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 

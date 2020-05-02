@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserSVG: React.SFC  = () => {
+const UserSVG = () => {
     return (
         <svg id="Group_14" data-name="Group 14" xmlns="http://www.w3.org/2000/svg" width="14.994" height="14.56" viewBox="0 0 14.994 14.56">
             <g id="Ellipse_14" data-name="Ellipse 14" transform="translate(3.818)" fill="none" stroke="#fff" strokeWidth="1">

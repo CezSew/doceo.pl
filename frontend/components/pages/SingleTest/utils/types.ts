@@ -21,5 +21,6 @@ export interface SingleTestState {
     lastQuestionIndex: number,
     questionsProbabilityArray: Array<number>,
     currentQuestion: any,
-    questions: any
+    questions: any,
+    finished: boolean
 }

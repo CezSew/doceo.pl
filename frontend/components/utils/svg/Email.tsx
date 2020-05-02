@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmailSVG: React.SFC  = () => {
+const EmailSVG = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="16.031" height="11.795" viewBox="0 0 16.031 11.795">
             <g id="Group_15" data-name="Group 15" transform="translate(0.531 0.5)">
