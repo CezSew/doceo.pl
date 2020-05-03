@@ -17,6 +17,11 @@ export const showContainer = (element) => {
 export const selectQuizType = (element) => {
     disableAllOptions('type');
     enableOption(element);
+
+    const value = element.getAttribute('data-value');
+    const typeInput: HTMLInputElement = document.querySelector('.o-input[name=type]');
+
+    typeInput.value = value;
 }
 
 const hide = (element) => {

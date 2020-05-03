@@ -32,29 +32,30 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
                             Dodaj quiz
                         </p>
                         <div className="c-quiz-creator-form__content">
-                            <div className="c-quiz-creator-form__inputs">
+                            <div className="c-quiz-creator__quiz-types-group">
+                                <p className="c-quiz-creator__quiz-types-title">Nazwa testu:</p>
                                 <InputLine name="name" type="text" placeholder="nazwa testu" icon="letter"/>
                                 <InputLine name="type" type="text" placeholder="typ testu" classes="o-hidden"/>
                                 <InputLine name="hidden-questions" type="text" placeholder="pytania" classes="o-hidden"/>
                             </div>
-                            <div>
-                                <p>Typ testu</p>
+                            <div className="c-quiz-creator__quiz-types-group">
+                                <p className="c-quiz-creator__quiz-types-title">Typ testu:</p>
                                 <div className="c-quiz-creator__quiz-types">
-                                    <div className="c-quiz-creator__quiz-type js-quiz-type-option" onClick={(e) => selectQuizType(e.target)}>
+                                    <div className="c-quiz-creator__quiz-type c-quiz-creator__quiz-type--inactive js-quiz-type-option" data-value="prosty" onClick={(e) => selectQuizType(e.target)}>
                                         prosty
                                     </div>
-                                    <div className="c-quiz-creator__quiz-type js-quiz-type-option" onClick={(e) => selectQuizType(e.target)}>
-                                        losowy
+                                    <div className="c-quiz-creator__quiz-type js-quiz-type-option" data-value="smart" onClick={(e) => selectQuizType(e.target)}>
+                                        smart
                                     </div>
-                                    <div className="c-quiz-creator__quiz-type js-quiz-type-option" onClick={(e) => selectQuizType(e.target)}>
+                                    <div className="c-quiz-creator__quiz-type c-quiz-creator__quiz-type--inactive js-quiz-type-option" data-value="nauka" onClick={(e) => selectQuizType(e.target)}>
                                         nauka
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <p>Dodaj pytania</p>
+                            <div className="c-quiz-creator__quiz-types-group">
+                                <p className="c-quiz-creator__quiz-types-title">Dodaj pytania:</p>
                                 <div className="c-quiz-creator__quiz-types">
-                                    <div className="c-quiz-creator__quiz-type js-add-question-method-option js-open-creator"  onClick={(e) => showContainer(e.target)}>
+                                    <div className="c-quiz-creator__quiz-type c-quiz-creator__quiz-type--inactive js-add-question-method-option js-open-creator"  onClick={(e) => showContainer(e.target)}>
                                         kreator
                                     </div>
                                     <div className="c-quiz-creator__quiz-type js-add-question-method-option js-open-dropfile c-quiz-creator__quiz-type--file" onClick={(e) => showContainer(e.target)}>
@@ -63,11 +64,11 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
                                 </div>
                             </div>
                             <div className="c-quiz-creator-form__dropfile js-quiz-creator-form__dropfile o-hidden">
+                                <p className="c-file-holder-status" id="status">Przeciągnij plik .txt</p>
                                 <div className="js-file-holder" id="holder"></div>
-                                <p id="status">Przeciągnij plik .txt</p>
                             </div>
                             <div className="c-quiz-creator__tool js-quiz-creator__tool o-hidden">
-                                Here is a creation wizard tool!
+                                ...
                             </div>
                         </div>
                         <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>

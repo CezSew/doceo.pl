@@ -1,13 +1,22 @@
 @import '../utils/variables.scss';
 
 .c-quiz-creator {
-    margin-top: 10rem;
+    background-color: $lightpurple;
+    box-sizing: border-box;
 
     .o-container {
+        padding-top: 10rem;
+        min-height: 100vh;
+        background-color: $white;
+    }
+
+    .o-form {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 20rem);
+        flex-direction: column;
+        box-shadow: none;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 }
 
@@ -24,30 +33,27 @@
 }
 
 .c-quiz-creator-form__content {
-    min-width: 50rem;
-}
-
-.c-quiz-creator-form__inputs {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    width: 100%;
 }
 
 .c-quiz-creator-form__dropfile {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
     align-items: center;
+
     &.o-hidden {
         display: none;
     }
 }
 
+.c-file-holder-status {
+    display: block;
+    margin-right: 2rem;
+}
+
 .c-quiz-creator__quiz-types {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    margin-bottom: 2rem;
 }
 
 .c-quiz-creator__quiz-type {
@@ -75,10 +81,26 @@
         background-color: $purple;
         color: $white;
     }
+
+    &--inactive {
+        pointer-events: none;
+        background-color: $darkgray;
+        opacity: 0.3;
+    }
 }
 
 .c-quiz-creator__tool {
     &.o-hidden {
         display: none;
     }
+}
+
+.c-quiz-creator__quiz-types-title {
+    margin-right: 2rem;
+}
+
+.c-quiz-creator__quiz-types-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 }
