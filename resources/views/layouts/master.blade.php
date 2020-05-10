@@ -9,11 +9,9 @@
     <title>{{ config('app.name') }}</title>
 
     @include('components.loader-css')
-    
-    <link href="https://fonts.googleapis.com/css?family=Merriweather|Lato" rel="stylesheet" />
-    @env('production')
-    <link rel="stylesheet" type="text/css" href="dist/styles.css" />
-    @endenv
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -25,7 +23,7 @@
     @yield('content')
 
     @env('production')
-    <script src="/dist/bundle.js"></script>
+    <script src="public/dist/bundle.js"></script>
     @else
     <script src="https://localhost:3333/bundle.js"></script>
     @endenv

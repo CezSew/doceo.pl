@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.c-introduction { 
+.c-introduction {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10rem;
@@ -19,7 +19,7 @@
 }
 
 .c-introduction__description {
-    color: $clay;
+    color: $darkgray;
     font-size: 2.2rem;
     font-weight: 300;
     margin-bottom: 4.5rem;

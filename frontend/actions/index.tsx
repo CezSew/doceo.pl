@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { clearInputs } from './utils';
+import store from '../store';
 import {
     SET_USER,
     USER_LOGOUT,
@@ -12,9 +13,10 @@ import {
 export function requestLogin(event, email, password, history) {
     event.preventDefault();
     const form = event.target;
+    const host = store.getState().host;
 
     return (dispatch) => {
-        axios.post('http://localhost:8000/api/login', {
+        axios.post(`${host}/api/login`, {
             email: email,
             password: password
         }).then(res => {
@@ -52,8 +54,9 @@ const requestTopQuizesStarted = () => {
 
 export const requestTopQuizes = () => {
     return (dispatch, getState) => {
+        const host = store.getState().host;
         dispatch(requestTopQuizesStarted());
-        axios.post('http://localhost:8000/api/get-top-quizes').then((res => {
+        axios.post(`${host}/api/get-top-quizes`).then((res => {
             dispatch(getTopQuizes(res.data));
         }));
     }

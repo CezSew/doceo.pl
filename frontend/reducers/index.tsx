@@ -4,11 +4,13 @@ import {
     GET_TOP_QUIZES,
     REQUEST_TOP_QUIZES_START
 } from '../constants/action-types';
+import { getHost } from './utils';
 
 const initialState = {
     user: {},
     isUserLoggedIn: null,
-    quizes_all_by_rating: []
+    quizes_all_by_rating: [],
+    host: getHost()
 };
 
 function rootReducer(state = initialState, action) {
