@@ -8,7 +8,8 @@ import { compose } from 'redux';
 interface AuthOverlordProps {
     setUser: Function,
     user: any,
-    isUserLoggedIn: boolean|null
+    isUserLoggedIn: boolean|null,
+    host: string
 }
 
 class AuthOverlord extends Component<AuthOverlordProps> {
@@ -26,7 +27,7 @@ class AuthOverlord extends Component<AuthOverlordProps> {
     }
 
     if (!this.props.isUserLoggedIn) {
-      axios.get('http://localhost:8000/api/user', { headers: { Authorization: getJwt() } }).then(res => {
+      axios.get(`${this.props.host}/api/user`, { headers: { Authorization: getJwt() } }).then(res => {
           const user = res.data.user;
           this.props.setUser(user);
       });
@@ -39,8 +40,9 @@ class AuthOverlord extends Component<AuthOverlordProps> {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
-  isUserLoggedIn: state.isUserLoggedIn
+    user: state.user,
+    isUserLoggedIn: state.isUserLoggedIn,
+    host: state.host
 })
 
 const mapDispatchToProps = dispatch => {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Quiz;
+use App\User;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -43,11 +44,20 @@ class QuizesController extends Controller
 
     public function getBestQuizes() {
         $quizes = Quiz::orderBy('rating', 'DESC')->get();
+        $parsedQuizes = [];
 
         if(count($quizes) == 0) {
             $quizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
+        } else {
+            for($i = 0; $i < count($quizes); $i++) {
+                $quiz = $quizes[$i];
+                $userId = $quiz['authorId'];
+                $user = User::where('id', $userId)->get();
+                $quiz['authorName'] = $user[0]['name'];
+                array_push($parsedQuizes, $quiz);
+            }
         }
 
-        return response()->json($quizes, 201);
+        return response()->json($parsedQuizes, 201);
     }
 }

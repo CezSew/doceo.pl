@@ -11,7 +11,7 @@ import '../../../css/pages/test.scss';
 import { Loader } from "../../utils/Loader";
 import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
 import AuthOverlord from '../../auth/AuthOverlord';
-import { shouldGenerateNextQuestion } from './utils/utils';
+import {getAnwerAccuracyPercent, isQuestionEliminated, shouldGenerateNextQuestion} from './utils/utils';
 import { getQuestionsArray } from "./utils/getQuestionsArray";
 import { getUserId } from "./utils/getUserId";
 import Results from "./Results/Results";
@@ -31,7 +31,10 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
             questionsProbabilityArray: [],
             currentQuestion: [],
             questions: [],
-            finished: false
+            finished: false,
+            questionsEliminated: 0,
+            answersGiven: 0,
+            answersCorrect: 0
         };
 
         this.goToTheNextQuestion = this.goToTheNextQuestion.bind(this);
@@ -50,11 +53,16 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
 
         if(shouldGenerateNextQuestion(newQuestionsProbabilityArray, this.state.lastQuestionIndex)) {
             const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
+            const questionsEliminatedModifier: number = Number(isQuestionEliminated(this.state.lastQuestionIndex, newQuestionsProbabilityArray));
+            const correctAnswersModifier = Number(isCorrect);
 
             this.setState({
                 questionsProbabilityArray: newQuestionsProbabilityArray,
                 currentQuestion: nextQuestion,
-                lastQuestionIndex: nextQuestion[1]
+                lastQuestionIndex: nextQuestion[1],
+                questionsEliminated: this.state.questionsEliminated + questionsEliminatedModifier,
+                answersGiven: this.state.answersGiven + 1,
+                answersCorrect: this.state.answersCorrect + correctAnswersModifier
             })
         } else {
             const quizId = this.props.location.state.quiz['id'];
@@ -100,6 +108,10 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         if(!this.shouldRender()) return <Redirect to="tests-main" />;
 
         if(this.state.currentQuestion.length && !this.state.finished) {
+            const quiz = this.props.location.state.quiz;
+            const date = quiz['created_at'].split(' ')[0].replace(/-/g, '.');
+            const accuracy = getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven);
+
             return (
                 <AuthOverlord>
                     <Header/>
@@ -107,23 +119,20 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                         <div className="o-container">
                             <div className="c-test__header">
                                 <div className="c-test__data-container">
-                                    <h1 className="c-test__title o-title o-title--h2 o-title--line">Nazwa testu <span className="c-test__id">(#000)</span></h1>
-                                    <p className="c-test__data-author o-text o-text--light o-text--gray o-text--semi-large">autor: galAnonim69</p>
+                                    <h1 className="c-test__title o-title o-title--h2 o-title--line">{quiz['title']} <span className="c-test__id">(#{quiz['id']})</span></h1>
+                                    <p className="c-test__data-author o-text o-text--light o-text--gray o-text--semi-large">autor: {quiz['authorName']}</p>
                                 </div>
                                 <div className="c-test__data-container">
                                     <p className="o-text o-text--light o-text--gray o-text--semi-large">data dodania:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">00.00.0000</p>
+                                    <p className="o-text o-text--light o-text--light-gray">{date}</p>
                                 </div>
                                 <div className="c-test__data-container">
                                     <p className="o-text o-text--light o-text--gray o-text--semi-large">typ testu:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">smart</p>
-                                </div>
-                                <div className="c-test__data-container">
-                                    <p className="o-text o-text--light o-text--gray o-text--semi-large">wyświetlenia:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">00 000</p>
+                                    <p className="o-text o-text--light o-text--light-gray">{quiz['type']}</p>
                                 </div>
                                 <div className="c-test__data-container">
                                     <p className="o-text o-text--light o-text--gray o-text--semi-large">ocena:</p>
+                                    <p className="o-text o-text--light o-text--light-gray">{quiz['rating']}/5 (głosów: {quiz['votes']})</p>
                                 </div>
                             </div>
                             <main className="c-test__main">
@@ -156,7 +165,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                                             Pozostałe pytania:
                                         </div>
                                         <div className="c-test-stats__value">
-                                            X
+                                            {Object.keys(this.state.questions).length - 1 - this.state.questionsEliminated}
                                         </div>
                                     </div>
                                     <div className="c-test-stats__box">
@@ -164,7 +173,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                                             Wyeliminowane:
                                         </div>
                                         <div className="c-test-stats__value">
-                                            X
+                                            {this.state.questionsEliminated}
                                         </div>
                                     </div>
                                     <div className="c-test-stats__box">
@@ -172,7 +181,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                                             Skuteczność:
                                         </div>
                                         <div className="c-test-stats__value">
-                                            XX%
+                                            {accuracy}%
                                         </div>
                                     </div>
                                 </aside>

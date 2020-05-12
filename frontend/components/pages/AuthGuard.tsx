@@ -12,7 +12,8 @@ interface AuthGuardProps {
     history: any,
     setUser: Function,
     user: any,
-    isUserLoggedIn: boolean|null
+    isUserLoggedIn: boolean|null,
+    host: string
 }
 
 class AuthGuard extends Component<AuthGuardProps> {
@@ -28,7 +29,7 @@ class AuthGuard extends Component<AuthGuardProps> {
       return;
     }
 
-    axios.get('http://localhost:8000/api/user', { headers: { Authorization: getJwt() } }).then(res => {
+    axios.get(`${this.props.host}/api/user`, { headers: { Authorization: getJwt() } }).then(res => {
       this.props.setUser(res.data.user);
 
       if(!res.data.user) {
@@ -54,8 +55,9 @@ class AuthGuard extends Component<AuthGuardProps> {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
-  isUserLoggedIn: state.isUserLoggedIn
+    user: state.user,
+    isUserLoggedIn: state.isUserLoggedIn,
+    host: state.host
 })
 
 const mapDispatchToProps = dispatch => {

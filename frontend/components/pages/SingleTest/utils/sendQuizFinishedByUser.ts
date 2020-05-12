@@ -1,7 +1,10 @@
 import axios from "axios";
+import store from '../../../../store';
 
 export const sendQuizFinishedByUser = (userId, quizId) => {
-    axios.post('http://localhost:8000/api/quiz_result', {
+    const host = store.getState().host;
+
+    axios.post(`${host}/api/quiz_result`, {
         userId: userId.toString(),
         quizId: quizId.toString()
     }).then((res => {

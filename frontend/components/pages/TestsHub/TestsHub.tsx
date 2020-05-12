@@ -30,6 +30,8 @@ class TestsHub extends React.Component <TestsHubProps> {
         const renderListContent = getTestHubListContent(quizes_all_by_rating);
         const shouldRender = shouldListContentRender(renderListContent);
 
+        console.log(quizes_all_by_rating);
+
         return (
             <AuthOverlord>
                 <Header/>
