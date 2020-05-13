@@ -7,7 +7,7 @@
 .c-introduction {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 8rem;
+    grid-gap: 6rem;
     align-items: center;
     min-height: 91vh;
     padding-top: 5rem;
@@ -17,7 +17,6 @@
     }
 
     @media(min-width: $lg) {
-        grid-gap: 10rem;
         grid-template-columns: 1fr 1fr;
     }
 }
