@@ -16,7 +16,7 @@ const Home: React.SFC <HomeProps> = ({user}) => {
     return (
         <AuthOverlord>
             <Header/>
-            <main className="c-home">
+            <main className="c-home c-content">
                 <div className="o-container">
                     <section className="c-home__introduction c-introduction">
                         <div className="c-introduction__description-box">

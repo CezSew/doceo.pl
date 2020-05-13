@@ -6,16 +6,39 @@
 
 .c-introduction {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10rem;
+    grid-template-columns: 1fr;
+    grid-gap: 8rem;
     align-items: center;
-    min-height: 100vh;
+    min-height: 91vh;
+    padding-top: 5rem;
+
+    @media(min-width: $md) {
+        padding-top: 0;
+    }
+
+    @media(min-width: $lg) {
+        grid-gap: 10rem;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .c-introduction__title {
     font-weight: 700;
     font-size: 5rem;
     margin-bottom: 4.5rem;
+    line-height: 1.2;
+
+    @media(min-width: $md) {
+        line-height: 1.3;
+    }
+}
+
+.c-introduction__registration-box {
+    display: none;
+
+    @media(min-width: $lg) {
+       display: block;
+    }
 }
 
 .c-introduction__description {
@@ -31,6 +54,12 @@
     align-items: center;
 
     .o-button:first-of-type {
-        margin-right: 4rem;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+
+        @media(min-width: $lg) {
+            margin-right: 4rem;
+            margin-bottom: 0;
+        }
     }
 }

@@ -4,9 +4,13 @@ body, html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-size: 10px;
+    font-size: 8px;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+
+    @media (min-width: $md) {
+        font-size: 10px;
+    }
 }
 
 p, b, strong, a {
@@ -25,6 +29,11 @@ h1, h2, h3 {
 h4, h5, h6 {
     font-size: 1.8rem;
     margin: 0;
+}
+
+.c-content {
+    box-sizing: border-box;
+    padding-top: 9rem;
 }
 
 .o-title {
@@ -71,11 +80,11 @@ h4, h5, h6 {
 }
 
 .o-container {
-    max-width: 300px;
+    max-width: calc(100% - 4rem);
     margin: 0 auto;
 
     @media(min-width: 800px) {
-        max-width: 750px;
+        max-width: calc(100% - 6rem);
     }
 
     @media(min-width:1200px) {
