@@ -6,13 +6,7 @@ import { connect } from 'react-redux';
 import AuthOverlord from '../auth/AuthOverlord';
 import RegistrationForm from '../parts/RegistrationForm';
 
-interface HomeProps {
-    user: {
-        name: string|undefined
-    }
-}
-
-const Home: React.SFC <HomeProps> = ({user}) => {
+const Home = ({user}) => {
     return (
         <AuthOverlord>
             <Header/>

@@ -2,8 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../parts/Header';
 
-const Protected = () => {
-  return (
+const Protected = () => (
     <React.Fragment>
       <Header/>
       <div className="o-container">
@@ -16,7 +15,6 @@ const Protected = () => {
         </section>
       </div>
     </React.Fragment>
-  );
-};
+);
 
 export default Protected;
