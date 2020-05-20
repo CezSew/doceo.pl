@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from 'react-router-dom';
 import '../../css/pages/home.scss';
 import Header from '../parts/Header';
-import { connect } from 'react-redux';
 import AuthOverlord from '../auth/AuthOverlord';
 import RegistrationForm from '../parts/RegistrationForm';
 
-const Home = ({user}) => {
-    return (
-        <AuthOverlord>
+const Home = () => (
+    <React.Fragment>
             <Header/>
             <main className="c-home c-content">
                 <div className="o-container">
@@ -35,12 +33,7 @@ const Home = ({user}) => {
                     </section>
                 </div>
             </main>
-        </AuthOverlord>
-    );
-}
+    </React.Fragment>
+);
 
-const mapStateToProps = state => ({
-    user: state.user
-})
-
-export default connect(mapStateToProps, null)(Home)
+export default React.memo(Home)

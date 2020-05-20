@@ -23,7 +23,7 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
 
    render() {
     return (
-        <AuthOverlord>
+        <React.Fragment>
             <Header />
             <main className="c-quiz-creator">
                 <div className="o-container">
@@ -75,7 +75,7 @@ class QuizCreator extends React.Component<QuizCreatorProps> {
                     </form>
                 </div>
             </main>
-        </AuthOverlord>
+        </React.Fragment>
     )
    }
 }

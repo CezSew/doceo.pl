@@ -11,6 +11,7 @@ import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
 
 const TestsHub = (props: TestsHubProps) => {
+    console.log('TestsHub')
     useEffect(() => {
         props.onRequestTopQuizes();
     }, [])
@@ -20,7 +21,7 @@ const TestsHub = (props: TestsHubProps) => {
     const shouldRender = shouldListContentRender(renderListContent);
 
     return (
-        <AuthOverlord>
+        <React.Fragment>
             <Header/>
             <main className="c-test-hub">
                 <div className="o-container">
@@ -56,7 +57,7 @@ const TestsHub = (props: TestsHubProps) => {
                     </section>
                 </div>
             </main>
-        </AuthOverlord>
+        </React.Fragment>
     );
 }
 

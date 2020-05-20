@@ -113,7 +113,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
             const accuracy = getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven);
 
             return (
-                <AuthOverlord>
+                <React.Fragment>
                     <Header/>
                     <section className="c-test">
                         <div className="o-container">
@@ -188,20 +188,20 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                             </main>
                         </div>
                     </section>
-                </AuthOverlord>
+                </React.Fragment>
             );
         } else if(this.state.finished) {
             return <Results/>
         } else {
             return (
-                <AuthOverlord>
+                <React.Fragment>
                     <Header/>
                     <main className="c-test">
                         <div className="o-container">
                             <Loader />
                         </div>
                     </main>
-                </AuthOverlord>
+                </React.Fragment>
             )
         }
     }

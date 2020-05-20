@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Results = () => {
     return (
-        <AuthOverlord>
+        <React.Fragment>
             <Header/>
             <main className="c-test-results">
                 <div className="o-container">
@@ -15,7 +15,7 @@ const Results = () => {
                     <Link to="/">Wróć do strony głównej</Link>
                 </div>
             </main>
-        </AuthOverlord>
+        </React.Fragment>
     )
 }
 
