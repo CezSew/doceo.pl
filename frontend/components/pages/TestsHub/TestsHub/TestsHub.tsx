@@ -31,7 +31,7 @@ const TestsHub = (props: TestsHubProps) => {
                         </h1>
                     </div>
                     <aside className="c-test-hub__menu">
-                    <Link to="/" className="c-test-hub__menu-item">Strona główna</Link>
+                        <Link to="/" className="c-test-hub__menu-item">Strona główna</Link>
                         <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
                     </aside>
                     <section className="c-test-hub__main">

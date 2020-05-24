@@ -1,16 +1,13 @@
-export const showContainer = (element) => {
-    const dropfileContainerElement = document.querySelector('.js-quiz-creator-form__dropfile');
-    const creatorContainerElement = document.querySelector('.js-quiz-creator__tool');
-
+export const showContainer = (element, {setShowWizard, setShowFileDrop}) => {
     disableAllOptions('upload-method');
     enableOption(element);
 
     if(element.classList.contains('js-open-dropfile')) {
-        hide(creatorContainerElement);
-        show(dropfileContainerElement);
+        setShowFileDrop(true);
+        setShowWizard(false);
     } else {
-        show(creatorContainerElement);
-        hide(dropfileContainerElement);
+        setShowWizard(true);
+        setShowFileDrop(false);
     }
 }
 
@@ -22,14 +19,6 @@ export const selectQuizType = (element) => {
     const typeInput: HTMLInputElement = document.querySelector('.o-input[name=type]');
 
     typeInput.value = value;
-}
-
-const hide = (element) => {
-    if(element) element.classList.add('o-hidden');
-}
-
-const show = (element) => {
-    if(element) element.classList.remove('o-hidden');
 }
 
 const disableAllOptions = (name) => {

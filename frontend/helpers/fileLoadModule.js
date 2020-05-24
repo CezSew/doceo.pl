@@ -2,7 +2,7 @@ import setLocalStorage from './setLocalStorage';
 
 const fileLoadModule = () => {
     const holder = document.getElementById('holder');
-   
+
     holder.ondragover = function() {
         this.className = 'hover';
         return false;
@@ -99,11 +99,11 @@ const trimAnswer = (answer) => {
 
 const objectDefine = (object) => {
     return object = object || {};
-} 
+}
 
 const setHolderFinishedClass = () => {
     const holder = document.getElementById('holder');
-    
+
     holder.classList = 'holder-ended';
 }
 
@@ -114,9 +114,9 @@ const isTestFileValid = (testObject) => {
     Object.keys(testObject).forEach(index => {
         const question = testObject[index].question;
         const answers = testObject[index].answers;
-        
+
         lengthOfTest++;
-    }) 
+    })
 
     if(lengthOfTest < 5) {
         error = 'Przesłany test jest zbyt krótki!';
@@ -128,7 +128,7 @@ const isTestFileValid = (testObject) => {
 
 const setQuestionFieldContent = (json) => {
     const questionsInput = document.querySelector('[name=hidden-questions]');
-    
+
     if(questionsInput) {
         questionsInput.value = json;
     }
