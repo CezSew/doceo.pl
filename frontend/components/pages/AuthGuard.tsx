@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { getJwt } from '../../helpers';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import Header from '../parts/Header';
 
 interface AuthGuardProps {
     history: any,

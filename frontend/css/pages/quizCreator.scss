@@ -1,31 +1,28 @@
 @import '../utils/variables.scss';
 
 .c-quiz-creator {
-    background-color: $lightpurple;
+    background-color: $white;
     box-sizing: border-box;
+    padding-bottom: 5rem;
+}
 
-    .o-container {
-        padding-top: 10rem;
-        min-height: 100vh;
-        background-color: $white;
-    }
-
-    .o-form {
-        display: flex;
-        flex-direction: column;
-        box-shadow: none;
-        width: 100%;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
+.c-quiz-creator-form {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
 }
 
 .js-file-holder, .hover {
-    width: 10rem;
-    height: 10rem;
-    border: 0.2rem dashed gray;
+    width: 15rem;
+    height: 15rem;
+    border: 0.2rem dashed $white;
     margin-bottom: 1rem;
     transition: 0.3s border;
+    color: $white;
 }
 
 .hover {
@@ -34,6 +31,21 @@
 
 .c-quiz-creator-form__content {
     width: 100%;
+}
+
+.c-quiz-creator__step-header {
+    margin-bottom: 3rem;
+}
+
+.c-quiz-creator__step-title {
+    color: $lightred;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.c-quiz-creator__input-line {
+    margin-bottom: 3rem;
+    max-width: 40rem;
 }
 
 .c-quiz-creator-form__dropfile {
@@ -45,9 +57,64 @@
     }
 }
 
-.c-file-holder-status {
-    display: block;
-    margin-right: 2rem;
+.c-quiz-creator__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 10rem 5rem 5rem;
+    background-color: $blue;
+    margin-bottom: 5rem;
+}
+
+.c-quiz-creator-form__dropfile-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5rem;
+    background-color: $blue;
+    box-sizing: border-box;
+}
+
+.c-quiz-creator-form__dropfile-description-wrapper {
+    width: 70%;
+}
+
+.c-quiz-creator-form__dropfile-description {
+    color: $white;
+    margin-bottom: 3rem;
+    font-size: 1.4rem;
+
+    a {
+        color: $white;
+    }
+}
+
+.c-file-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-quiz-creator__step-text {
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.c-quiz-creator__description {
+    font-size: 2rem;
+    max-width: 70%;
+    margin-bottom: 5rem;
+}
+
+.c-quiz-creator__form-content {
+    padding: 0 5rem;
+}
+
+.c-quiz-creator__title {
+    color: $white;
+    font-size: 4rem;
+    max-width: 50rem;
 }
 
 .c-quiz-creator__quiz-types {
@@ -56,36 +123,47 @@
     margin-bottom: 2rem;
 }
 
+.c-quiz-creator__quiz-type-icon {
+    width: 5rem;
+    height: auto;
+    margin-bottom: 1rem;
+    pointer-events: none;
+}
+
 .c-quiz-creator__quiz-type {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     cursor: pointer;
     flex-shrink: 0;
-    width: 7rem;
-    height: 7rem;
+    width: 15rem;
+    height: 15rem;
+    padding-top: 3rem;
+    padding-bottom: 1.2rem;
     background-color: $white;
-    border: 1px solid $purple;
-    color: $black;
-    font-weight: 500;
-    margin: 1rem 1rem 1rem 0;
-    font-size: 1.4rem;
+    border: 1px solid $lightpurple;
+    margin: 0rem 2rem 3rem 2rem;
+    font-size: 1.8rem;
     transition: 0.1s background-color;
+    box-sizing: border-box;
 
     &:hover {
-        background-color: $purple;
-        color: $white;
+        border-color: $blue;
     }
 
     &.active {
-        background-color: $purple;
-        color: $white;
+        background-color: rgba($blue, 0.05);
+        border-color: $blue;
     }
 
     &--inactive {
         pointer-events: none;
-        background-color: $darkgray;
-        opacity: 0.3;
+        opacity: 0.6;
+    }
+
+    .o-text {
+        pointer-events: none;
     }
 }
 

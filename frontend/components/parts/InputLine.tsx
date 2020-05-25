@@ -9,6 +9,7 @@ interface InputLineInterface {
     type: string,
     name: string,
     classes?: string,
+    wrapperClasses?: string,
     value?: string,
     handleOnChange?: Function,
     handleClick?: Function
@@ -20,13 +21,13 @@ class InputLine extends React.Component<InputLineInterface> {
     }
 
     render() {
-        const {classes = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}} = this.props;
-        const iconModifierClass = icon 
-        ? `o-input--${icon}` 
+        const {classes = '', wrapperClasses = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}} = this.props;
+        const iconModifierClass = icon
+        ? `o-input--${icon}`
         : '';
 
         let iconContent;
-        
+
         switch(icon) {
             case 'user':
                 iconContent = <UserSVG/>;
@@ -44,16 +45,16 @@ class InputLine extends React.Component<InputLineInterface> {
                 iconContent = '';
                 break;
         };
-        
+
         return (
-            <div className="o-input__line">
+            <div className={`o-input__line ${wrapperClasses}`}>
                 {iconContent &&
                 <div className="o-input__icon-container">
                     <div className="o-input__icon">
                         {iconContent}
                     </div>
                 </div>}
-                {type === "submit" 
+                {type === "submit"
                     ? <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} value={value} onClick={e => handleClick(e)}/>
                     : <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} onChange={e => handleOnChange(e)} onClick={e => handleClick(e)}/>
                 }

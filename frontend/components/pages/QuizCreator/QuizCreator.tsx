@@ -9,8 +9,10 @@ import { AddQuizMethods } from "./representational/AddQuizMethods";
 import { QuizCreatorProps } from "./types";
 import { QuizWizard } from "./representational/QuizWizard";
 import { Dropfile } from "./representational/Dropfile";
-import { QuizCreatorHeader } from "./representational/QuizCreatorHeader";
 import { WithSideMenu } from "../../hoc/withSideMenu";
+import { BulbSVG } from "../../utils/svg/Bulb";
+import { QuizCreatorInputs } from "./representational/QuizCreatorInputs";
+import { CreatorStepHeader } from "./representational/CreatorStepHeader";
 
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
@@ -18,22 +20,34 @@ const QuizCreator = (props: QuizCreatorProps) => {
 
     return (
         <section className="c-quiz-creator">
-            <form className="o-form c-quiz-creator-form" onSubmit={(e) => createTest(e, this.props.history)}>
-                <p className="o-form__title o-title o-title--h2 o-title--line">
-                    Dodaj quiz
-                </p>
-                <div className="c-quiz-creator-form__content">
-                    <QuizCreatorHeader />
-                    <QuizTypes />
-                    <div className="c-quiz-creator__quiz-types-group">
-                        <p className="c-quiz-creator__quiz-types-title">Dodaj pytania:</p>
+            <div className="c-quiz-creator__header">
+                <h2 className="c-quiz-creator__title">
+                    Stwórz swój własny, unikalny test!
+                </h2>
+                <BulbSVG/>
+            </div>
+            <div className="c-quiz-creator__content">
+                <form className="o-form c-quiz-creator-form" onSubmit={(e) => createTest(e, props.history)}>
+                    <div className="c-quiz-creator__form-content">
+                        <p className="c-quiz-creator__description">
+                            Utwórz test, którym łatwiej zrealizujesz swój cel, a ponadto umożliwisz naukę innym użytkownikom. Twórz, dziel się, a przede wszystkim <span className="o-underlined">ucz się łatwiej.</span>
+                        </p>
+                        <CreatorStepHeader title="Krok 1." description="Podaj nazwę testu"/>
+                        <QuizCreatorInputs />
+
+                        <CreatorStepHeader title="Krok 2." description="Wybierz typ testu"/>
+                        <QuizTypes />
+
+                        <CreatorStepHeader title="Krok 3." description="Dodaj pytania"/>
                         <AddQuizMethods setShowWizard={setShowWizard} setShowFileDrop={setShowFileDrop}/>
                     </div>
                     {showFileDrop && <Dropfile />}
                     {showWizard && <QuizWizard />}
-                </div>
-                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
-            </form>
+
+                    <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
+                </form>
+            </div>
+
         </section>
     )
 }
@@ -43,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const options = {
-    title: 'Kreator quizów',
+    title: 'Kreator testów',
     sideLinks: [
         {
             text: 'Strona główna',
