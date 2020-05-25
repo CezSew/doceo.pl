@@ -96,6 +96,70 @@ h4, h5, h6 {
         align-items: center;
         justify-content: space-between;
     }
+
+    &--with-sidemenu {
+        display: grid;
+        grid-template-columns: 22rem auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            'with-sidemenu-title with-sidemenu-title'
+            'with-sidemenu-aside with-sidemenu-main';
+        grid-gap: 2rem;
+    }
+}
+
+.o-page {
+    padding-top: 9rem;
+    background-color: #F3F7FA;
+    min-height: calc(100vh - 9rem);
+}
+
+.o-page__title-container {
+    grid-area: with-sidemenu-title;
+    padding: 1.85rem;
+    background-color: $white;
+}
+
+.o-page__title {
+    color: $purple;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.o-page__menu {
+    grid-area: with-sidemenu-aside;
+    background-color: $white;
+    z-index: 2;
+    align-self: flex-start;
+}
+
+.o-page__menu-item {
+    display: block;
+    border-bottom: 2px solid $lightgray;
+
+    &:first-child {
+        border-top: 0;
+    }
+
+    &:hover {
+        background-color: $purple;
+        .o-page__menu-link {
+            color: $white;
+        }
+    }
+}
+
+.o-page__menu-link {
+    display: block;
+    font-size: 1.4rem;
+    color: $black;
+    padding: 1.2rem 3.5rem;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.o-page__main {
+    grid-area: with-sidemenu-main;
 }
 
 .o-underlined {

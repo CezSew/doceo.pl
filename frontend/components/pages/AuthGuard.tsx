@@ -1,11 +1,10 @@
+import '../../css/utils/loader.scss';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { getJwt } from '../../helpers';
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import store from "../../store";
 import Header from '../parts/Header';
 
 interface AuthGuardProps {
@@ -42,10 +41,14 @@ class AuthGuard extends Component<AuthGuardProps> {
     if(!this.props.isUserLoggedIn) {
       return (
       <React.Fragment>
-        <Header/>
-        <div className="o-container">
-          <p>Loading ...</p>
-        </div>
+          <div className="loader-container">
+              <div className="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+              </div>
+          </div>
       </React.Fragment>
       );
     } else {

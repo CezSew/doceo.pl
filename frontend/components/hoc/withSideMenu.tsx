@@ -2,22 +2,31 @@ import React from "react";
 import Header from "../parts/Header";
 import { Link } from 'react-router-dom';
 
-export const WithSideMenu = Component => props => {
+export const WithSideMenu = (Component, {title, sideLinks}) => props => {
+    const options = sideLinks.map(option => {
+        return (
+            <li key={Math.floor(Math.random() * 1000000) + 1} className="o-page__menu-item">
+                <Link to={option.link} className="o-page__menu-link">{option.text}</Link>
+            </li>
+        )
+    });
+
     return (
         <React.Fragment>
             <Header/>
-            <main className="c-page">
-                <div className="o-container">
-                    <div className="c-test-hub__title-container">
-                        <h1 className="o-title o-title--h2 o-title--line c-test-hub__title">
-                            Dostępne testy
+            <main className="o-page">
+                <div className="o-container o-container--with-sidemenu">
+                    <div className="o-page__title-container">
+                        <h1 className="o-title o-title--h2 o-title--line o-page__title">
+                            {title}
                         </h1>
                     </div>
-                    <aside className="c-test-hub__menu">
-                        <Link to="/" className="c-test-hub__menu-item">Strona główna</Link>
-                        <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
+                    <aside className="o-page__menu">
+                        {options}
                     </aside>
-                    <Component />
+                    <main className="o-page__main">
+                        <Component />
+                    </main>
                 </div>
             </main>
         </React.Fragment>
