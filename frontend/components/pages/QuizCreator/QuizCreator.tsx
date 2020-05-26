@@ -17,6 +17,7 @@ import { CreatorStepHeader } from "./representational/CreatorStepHeader";
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
     const [showFileDrop, setShowFileDrop] = useState(false);
+    const [formRecords, setFormRecords] = useState(null);
 
     return (
         <section className="c-quiz-creator">
@@ -42,7 +43,7 @@ const QuizCreator = (props: QuizCreatorProps) => {
                         <AddQuizMethods setShowWizard={setShowWizard} setShowFileDrop={setShowFileDrop}/>
                     </div>
                     {showFileDrop && <Dropfile />}
-                    {showWizard && <QuizWizard />}
+                    {showWizard && <QuizWizard formRecords={formRecords} setFormRecords={setFormRecords}/>}
 
                     <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
                 </form>

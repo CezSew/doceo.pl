@@ -21,6 +21,27 @@ export const selectQuizType = (element) => {
     typeInput.value = value;
 }
 
+export const handleAddFormRecord = (forms, setForms) => {
+    let newForms;
+
+    if(!forms) {
+        newForms = [];
+    } else {
+        newForms = [...forms];
+    }
+
+    const newForm = {
+        id: newForms.length,
+        question: '',
+        answers: '',
+        correct: ''
+    };
+
+    newForms.push(newForm);
+    console.log(newForms);
+    setForms(newForms);
+}
+
 const disableAllOptions = (name) => {
     let selector;
 
