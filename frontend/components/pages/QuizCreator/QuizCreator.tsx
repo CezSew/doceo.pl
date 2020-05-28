@@ -42,11 +42,12 @@ const QuizCreator = (props: QuizCreatorProps) => {
                         <CreatorStepHeader title="Krok 3." description="Dodaj pytania"/>
                         <AddQuizMethods setShowWizard={setShowWizard} setShowFileDrop={setShowFileDrop}/>
                     </div>
-                    {showFileDrop && <Dropfile />}
-                    {showWizard && <QuizWizard formRecords={formRecords} setFormRecords={setFormRecords}/>}
-
-                    <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
                 </form>
+
+                {showFileDrop && <Dropfile />}
+                {showWizard && <QuizWizard formRecords={formRecords} setFormRecords={setFormRecords}/>}
+
+                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
             </div>
 
         </section>

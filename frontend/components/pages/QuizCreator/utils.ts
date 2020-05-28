@@ -42,6 +42,32 @@ export const handleAddFormRecord = (forms, setForms) => {
     setForms(newForms);
 }
 
+export const handleInputClick = (event) => {
+    event.preventDefault();
+    const target = event.target;
+
+    target.classList.remove('add-question-form__input--active');
+
+}
+
+export const handleCheckboxClick = (event) => {
+    console.log('handleCheckboxClick')
+    const target = event.target;
+    const id = target.getAttribute('data-id');
+    const items = document.querySelectorAll(`.add-question-form__checkbox[data-id='${id}']`);
+
+    console.log(items)
+
+    items.forEach((checkbox: HTMLInputElement) => {
+        console.log('items');
+        checkbox.checked = false;
+    })
+
+    target.checked = true;
+
+    console.log();
+}
+
 const disableAllOptions = (name) => {
     let selector;
 

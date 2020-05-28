@@ -4,7 +4,6 @@ import { handleAddFormRecord } from "../utils";
 import { FormRecords } from "./FormRecords";
 
 export const QuizWizard = ({formRecords, setFormRecords}) => {
-
     return (
         <div className="c-quiz-creator-wizard">
             <div className="c-quiz-creator-wizard__description-wrapper">
