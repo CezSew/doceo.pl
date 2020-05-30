@@ -68,6 +68,13 @@ export const handleCheckboxClick = (event) => {
     console.log();
 }
 
+export const handleArrowClick = (event) => {
+    const target = event.target;
+    const form = target.closest('.c-add-question-form');
+
+    form.classList.toggle('c-add-question-form--unfolded');
+}
+
 const disableAllOptions = (name) => {
     let selector;
 

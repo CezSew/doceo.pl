@@ -207,20 +207,20 @@
     height: 2.3rem;
 }
 
-.add-question-form {
+.c-add-question-form {
     width: 80%;
     margin: 2rem auto;
 }
 
-.add-question-form__input {
+.c-add-question-form__input {
     font-size: 1.6rem;
     box-sizing: border-box;
-    padding: 0.7rem 3rem;
+    padding: 0.7rem 5rem;
     min-height: 3.5rem;
     color: $white;
     background-color: $blue;
     width: 100%;
-    margin: 1rem 0;
+    margin: 0;
     border: 0;
     border: 1px solid $white;
 
@@ -230,26 +230,34 @@
     }
 }
 
-.add-question-form__input::placeholder {
+.c-add-question-form__input::placeholder {
     color: $white;
 }
 
-.add-question-form__input--active::placeholder {
+.c-add-question-form__input--active::placeholder {
     color: $clay;
 }
 
-.add-question-form__answers {
+.c-add-question-form__answers {
     box-sizing: border-box;
     padding-left: 3rem;
     border-left: 2px solid $white;
+    margin-left: 3rem;
+    max-height: 0px;
+    overflow: hidden;
+    transition: 0.3s max-height ease;
 }
 
-.add-question-form__answer-line {
+.c-add-question-form__answer-line {
     display: flex;
     align-items: center;
+
+    .c-add-question-form__input {
+        padding-left: 3rem;
+    }
 }
 
-.add-question-form__checkbox {
+.c-add-question-form__checkbox {
     position: relative;
     margin-left: 1rem;
     width: 3.5rem;
@@ -281,5 +289,44 @@
         width: 3.5rem;
         height: 3.5rem;
         color: $white;
+    }
+}
+
+.c-add-question-form__arrow-fold-svg {
+    pointer-events: none;
+    transform: rotate(180deg);
+}
+
+.c-add-question-form__arrow-fold-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: calc(50% - 1rem);
+    left: 2rem;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    border: 0;
+}
+
+.c-add-question-form__question-input-wrapper {
+    position: relative;
+}
+
+.c-add-question-form {
+    &--unfolded {
+        .c-add-question-form__arrow-fold-svg {
+            transform: rotate(90deg);
+        }
+
+        .c-add-question-form__answers {
+            max-height: 25rem;
+        }
+
+        .c-add-question-form__input {
+            margin: 1rem 0;
+        }
     }
 }
