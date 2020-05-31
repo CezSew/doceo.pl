@@ -23,6 +23,7 @@ export const selectQuizType = (element) => {
 
 export const handleAddFormRecord = (forms, setForms) => {
     let newForms;
+    let isPrevFormValid = true;
 
     if(!forms) {
         newForms = [];
@@ -30,36 +31,37 @@ export const handleAddFormRecord = (forms, setForms) => {
         newForms = [...forms];
     }
 
+    const currentFormId = newForms.length;
     const newForm = {
-        id: newForms.length,
+        id: currentFormId,
         question: '',
         answers: '',
         correct: ''
     };
 
-    newForms.push(newForm);
-    console.log(newForms);
-    setForms(newForms);
+    if(currentFormId) {
+        isPrevFormValid = validateQuestionForm(currentFormId - 1);
+    }
+
+    if(isPrevFormValid) {
+        newForms.push(newForm);
+        setForms(newForms);
+    }
 }
 
 export const handleInputClick = (event) => {
     event.preventDefault();
     const target = event.target;
 
-    target.classList.remove('add-question-form__input--active');
-
+    target.classList.remove('c-add-question-form__input--active');
 }
 
 export const handleCheckboxClick = (event) => {
-    console.log('handleCheckboxClick')
     const target = event.target;
     const id = target.getAttribute('data-id');
-    const items = document.querySelectorAll(`.add-question-form__checkbox[data-id='${id}']`);
-
-    console.log(items)
+    const items = Array.from(document.querySelectorAll(`.c-add-question-form__checkbox[data-id='${id}']`));
 
     items.forEach((checkbox: HTMLInputElement) => {
-        console.log('items');
         checkbox.checked = false;
     })
 
@@ -73,6 +75,52 @@ export const handleArrowClick = (event) => {
     const form = target.closest('.c-add-question-form');
 
     form.classList.toggle('c-add-question-form--unfolded');
+}
+
+/**
+ * helpers
+ */
+
+const validateQuestionForm = (id) => {
+    const isFilled = areInputsFilled(id);
+    const isSelected = isCorrectAnswerSelected(id);
+    let isValid = true;
+
+    if(!isFilled) {
+        alert('Wypełnij wszystkie pola!');
+        isValid = false;
+    }
+
+    if(!isSelected) {
+        alert('Zaznacz poprawną odpowiedź!')
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+const areInputsFilled = (id) => {
+    const inputs = Array.from(document.querySelectorAll(`.c-add-question-form[data-form-id='${id}'] input[type='text']`));
+    let areAllInputsFilled = false;
+
+    const filledInputs = inputs.filter((input: HTMLInputElement) => {
+        return !!input.value.trim();
+    })
+
+    if(filledInputs.length === inputs.length) areAllInputsFilled = true;
+
+    return areAllInputsFilled;
+}
+
+const isCorrectAnswerSelected = (id) => {
+    const checkboxes = Array.from(document.querySelectorAll(`.c-add-question-form__checkbox[data-id='${id}']`));
+    let isAnySelected = false;
+
+    checkboxes.forEach((checkbox: HTMLInputElement) => {
+        if(checkbox.checked) isAnySelected = true;
+    })
+
+    return isAnySelected;
 }
 
 const disableAllOptions = (name) => {
