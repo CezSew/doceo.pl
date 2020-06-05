@@ -96,6 +96,13 @@
     .o-underlined {
         font-size: 2rem;
     }
+
+    &--main {
+        color: $black;
+        width: 70%;
+        font-size: 2rem;
+        font-weight: 300;
+    }
 }
 
 .c-file-holder {
@@ -328,5 +335,14 @@
         .c-add-question-form__input {
             margin: 1rem 0;
         }
+    }
+}
+
+.c-quiz-creator__step {
+    transition: 0.3s opacity;
+
+    &--hidden {
+        pointer-events: none;
+        opacity: 0.5;
     }
 }

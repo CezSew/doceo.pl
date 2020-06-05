@@ -12,7 +12,8 @@ interface InputLineInterface {
     wrapperClasses?: string,
     value?: string,
     handleOnChange?: Function,
-    handleClick?: Function
+    handleClick?: Function,
+    handleBlur?: Function
 }
 
 class InputLine extends React.Component<InputLineInterface> {
@@ -21,7 +22,7 @@ class InputLine extends React.Component<InputLineInterface> {
     }
 
     render() {
-        const {classes = '', wrapperClasses = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}} = this.props;
+        const {classes = '', wrapperClasses = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}, handleBlur = () => {}} = this.props;
         const iconModifierClass = icon
         ? `o-input--${icon}`
         : '';
@@ -56,7 +57,15 @@ class InputLine extends React.Component<InputLineInterface> {
                 </div>}
                 {type === "submit"
                     ? <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} value={value} onClick={e => handleClick(e)}/>
-                    : <input className={`o-input ${iconModifierClass} ${classes}`} type={type} name={name} placeholder={placeholder} onChange={e => handleOnChange(e)} onClick={e => handleClick(e)}/>
+                    : <input
+                        className={`o-input ${iconModifierClass} ${classes}`}
+                        type={type}
+                        name={name}
+                        placeholder={placeholder}
+                        onChange={e => handleOnChange(e)}
+                        onClick={e => handleClick(e)}
+                        onBlur={(e => handleBlur(e))}
+                    />
                 }
             </div>
         );

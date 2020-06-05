@@ -13,6 +13,7 @@ import { WithSideMenu } from "../../hoc/withSideMenu";
 import { BulbSVG } from "../../utils/svg/Bulb";
 import { QuizCreatorInputs } from "./representational/QuizCreatorInputs";
 import { CreatorStepHeader } from "./representational/CreatorStepHeader";
+import { firstStepHandler, secondStepHandler } from "./utils";
 
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
@@ -30,17 +31,21 @@ const QuizCreator = (props: QuizCreatorProps) => {
             <div className="c-quiz-creator__content">
                 <form className="o-form c-quiz-creator-form" onSubmit={(e) => createTest(e, props.history)}>
                     <div className="c-quiz-creator__form-content">
-                        <p className="c-quiz-creator__description">
+                        <p className="c-quiz-creator__description c-quiz-creator__description--main">
                             Utwórz test, którym łatwiej zrealizujesz swój cel, a ponadto umożliwisz naukę innym użytkownikom. Twórz, dziel się, a przede wszystkim <span className="o-underlined">ucz się łatwiej.</span>
                         </p>
-                        <CreatorStepHeader title="Krok 1." description="Podaj nazwę testu"/>
-                        <QuizCreatorInputs />
-
-                        <CreatorStepHeader title="Krok 2." description="Wybierz typ testu"/>
-                        <QuizTypes />
-
-                        <CreatorStepHeader title="Krok 3." description="Dodaj pytania"/>
-                        <AddQuizMethods setShowWizard={setShowWizard} setShowFileDrop={setShowFileDrop}/>
+                        <div className="c-quiz-creator__step js-creator-step-1">
+                            <CreatorStepHeader title="Krok 1." description="Podaj nazwę testu"/>
+                            <QuizCreatorInputs stepHandlers={[firstStepHandler, secondStepHandler]}/>
+                        </div>
+                        <div className="c-quiz-creator__step c-quiz-creator__step--hidden js-creator-step-2">
+                            <CreatorStepHeader title="Krok 2." description="Wybierz typ testu"/>
+                            <QuizTypes/>
+                        </div>
+                        <div className="c-quiz-creator__step c-quiz-creator__step--hidden js-creator-step-3">
+                            <CreatorStepHeader title="Krok 3." description="Dodaj pytania"/>
+                            <AddQuizMethods setShowWizard={setShowWizard} setShowFileDrop={setShowFileDrop}/>
+                        </div>
                     </div>
                 </form>
 

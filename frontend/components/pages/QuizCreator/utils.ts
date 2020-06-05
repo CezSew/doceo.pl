@@ -16,9 +16,12 @@ export const selectQuizType = (element) => {
     enableOption(element);
 
     const value = element.getAttribute('data-value');
-    const typeInput: HTMLInputElement = document.querySelector('.o-input[name=type]');
+    const typeInput: HTMLInputElement = document.querySelector('.js-quiz-creator-type-input');
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+    const ev2 = new Event('input', { bubbles: true});
 
-    typeInput.value = value;
+    nativeInputValueSetter.call(typeInput, value);
+    typeInput.dispatchEvent(ev2);
 }
 
 export const handleAddFormRecord = (forms, setForms) => {
@@ -75,6 +78,20 @@ export const handleArrowClick = (event) => {
     const form = target.closest('.c-add-question-form');
 
     form.classList.toggle('c-add-question-form--unfolded');
+}
+
+export const firstStepHandler = (e) => {
+    const input: HTMLInputElement = document.querySelector('.js-quiz-creator-title-input');
+
+    if(input.value) {
+        const secondStep = document.querySelector('.js-creator-step-2');
+        secondStep.classList.remove('c-quiz-creator__step--hidden');
+    }
+}
+
+export const secondStepHandler = (e) => {
+    const thirdStep = document.querySelector('.js-creator-step-3');
+    thirdStep.classList.remove('c-quiz-creator__step--hidden');
 }
 
 /**
