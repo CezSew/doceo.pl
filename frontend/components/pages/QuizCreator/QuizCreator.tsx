@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
-import Header from "../../parts/Header";
 import InputLine from "../../parts/InputLine";
 import '../../../css/pages/quizCreator.scss';
 import { createTest } from '../../../helpers/createTest';
@@ -15,7 +14,6 @@ import { QuizCreatorInputs } from "./representational/QuizCreatorInputs";
 import { CreatorStepHeader } from "./representational/CreatorStepHeader";
 import { firstStepHandler, secondStepHandler } from "./utils";
 import { sendForm } from '../../../helpers/sendForm';
-// test
 
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
