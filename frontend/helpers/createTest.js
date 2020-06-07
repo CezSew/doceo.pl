@@ -9,6 +9,9 @@ export function createTest(e, history) {
     const questions =  e.target.querySelector('.o-input[name=hidden-questions]').value;
     const host = store.getState().host;
 
+    console.log({title: title,
+        type: type,
+        questions: encodeURIComponent(questions)})
     if(title && type) {
         axios.post(`${host}/api/quiz`, {
             title: title,

@@ -14,12 +14,14 @@ import { BulbSVG } from "../../utils/svg/Bulb";
 import { QuizCreatorInputs } from "./representational/QuizCreatorInputs";
 import { CreatorStepHeader } from "./representational/CreatorStepHeader";
 import { firstStepHandler, secondStepHandler } from "./utils";
+import { sendForm } from '../../../helpers/sendForm';
 
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
     const [showFileDrop, setShowFileDrop] = useState(false);
     const [formRecords, setFormRecords] = useState(null);
 
+    console.log(props)
     return (
         <section className="c-quiz-creator">
             <div className="c-quiz-creator__header">
@@ -52,7 +54,7 @@ const QuizCreator = (props: QuizCreatorProps) => {
                 {showFileDrop && <Dropfile />}
                 {showWizard && <QuizWizard formRecords={formRecords} setFormRecords={setFormRecords}/>}
 
-                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit"/>
+                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit" handleClick={(e) => sendForm(e, '.c-quiz-creator-form')}/>
             </div>
 
         </section>
@@ -77,4 +79,7 @@ const options = {
     ]
 }
 
-export default connect(mapStateToProps, null)(WithSideMenu(QuizCreator, options))
+export default connect(
+    mapStateToProps, 
+    null)
+    (WithSideMenu(QuizCreator, options))

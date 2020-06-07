@@ -25,7 +25,7 @@ export const WithSideMenu = (Component, {title, sideLinks}) => props => {
                         {options}
                     </aside>
                     <main className="o-page__main">
-                        <Component />
+                        <Component {...props}/>
                     </main>
                 </div>
             </main>
