@@ -15,6 +15,7 @@ import { QuizCreatorInputs } from "./representational/QuizCreatorInputs";
 import { CreatorStepHeader } from "./representational/CreatorStepHeader";
 import { firstStepHandler, secondStepHandler } from "./utils";
 import { sendForm } from '../../../helpers/sendForm';
+// test
 
 const QuizCreator = (props: QuizCreatorProps) => {
     const [showWizard, setShowWizard] = useState(false);
