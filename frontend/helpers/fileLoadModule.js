@@ -28,7 +28,7 @@ const fileLoadModule = () => {
 
             if(validation.status) {
                 state.textContent = 'Pomyślnie odczytano plik';
-                test.name = 'user-test';
+                // test.name = 'user-test';
                 setLocalStorage(test, 'user-test');
                 setQuestionFieldContent(JSON.stringify(test));
             } else {
@@ -107,7 +107,7 @@ const setHolderFinishedClass = () => {
     holder.classList = 'holder-ended';
 }
 
-const isTestFileValid = (testObject) => {
+export const isTestFileValid = (testObject) => {
     let lengthOfTest = 0;
     let error = '';
 
@@ -126,7 +126,7 @@ const isTestFileValid = (testObject) => {
     return {status: true, error: ''};
 }
 
-const setQuestionFieldContent = (json) => {
+export const setQuestionFieldContent = (json) => {
     const questionsInput = document.querySelector('[name=hidden-questions]');
 
     if(questionsInput) {

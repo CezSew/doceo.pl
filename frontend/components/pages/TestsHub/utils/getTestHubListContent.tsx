@@ -2,6 +2,7 @@ import {QuizLine} from "../QuizLine";
 import React from "react";
 
 const getTestHubListContent = (data) => {
+    console.log(data)
     let renderData;
     const quizesNotFound = typeof data['msg'] !== 'undefined';
 

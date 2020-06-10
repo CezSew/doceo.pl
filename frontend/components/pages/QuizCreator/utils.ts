@@ -1,3 +1,6 @@
+import setLocalStorage from '../../../helpers/setLocalStorage';
+import { setQuestionFieldContent, isTestFileValid } from '../../../helpers/fileLoadModule';
+
 export const showContainer = (element, {setShowWizard, setShowFileDrop}) => {
     disableAllOptions('upload-method');
     enableOption(element);
@@ -52,6 +55,25 @@ export const handleAddFormRecord = (forms, setForms) => {
     }
 }
 
+export const handleAcceptWizard = (forms) => {
+    if(forms.length <= 4) {
+        alert('musisz uzupełnić conajmniej 5 pytań')
+    }
+
+    const test = mapFormsIntoObject(forms);
+    console.log(test)
+    const validation = isTestFileValid(test);
+
+    if(validation.status) {
+        setLocalStorage(test, 'user-test');
+        setQuestionFieldContent(JSON.stringify(test));
+        enableSendForm();
+    } else {
+        console.log(validation.error)
+    }
+
+}
+
 export const handleInputClick = (event) => {
     event.preventDefault();
     const target = event.target;
@@ -69,8 +91,6 @@ export const handleCheckboxClick = (event) => {
     })
 
     target.checked = true;
-
-    console.log();
 }
 
 export const handleArrowClick = (event) => {
@@ -97,6 +117,58 @@ export const secondStepHandler = (e) => {
 /**
  * helpers
  */
+const enableSendForm = () => {
+    document.querySelector('.js-wizard-button-submit').classList.remove('o-input--inactive');
+}
+
+const mapFormsIntoObject = (forms) => {
+    let finalFormsObject = {};
+
+    forms.forEach((form, index) => {
+        const isValid = validateQuestionForm(form.id);
+
+        if(isValid) {
+            const formQuestionElement: HTMLInputElement = document.querySelector(`[name=question-${form.id}`);
+            const formAnswersElements =  Array.from(document.querySelectorAll(`[name=answer-${form.id}`));
+            const formAnswersCheckboxesElements = Array.from(document.querySelectorAll(`.c-add-question-form__checkbox[data-id='${form.id}']`));
+            const question = formQuestionElement.value;
+            let answers = getAnswers(formAnswersElements);
+            const correct = getCheckedInputIndex(formAnswersCheckboxesElements);
+
+            finalFormsObject[(index + 1)] = {
+                answers: answers,
+                question: question.toString(),
+                correct: correct.toString()
+            }
+        } else {
+            console.warn('Invalid form values')
+        }
+    })
+
+    return finalFormsObject;
+}
+
+const getAnswers = (answersElems) => {
+    let answers = {1:'', 2:'', 3:'', 4:''};
+
+    answersElems.forEach((answer: HTMLInputElement, index) => {
+        answers[(index+1).toString()] = answer.value;
+    });
+
+    return answers;
+}
+
+const getCheckedInputIndex = (checkboxes) : number => {
+    let checkboxIndex = -1;
+
+    checkboxes.forEach((checkbox: HTMLInputElement, index: number) => {
+        if(checkbox.checked) {
+            checkboxIndex = index;
+        }
+    })
+
+    return checkboxIndex + 1;
+}
 
 const validateQuestionForm = (id) => {
     const isFilled = areInputsFilled(id);

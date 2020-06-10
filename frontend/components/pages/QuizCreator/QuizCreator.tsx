@@ -20,7 +20,6 @@ const QuizCreator = (props: QuizCreatorProps) => {
     const [showFileDrop, setShowFileDrop] = useState(false);
     const [formRecords, setFormRecords] = useState(null);
 
-    console.log(props)
     return (
         <section className="c-quiz-creator">
             <div className="c-quiz-creator__header">
@@ -53,7 +52,7 @@ const QuizCreator = (props: QuizCreatorProps) => {
                 {showFileDrop && <Dropfile />}
                 {showWizard && <QuizWizard formRecords={formRecords} setFormRecords={setFormRecords}/>}
 
-                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit" handleClick={(e) => sendForm(e, '.c-quiz-creator-form')}/>
+                <InputLine name="submit" type="submit" value="Dodaj test" classes="o-input--submit o-input--inactive js-wizard-button-submit" handleClick={(e) => sendForm(e, '.c-quiz-creator-form')}/>
             </div>
 
         </section>
@@ -79,6 +78,6 @@ const options = {
 }
 
 export default connect(
-    mapStateToProps, 
+    mapStateToProps,
     null)
     (WithSideMenu(QuizCreator, options))
