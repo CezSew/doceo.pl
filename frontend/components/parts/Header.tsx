@@ -27,6 +27,11 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout}) =
                                 wyloguj się
                             </Link>
                         </button>
+                        <button className="c-header__logout">
+                            <Link className="c-header__link" to="/user-panel">
+                                panel użytkownika
+                            </Link>
+                        </button>
                     </div>
                 :   <Link className="c-header__link" to="/login">
                         zaloguj się

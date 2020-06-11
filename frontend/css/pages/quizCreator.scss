@@ -167,13 +167,33 @@
     }
 
     &--inactive {
+        position: relative;
         pointer-events: none;
         opacity: 0.6;
+        overflow: hidden;
     }
 
     .o-text {
         pointer-events: none;
     }
+}
+
+.c-quiz-creator__quiz-type-span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    left: -25%;
+    width: 150%;
+    height: 3rem;
+    text-align: center;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    padding: 1rem 0;
+    background-color: $lightred;
+    color: $white;
+    font-size: 1.4rem;
 }
 
 .c-quiz-creator__tool {

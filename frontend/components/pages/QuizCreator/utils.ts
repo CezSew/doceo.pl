@@ -69,7 +69,7 @@ export const handleAcceptWizard = (forms) => {
         setQuestionFieldContent(JSON.stringify(test));
         enableSendForm();
     } else {
-        console.log(validation.error)
+        console.warn(validation.error)
     }
 
 }

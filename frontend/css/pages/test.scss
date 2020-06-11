@@ -28,8 +28,8 @@
     display: block;
     padding: 1rem;
     margin: 1rem 0;
-    background-color: $purple;
-    border: 1px solid $purple;
+    background-color: $blue;
+    border: 1px solid $blue;
     list-style: none;
     font-size: 1.6rem;
     color: $white;
@@ -37,7 +37,7 @@
     cursor: pointer;
 
     &:hover {
-        color: $purple;
+        color: $blue;
         background-color: $white;
     }
 
@@ -102,15 +102,15 @@
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    border: 1px solid $purple;
+    border: 1px solid $blue;
     margin-bottom: .5rem;
     text-decoration: none;
-    color: $purple;
+    color: $blue;
     transition: 0.3s background-color;
 
     &:hover {
         color: $white;
-        background-color: $purple;
+        background-color: $blue;
 
         path {
             fill: $white;
@@ -153,7 +153,7 @@
 .c-test-stats__header {
     width: 100%;
     padding: 0.5rem 1rem;
-    background-color: $purple;
+    background-color: $blue;
     box-sizing: border-box;
     color: $white;
     font-size: 1.2rem;
@@ -167,6 +167,6 @@
     color: $green;
     box-sizing: border-box;
     padding: 2rem 1rem;
-    border: 1px solid rgba($purple, 0.3);
+    border: 1px solid rgba($blue, 0.3);
     font-size: 2rem;
 }
