@@ -10,7 +10,7 @@ import SingleTest from './components/pages/SingleTest/SingleTest';
 import ErrorBoundary from './components/utils/ErrorBoundary';
 import PageNotFound from "./components/pages/PageNotFound";
 import { WithAuthGuard } from "./components/hoc/withAuthGuard";
-import UserPanel from "./components/pages/UserPanel";
+import UserPanel from "./components/pages/userPanel/UserPanel";
 import {WithSideMenu} from "./components/hoc/withSideMenu";
 
 export const RouterComponent = () => (
@@ -23,7 +23,7 @@ export const RouterComponent = () => (
                 <Route exact path="/test-page"      component={SingleTest} />
                 <Route exact path='/protected'      component={WithAuthGuard(Protected)} />
                 <Route exact path='/create-quiz'    component={WithAuthGuard(QuizCreator)} />
-                <Route exact path="/user-panel"     component={WithAuthGuard(WithSideMenu(UserPanel, {title: 'Panel użytkownika', sideLinks: [{text: 'Strona główna', link: '/'}, {text: 'Wyświetl testy', link: '/tests-main'}]}))} />
+                <Route exact path="/user-panel"     component={WithAuthGuard(UserPanel)} />
                 <Route                              component={PageNotFound} />
             </Switch>
         </ErrorBoundary>

@@ -2,8 +2,8 @@ import React from "react";
 import Header from "../parts/Header";
 import { Link } from 'react-router-dom';
 
-export const WithSideMenu = (Component, {title, sideLinks}) => props => {
-    const options = sideLinks.map(option => {
+export const WithSideMenu = (Component, {title = null, sideLinks = null}) => props => {
+    const options = sideLinks && sideLinks.map(option => {
         return (
             <li key={Math.floor(Math.random() * 1000000) + 1} className="o-page__menu-item">
                 <Link to={option.link} className="o-page__menu-link">{option.text}</Link>

@@ -10,7 +10,6 @@ import Answers from "./Question/Answers";
 import '../../../css/pages/test.scss';
 import { Loader } from "../../utils/Loader";
 import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
-import AuthOverlord from '../../auth/AuthOverlord';
 import {getAnwerAccuracyPercent, isQuestionEliminated, shouldGenerateNextQuestion} from './utils/utils';
 import { getQuestionsArray } from "./utils/getQuestionsArray";
 import { getUserId } from "./utils/getUserId";
