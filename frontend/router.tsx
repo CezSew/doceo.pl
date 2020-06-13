@@ -11,19 +11,20 @@ import ErrorBoundary from './components/utils/ErrorBoundary';
 import PageNotFound from "./components/pages/PageNotFound";
 import { WithAuthGuard } from "./components/hoc/withAuthGuard";
 import UserPanel from "./components/pages/userPanel/UserPanel";
-import {WithSideMenu} from "./components/hoc/withSideMenu";
+import UserTests from "./components/pages/userPanel/UserTests";
 
 export const RouterComponent = () => (
     <BrowserRouter>
         <ErrorBoundary>
             <Switch>
-                <Route exact path="/"               component={Home} />
-                <Route exact path="/login"          component={Login} />
-                <Route exact path="/tests-main"     component={TestsHub} />
-                <Route exact path="/test-page"      component={SingleTest} />
+                <Route exact path='/'               component={Home} />
+                <Route exact path='/login'          component={Login} />
+                <Route exact path='/tests-main'     component={TestsHub} />
+                <Route exact path='/test-page'      component={SingleTest} />
                 <Route exact path='/protected'      component={WithAuthGuard(Protected)} />
                 <Route exact path='/create-quiz'    component={WithAuthGuard(QuizCreator)} />
-                <Route exact path="/user-panel"     component={WithAuthGuard(UserPanel)} />
+                <Route exact path='/user-panel'     component={WithAuthGuard(UserPanel)} />
+                <Route exact path='/user-tests'     component={WithAuthGuard(UserTests)}/>
                 <Route                              component={PageNotFound} />
             </Switch>
         </ErrorBoundary>

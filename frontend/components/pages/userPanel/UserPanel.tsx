@@ -3,6 +3,7 @@ import classroom from '../../../img/classroom.jpg';
 import React from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";
+import { Link } from 'react-router-dom';
 
 const UserPanel = (props) => {
     return (
@@ -12,10 +13,10 @@ const UserPanel = (props) => {
                 <div className="o-container">
                     <h1 className="c-user-panel__title">Witaj, {props.user.name}</h1>
                     <main className="c-user-panel__tiles">
-                        <button className="c-user-panel__tile">
+                        <Link to="/user-tests" className="c-user-panel__tile">
                             <p className="c-user-panel__tile-text">Zarządzaj testami</p>
-                        </button>
-                        <div className="c-user-panel__tile">
+                        </Link>
+                        <div className="c-user-panel__tile c-user-panel__tile--image">
                            <img className="c-user-panel__image" src={classroom} alt="Empty classroom"/>
                         </div>
                         <button className="c-user-panel__tile">

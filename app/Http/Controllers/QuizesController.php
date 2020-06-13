@@ -60,4 +60,31 @@ class QuizesController extends Controller
 
         return response()->json($parsedQuizes, 201);
     }
+
+    public function getUserQuizes(Request $request) {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+        } catch (JWTException $e) {
+            return response()->json('User not found', 403);
+        } catch (TokenExpiredException $e) {
+            return response()->json('User not found', 403);
+        } catch (TokenInvalidException $e) {
+            return response()->json('User not found', 403);
+        }
+
+        $this->validate($request, [
+            'userId' => 'int'
+        ]);
+
+        $request_user_id = $request->input('userId');
+        $user_id = strval($user->id);
+
+        $response = [$user_id, $request_user_id];
+
+        if($request_user_id == $user_id) {
+            $response = Quiz::where('authorId', $user_id)->get();
+        }
+
+        return response()->json($response, 201);
+    }
 }

@@ -1,3 +1,4 @@
+import '../../css/pages/error.scss';
 import React, {ReactNode} from "react";
 import { Link } from 'react-router-dom';
 
@@ -32,12 +33,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     render() {
         if (this.state.hasError) {
             return (
-                <main>
+                <main className="c-error">
                     <div className="o-container">
-                        <h1>:( UPS! Coś poszło bardzo nie tak!</h1>
-                        <h2>Wróć do
-                            <Link to="/" onClick={() => this.resetError()}>
-                                Strony głównej
+                        <h1 className="c-error__title">
+                            <span className="c-error__sadface">:(</span> UPS! Coś poszło bardzo nie tak!
+                        </h1>
+                        <h2 className="c-error__subtitle">Wróć do
+                            <Link to="/" className="c-error__link" onClick={() => this.resetError()}>
+                                strony głównej
                             </Link>
                         </h2>
                     </div>

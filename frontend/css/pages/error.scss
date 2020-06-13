@@ -1,0 +1,41 @@
+@import '../utils/variables';
+
+.c-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: $blue;
+    color: $white;
+
+    .o-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.c-error__sadface {
+    display: block;
+    font-size: 8rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    transform: rotate(90deg);
+}
+
+.c-error__title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.c-error__subtitle {
+    display: flex;
+    font-size: 2.5rem;
+}
+
+.c-error__link {
+    display: block;
+    margin-left: .5ch;
+    color: $white;
+    font-size: 2.5rem;
+}
