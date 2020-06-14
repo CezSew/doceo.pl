@@ -15,14 +15,18 @@ interface QuizLineInterface {
 }
 
 export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
+    const link = userPanel
+        ? {}
+        : {
+            pathname: '/test-page',
+            state: {
+                quiz: quiz
+            }
+        }
+
     return(
         <li className="c-quiz-line">
-            <Link to={{
-                pathname: '/test-page',
-                state: {
-                    quiz: quiz
-                }
-            }} className="c-test-hub__quiz-link"
+            <Link to={link} className="c-test-hub__quiz-link"
             >
                 <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{testNameLetters(quiz.title)}</span></div>
                 <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quiz.title}</span></div>
@@ -31,9 +35,12 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
                 <div className="c-quiz-line__rating">{quiz.rating} ({quiz.votes} głosów)</div>
                 {userPanel &&
                  (<div className="c-quiz-line__remove">
-                    <button>
+                    <button className="c-quiz-line__remove-button" onClick={() => {alert('remove')}}>
                         Usuń
                     </button>
+                     <button className="c-quiz-line__show-button" onClick={() => {alert('remove')}}>
+                         Pokaż
+                     </button>
                  </div>)
                 }
             </Link>
