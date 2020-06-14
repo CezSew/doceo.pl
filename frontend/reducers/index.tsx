@@ -2,7 +2,7 @@ import {
     SET_USER,
     USER_LOGOUT,
     GET_TOP_QUIZES,
-    REQUEST_TOP_QUIZES_START
+    REQUEST_TOP_QUIZES_START, GET_USER_QUIZES
 } from '../constants/action-types';
 import { getHost } from './utils';
 
@@ -10,6 +10,7 @@ const initialState = {
     user: {},
     isUserLoggedIn: null,
     quizes_all_by_rating: [],
+    userTests: [],
     host: getHost()
 };
 
@@ -39,6 +40,11 @@ function rootReducer(state = initialState, action) {
       return Object.assign({}, state, {
         quizes_all_by_rating: action.payload,
         request_in_progress: false
+      })
+    case GET_USER_QUIZES:
+      return Object.assign({}, state, {
+          userTests: action.payload,
+          request_in_progress: false
       })
     case REQUEST_TOP_QUIZES_START:
       return Object.assign({}, state, {

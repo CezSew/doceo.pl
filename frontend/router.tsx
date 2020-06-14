@@ -30,17 +30,3 @@ export const RouterComponent = () => (
         </ErrorBoundary>
     </BrowserRouter>
 );
-
-const options = {
-    title: 'Kreator testów',
-    sideLinks: [
-        {
-            text: 'Strona główna',
-            link: '/'
-        },
-        {
-            text: 'Wyświetl testy',
-            link: '/tests-main'
-        }
-    ]
-}

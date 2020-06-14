@@ -10,10 +10,11 @@ interface QuizLineInterface {
         rating: string,
         votes: string,
         msg?: string
-    }
+    },
+    userPanel: boolean
 }
 
-export const QuizLine: React.FC<QuizLineInterface> = ({quiz}) => {
+export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
     return(
         <li className="c-quiz-line">
             <Link to={{
@@ -28,6 +29,13 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz}) => {
                 <div className="c-quiz-line__type">{quiz.type}</div>
                 <div className="c-quiz-line__score">-</div>
                 <div className="c-quiz-line__rating">{quiz.rating} ({quiz.votes} głosów)</div>
+                {userPanel &&
+                 (<div className="c-quiz-line__remove">
+                    <button>
+                        Usuń
+                    </button>
+                 </div>)
+                }
             </Link>
         </li>
     );

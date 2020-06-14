@@ -11,7 +11,6 @@ import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
 
 const TestsHub = (props: TestsHubProps) => {
-    console.log('TestsHub')
     useEffect(() => {
         props.onRequestTopQuizes();
     }, [])

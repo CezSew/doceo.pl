@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { clearInputs } from './utils';
 import store from '../store';
+import { getJwt } from '../helpers';
 import {
     SET_USER,
     USER_LOGOUT,
     CREATE_TEST,
     GET_TOP_QUIZES,
     REQUEST_TOP_QUIZES_START,
-    HANDLE_LOGIN
+    HANDLE_LOGIN,
+    GET_USER_QUIZES
 } from '../constants/action-types';
+
 
 export function requestLogin(event, email, password, history) {
     event.preventDefault();
@@ -48,16 +51,36 @@ const getTopQuizes = data => {
     return { type: GET_TOP_QUIZES, payload: { ...data }}
 }
 
-const requestTopQuizesStarted = () => {
+const getUserQuizes = data => {
+    return { type: GET_USER_QUIZES, payload: { ...data }}
+}
+
+const requestStarted = () => {
     return { type: REQUEST_TOP_QUIZES_START }
 }
 
 export const requestTopQuizes = () => {
     return (dispatch, getState) => {
         const host = store.getState().host;
-        dispatch(requestTopQuizesStarted());
+        dispatch(requestStarted());
         axios.post(`${host}/api/get-top-quizes`).then((res => {
             dispatch(getTopQuizes(res.data));
         }));
+    }
+}
+
+export const requestUserQuizes = (userId) => {
+    return (dispatch, getState) => {
+        const host = store.getState().host;
+        dispatch(requestStarted());
+        axios.post(`${host}/api/user-tests`, {
+                userId: userId
+            },
+            { headers: { Authorization: getJwt() } }
+        ).then(res => {
+            dispatch(getUserQuizes(res.data));
+        }).catch(e => {
+            console.log(e)
+        })
     }
 }
