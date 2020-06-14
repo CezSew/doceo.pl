@@ -1,9 +1,15 @@
+@import '../utils/variables.scss';
+
 .c-user-tests {
     box-sizing: border-box;
-    padding-top: 12rem;
+    padding-top: 10rem;
     min-height: 100vh;
+    background-color: $lightpurple;
 }
 
 .c-user-tests__title {
+    background-color: $white;
+    padding: 2rem;
     margin-bottom: 2rem;
+    color: $clay;
 }

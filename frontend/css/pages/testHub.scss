@@ -119,6 +119,25 @@
         }
     }
 
+    &--user-panel {
+        border-radius: 0.3rem;
+        padding-left: 2rem;
+    }
+
+    &--user-panel .c-test-hub__quiz-link {
+       cursor: default;
+    }
+
+    &--user-panel:hover {
+        background-color: $white;
+        .c-quiz-line__title,
+        .c-quiz-line__type,
+        .c-quiz-line__score,
+        .c-quiz-line__rating {
+            color: $black;
+        }
+    }
+
     &:nth-child(4n - 3) {
         .c-quiz-line__circle {
             background-color: $lightred;
@@ -152,11 +171,17 @@
 }
 
 .c-quiz-line__remove-button, .c-quiz-line__show-button {
+    box-sizing: border-box;
     border: 0;
-    padding: 1rem 4rem;
+    padding: 0.8rem 4rem;
     transition: 0.3s opacity;
     opacity: 1;
     cursor: pointer;
+    font-size: 1.4rem;
+    text-decoration: none;
+    font-weight: 300;
+    min-width: 12rem;
+    text-align: center;
 
     &:hover {
         opacity: 0.8;
@@ -184,6 +209,9 @@
 }
 
 .c-quiz-line__short {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-column: 1;
 }
 
