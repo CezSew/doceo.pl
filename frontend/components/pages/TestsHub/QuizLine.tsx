@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { testNameLetters } from '../../../helpers/testNameLetters';
+import ConditionalQuizLineWrapper from "./ConditionalQuizLineWrapper";
+import {requestTopQuizes} from "../../../actions";
 
 interface QuizLineInterface {
     quiz: {
@@ -11,10 +13,11 @@ interface QuizLineInterface {
         votes: string,
         msg?: string
     },
-    userPanel: boolean
+    userPanel: boolean,
+    handleRemoveQuiz?: Function
 }
 
-export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
+export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel, handleRemoveQuiz = ()=>{}}) => {
     const link = userPanel
         ? {}
         : {
@@ -26,8 +29,7 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
 
     return(
         <li className={`c-quiz-line ` + (userPanel && 'c-quiz-line--user-panel')}>
-            <Link to={link} className="c-test-hub__quiz-link"
-            >
+            <ConditionalQuizLineWrapper userPanel={userPanel} link={link}>
                 <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{testNameLetters(quiz.title)}</span></div>
                 <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quiz.title}</span></div>
                 <div className="c-quiz-line__type">{quiz.type}</div>
@@ -35,7 +37,7 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
                 <div className="c-quiz-line__rating">{quiz.rating} ({quiz.votes} głosów)</div>
                 {userPanel &&
                  (<div className="c-quiz-line__remove">
-                    <button className="c-quiz-line__remove-button" onClick={() => {alert('remove')}}>
+                    <button className="c-quiz-line__remove-button" onClick={(e) => {handleRemoveQuiz(quiz.id)}}>
                         Usuń
                     </button>
                      <Link className="c-quiz-line__show-button" to={{
@@ -48,7 +50,22 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel}) => {
                      </Link>
                  </div>)
                 }
-            </Link>
+            </ConditionalQuizLineWrapper>
         </li>
     );
 }
+
+const mapStateToProps = state => ({
+    user: state.user,
+    quizes_all_by_rating: state.quizes_all_by_rating,
+    request_in_progress: state.request_in_progress
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onRequestTopQuizes: () => {
+            dispatch(requestTopQuizes());
+        }
+    };
+};
+

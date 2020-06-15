@@ -2,19 +2,19 @@ import '../../../css/pages/userTests.scss';
 import React, {useState, useEffect} from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";
-import { requestUserQuizes } from "../../../actions";
+import {requestDeleteQuiz, requestUserQuizes} from "../../../actions";
 import { Loader } from "../../utils/Loader";
 import getTestHubListContent from "../TestsHub/utils/getTestHubListContent";
 import shouldListContentRender from "../TestsHub/utils/shouldListContentRender";
 
-const UserTests = ({user, isUserLoggedIn, userTests, onRequestUserQuizes}) => {
+const UserTests = ({user, isUserLoggedIn, userTests, onRequestUserQuizes, onHandleRemoveQuiz}) => {
     useEffect(() => {
         if(isUserLoggedIn) {
             onRequestUserQuizes(user.id);
         }
     }, [])
 
-    const renderListContent = getTestHubListContent(userTests, true);
+    const renderListContent = getTestHubListContent(userTests, true, onHandleRemoveQuiz);
     const shouldRender = shouldListContentRender(renderListContent);
 
     return (
@@ -41,6 +41,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onRequestUserQuizes: (userId) => {
             dispatch(requestUserQuizes(userId));
+        },
+        onHandleRemoveQuiz: (testId) => {
+            dispatch(requestDeleteQuiz(testId));
         }
     };
 };

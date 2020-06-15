@@ -87,4 +87,35 @@ class QuizesController extends Controller
 
         return response()->json($response, 201);
     }
+
+    public function deleteQuiz(Request $request) {
+        $request_test_id = $request->input('testId');
+        $quiz = Quiz::find((int)$request_test_id);
+
+        if($quiz) {
+            try {
+                $user = JWTAuth::parseToken()->authenticate();
+            } catch (JWTException $e) {
+                return response()->json('User not found', 403);
+            } catch (TokenExpiredException $e) {
+                return response()->json('User not found', 403);
+            } catch (TokenInvalidException $e) {
+                return response()->json('User not found', 403);
+            }
+
+            $user_id = strval($user->id);
+            $author_id = $quiz['authorId'];
+
+            if($user_id == $author_id) {
+                $quiz->delete();
+                $response = Quiz::where('authorId', $user_id)->get();
+            } else {
+                $response = 'You cannot perform this action from this account.';
+            }
+        } else {
+            $response = 'Quiz not found.';
+        }
+
+        return response()->json($response, 201);
+    }
 }

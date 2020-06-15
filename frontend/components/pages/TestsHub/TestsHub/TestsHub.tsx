@@ -6,7 +6,6 @@ import { requestTopQuizes } from '../../../../actions';
 import { Loader } from '../../../utils/Loader';
 import { TestsHubProps } from "./types";
 import Header from '../../../parts/Header';
-import AuthOverlord from '../../../auth/AuthOverlord';
 import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
 

@@ -84,3 +84,22 @@ export const requestUserQuizes = (userId) => {
         })
     }
 }
+
+export const requestDeleteQuiz = (testId) => {
+    return (dispatch, getState) => {
+        const host = store.getState().host;
+        dispatch(requestStarted());
+        axios.delete(`${host}/api/delete-test`, {
+                headers: {
+                    Authorization: getJwt()
+                },
+                data: {
+                    testId: testId
+                }
+        }).then(res => {
+            dispatch(getUserQuizes(res.data));
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+}
