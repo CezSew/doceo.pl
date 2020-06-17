@@ -13,7 +13,8 @@ interface InputLineInterface {
     value?: string,
     handleOnChange?: Function,
     handleClick?: Function,
-    handleBlur?: Function
+    handleBlur?: Function,
+    required?: boolean
 }
 
 class InputLine extends React.Component<InputLineInterface> {
@@ -22,7 +23,7 @@ class InputLine extends React.Component<InputLineInterface> {
     }
 
     render() {
-        const {classes = '', wrapperClasses = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}, handleBlur = () => {}} = this.props;
+        const {classes = '', wrapperClasses = '', name= 'input', type = 'text', icon = '', placeholder = '', value = '', handleOnChange = () => {}, handleClick = () => {}, handleBlur = () => {}, required = false} = this.props;
         const iconModifierClass = icon
         ? `o-input--${icon}`
         : '';
@@ -65,6 +66,7 @@ class InputLine extends React.Component<InputLineInterface> {
                         onChange={e => handleOnChange(e)}
                         onClick={e => handleClick(e)}
                         onBlur={(e => handleBlur(e))}
+                        required={required}
                     />
                 }
             </div>
