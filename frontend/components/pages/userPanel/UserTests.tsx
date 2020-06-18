@@ -17,6 +17,8 @@ const UserTests = ({user, isUserLoggedIn, userTests, onRequestUserQuizes, onHand
     const renderListContent = getTestHubListContent(userTests, true, onHandleRemoveQuiz);
     const shouldRender = shouldListContentRender(renderListContent);
 
+    console.log(shouldRender)
+    console.log(renderListContent);
     return (
         <React.Fragment>
             <Header/>

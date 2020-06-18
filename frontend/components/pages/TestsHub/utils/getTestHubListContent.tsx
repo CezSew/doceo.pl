@@ -1,4 +1,4 @@
-import {QuizLine} from "../QuizLine";
+import { QuizLine } from "../QuizLine";
 import React from "react";
 
 const getTestHubListContent = (data, userPanel = false, onHandleRemoveQuiz = () => {}) => {

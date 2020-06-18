@@ -47,7 +47,7 @@ class QuizesController extends Controller
         $parsedQuizes = [];
 
         if(count($quizes) == 0) {
-            $quizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
+            $parsedQuizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
         } else {
             for($i = 0; $i < count($quizes); $i++) {
                 $quiz = $quizes[$i];
@@ -79,13 +79,17 @@ class QuizesController extends Controller
         $request_user_id = $request->input('userId');
         $user_id = strval($user->id);
 
-        $response = [$user_id, $request_user_id];
+        $quizes = [$user_id, $request_user_id];
 
         if($request_user_id == $user_id) {
-            $response = Quiz::where('authorId', $user_id)->get();
+            $quizes = Quiz::where('authorId', $user_id)->get();
         }
 
-        return response()->json($response, 201);
+        if(count($quizes) == 0) {
+            $quizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
+        }
+
+        return response()->json($quizes, 201);
     }
 
     public function deleteQuiz(Request $request) {
