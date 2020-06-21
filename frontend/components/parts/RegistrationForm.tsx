@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import '../../css/parts/registrationForm.scss';
 import InputLine from '../parts/InputLine';
 import { handleSubmitRegisterForm } from "./utils";
 import { withRouter } from 'react-router-dom';
+import {compose} from "redux";
+import { connect } from 'react-redux';
 
 const RegistrationForm = (props) => {
-    const { history } = props;
+    const [loading, setLoading] = useState(false);
+    const { history, host, isUserLoggedIn } = props;
 
     return (
-       <form className="o-form js-register-form" onSubmit={(e) => handleSubmitRegisterForm(e, history)}>
+       <form className={`o-form js-register-form ${loading && 'o-form--loading'}`} onSubmit={(e) => handleSubmitRegisterForm(e, history, setLoading, host)}>
            <p className="o-form__title o-title o-title--h2 o-title--line">
                Rejestracja
             </p>
@@ -24,5 +27,14 @@ const RegistrationForm = (props) => {
     );
 }
 
+const mapStateToProps = state => ({
+    user: state.user,
+    isUserLoggedIn: state.isUserLoggedIn,
+    host: state.host
+})
 
-export default withRouter(RegistrationForm)
+export default
+compose<any>(
+    withRouter,
+    connect(mapStateToProps, null)
+)(RegistrationForm)
