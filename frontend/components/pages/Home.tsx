@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
-import {Link} from 'react-router-dom';
+import React from "react";
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../../css/pages/home.scss';
 import Header from '../parts/Header';
-import AuthOverlord from '../auth/AuthOverlord';
 import RegistrationForm from '../parts/RegistrationForm';
+import {BulbSVG} from "../utils/svg/Bulb";
 
-const Home = () => (
-    <React.Fragment>
+const Home = ({isUserLoggedIn}) => {
+    return (
+        <React.Fragment>
             <Header/>
             <main className="c-home c-content">
                 <div className="o-container">
@@ -16,7 +18,8 @@ const Home = () => (
                                 Ucz się <span className="o-underlined">wydajniej</span>
                             </h1>
                             <p className="c-introduction__description">
-                                Wiedza to potęga. Pozwolimy Ci ją ujarzmić dzięki zestawowi darmowych narzędzi. Ucz się, udostępniaj, oceniaj, popularyzuj!
+                                Wiedza to potęga. Pozwolimy Ci ją ujarzmić dzięki zestawowi darmowych narzędzi. Ucz się,
+                                udostępniaj, oceniaj, popularyzuj!
                             </p>
                             <div className="c-introduction__buttons">
                                 <Link className="o-button o-button--primary" to="/">
@@ -27,13 +30,26 @@ const Home = () => (
                                 </Link>
                             </div>
                         </div>
-                        <div className="c-introduction__registration-box">
-                            <RegistrationForm />
-                        </div>
+                        {isUserLoggedIn
+                            ? (
+                            <div className="c-introduction__icon-box">
+                                <BulbSVG color={'#7F63F4'} classes='c-introduction__main-icon'/>
+                            </div>
+                            )
+                            : (
+                            <div className="c-introduction__registration-box">
+                                <RegistrationForm/>
+                            </div>
+                            )}
                     </section>
                 </div>
             </main>
-    </React.Fragment>
-);
+        </React.Fragment>
+    )
+}
 
-export default React.memo(Home)
+const mapStateToProps = state => ({
+    isUserLoggedIn: state.isUserLoggedIn
+})
+
+export default connect(mapStateToProps, [])(Home)

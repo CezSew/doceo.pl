@@ -71,6 +71,6 @@ const mapDispatchToProps = dispatch => {
         dispatch(requestTopQuizes());
       }
     };
-  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestsHub)
