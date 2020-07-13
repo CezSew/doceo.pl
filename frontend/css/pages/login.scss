@@ -4,11 +4,19 @@
     display: flex;
     position: relative;
     align-items: center;
-    min-height: 100vh;
+    min-height: 92vh;
     overflow: hidden;
     background-color: $lightgray;
 
     .o-form {
         border: 0;
+        max-width: 100%;
+        min-width: 100%;
+    }
+
+    @media (min-width: $md) {
+        .o-form {
+            min-width: 45rem;
+        }
     }
 }

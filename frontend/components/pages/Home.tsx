@@ -10,7 +10,7 @@ const Home = ({isUserLoggedIn}) => {
     return (
         <React.Fragment>
             <Header/>
-            <main className="c-home c-content">
+            <main className="c-home o-main-content">
                 <div className="o-container">
                     <section className="c-home__introduction c-introduction">
                         <div className="c-introduction__description-box">
@@ -33,7 +33,7 @@ const Home = ({isUserLoggedIn}) => {
                         {isUserLoggedIn
                             ? (
                             <div className="c-introduction__icon-box">
-                                <BulbSVG color={'#7F63F4'} classes='c-introduction__main-icon'/>
+                                <BulbSVG color={'#3B8BEB'} classes='c-introduction__main-icon'/>
                             </div>
                             )
                             : (

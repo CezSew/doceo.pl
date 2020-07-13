@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../../css/parts/header.scss';
 import { handleLogout } from '../../actions';
 import { getJwt } from '../../helpers';
+import Logo from '../utils/svg/Logo';
 import axios from "axios";
 
 interface HeaderProps {
@@ -38,7 +39,7 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
         <header className="c-header">
             <div className="o-container o-container--space-between">
                 <Link className="c-header__logo c-logo" to="/">
-                   doceo
+                   <Logo/>
                 </Link>
                 {isUserLoggedIn
                 ?   <div className="c-header__login-section">

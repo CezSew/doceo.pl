@@ -30,7 +30,7 @@ const Login = (props: LoginProps) => {
     return (
         <React.Fragment>
             <Header/>
-            <main className="c-login">
+            <main className="c-login o-main-content">
                 <div className="o-container">
                     <form
                     className="o-form o-form--login"

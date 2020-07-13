@@ -31,9 +31,10 @@ h4, h5, h6 {
     margin: 0;
 }
 
-.c-content {
+.c-content, .o-main-content {
     box-sizing: border-box;
-    padding-top: 9rem;
+    padding-top: 8rem;
+    background-color: $lightgray;
 }
 
 .o-title {
@@ -199,7 +200,7 @@ h4, h5, h6 {
     &--primary {
         color: $white;
         font-size: 1.6rem;
-        background-color: $purple;
+        background-color: $blue;
     }
 }
 
@@ -218,7 +219,7 @@ h4, h5, h6 {
         padding: 1rem 5rem;
         font-size: 1.6rem;
         color: $white;
-        background-color: $purple;
+        background-color: $blue;
         width: auto;
         font-weight: 400;
     }
@@ -253,7 +254,7 @@ h4, h5, h6 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $purple;
+    background-color: $blue;
     border-radius: 49%;
     width: 3rem;
     height: 3rem;

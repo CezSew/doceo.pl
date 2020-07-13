@@ -1,0 +1,13 @@
+.c-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 92vh;
+}
+
+.c-register__form-container {
+    .o-form {
+        box-sizing: border-box;
+        padding: 2rem 0 0 0;
+    }
+}
