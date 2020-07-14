@@ -89,7 +89,7 @@ h4, h5, h6 {
     }
 
     @media(min-width:1200px) {
-        max-width: 1150px;
+        max-width: 1240px;
     }
 
     &--space-between {
@@ -267,4 +267,40 @@ h4, h5, h6 {
 
 .o-hidden {
     display: none;
+}
+
+.o-sidemenu {
+    position: fixed;
+    left: 0;
+    top: 7rem;
+    background-color: $white;
+    height: 93rem;
+    width: 24rem;
+}
+
+.o-sidemenu__list {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-top: 4rem;
+}
+
+.o-sidemenu__list-element {
+    width: 100%;
+}
+
+.o-sidemenu__link {
+    display: block;
+    width: 100%;
+    padding: 2rem 2rem 2rem 7rem;
+    text-decoration: none;
+    color: $darkgray;
+    transition: 0.3s background-color;
+    box-sizing: border-box;
+
+    &:hover {
+        background-color: rgba($blue, 0.15);
+    }
 }

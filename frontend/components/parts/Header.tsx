@@ -55,9 +55,14 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
                             </Link>
                         </button>
                     </div>
-                :   <Link className="c-header__link" to="/login">
-                        zaloguj się
-                    </Link>
+                :  <div className="c-header__login-section">
+                        <Link className="c-header__link" to="/login">
+                            zaloguj się
+                        </Link>
+                        <Link className="c-header__link" to="/register">
+                            zarejestruj się
+                        </Link>
+                    </div>
                 }
             </div>
         </header>

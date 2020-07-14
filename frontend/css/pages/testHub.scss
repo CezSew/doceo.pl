@@ -1,16 +1,11 @@
 @import '../utils/variables.scss';
 
 .c-test-hub {
-    padding-top: 9rem;
     background-color: $lightgray;
     min-height: calc(100vh - 9rem);
 
     .o-container {
-        display: grid;
-        grid-template-columns: 22rem auto;
-        grid-template-rows: auto auto;
-        grid-template-areas: 'test-hub-title test-hub-title' 'test-hub-aside test-hub-main';
-        grid-gap: 2rem;
+        background-color: $white;
     }
 }
 
@@ -58,10 +53,11 @@
 }
 
 .c-test-hub__title {
-    color: $purple;
+    color: $darkgray;
     font-size: 2.2rem;
     font-weight: 300;
     font-weight: 400;
+    margin-bottom: 5rem;
 }
 
 .c-test-hub__quiz-list {
@@ -70,11 +66,11 @@
 
 .c-test-hub__table-header {
     display: grid;
-    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr;
+    grid-template-columns: 5rem 2rem 10rem 1fr 1fr 1fr;
     align-items: start;
     margin-bottom: 1rem;
     background-color: $white;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
 }
 
 .c-test-hub__table-th {
@@ -86,7 +82,7 @@
     font-size: 1.4rem;
 
     &--name {
-        grid-column: 1/4;
+        grid-column: 1/span 3;
     }
 
     &--type {
@@ -201,11 +197,12 @@
 
 .c-test-hub__quiz-link {
     display: grid;
-    grid-template-columns: 5rem 2rem 10rem 2fr 1fr 3fr 3fr;
+    grid-template-columns: 5rem 2rem 10rem 1fr 1fr 1fr;
     align-items: stretch;
     justify-items: stretch;
     text-decoration: none;
     color: initial;
+    padding-left: 2rem;
 }
 
 .c-quiz-line__short {
@@ -234,7 +231,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    grid-column: 3;
+    grid-column: 2;
 }
 
 .c-quiz-line__title {

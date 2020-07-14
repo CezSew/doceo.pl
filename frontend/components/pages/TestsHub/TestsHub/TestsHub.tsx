@@ -8,6 +8,7 @@ import { TestsHubProps } from "./types";
 import Header from '../../../parts/Header';
 import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
+import Sidemenu from "../../../parts/Sidemenu";
 
 const TestsHub = (props: TestsHubProps) => {
     useEffect(() => {
@@ -17,21 +18,19 @@ const TestsHub = (props: TestsHubProps) => {
     const {quizes_all_by_rating} = props;
     const renderListContent = getTestHubListContent(quizes_all_by_rating);
     const shouldRender = shouldListContentRender(renderListContent);
+    const links = [['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
 
     return (
         <React.Fragment>
             <Header/>
-            <main className="c-test-hub">
+            <main className="c-test-hub o-main-content">
+                <Sidemenu links={links} />
                 <div className="o-container">
                     <div className="c-test-hub__title-container">
-                        <h1 className="o-title o-title--h2 o-title--line c-test-hub__title">
+                        <h1 className="o-title o-title--h2 c-test-hub__title">
                             Dostępne testy
                         </h1>
                     </div>
-                    <aside className="c-test-hub__menu">
-                        <Link to="/" className="c-test-hub__menu-item">Strona główna</Link>
-                        <Link to="/create-quiz" className="c-test-hub__menu-item">Utwórz quiz</Link>
-                    </aside>
                     <section className="c-test-hub__main">
                         <div className="c-test-hub__table">
                             <div className="c-test-hub__table-header">
