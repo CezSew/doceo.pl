@@ -271,11 +271,47 @@ h4, h5, h6 {
 
 .o-sidemenu {
     position: fixed;
-    left: 0;
+    left: -24rem;
     top: 7rem;
     background-color: $white;
     height: 93rem;
     width: 24rem;
+    border-right: solid 0.1rem $blue;
+    transition: 0.3s left;
+    box-sizing: border-box;
+
+    &:after {
+        content: "MENU";
+        display: block;
+        position: absolute;
+        top: 2.5rem;
+        right: -0.4rem;
+        width: 5rem;
+        height: 8rem;
+        transform: rotate(90deg);
+        font-size: 1.3rem;
+        pointer-events: none;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: -2.5rem;
+        width: 5rem;
+        height: 8rem;
+        border-radius: 1rem;
+        background-color: $white;
+        border: solid 0.1rem $blue;
+        box-sizing: border-box;
+        z-index: -1;
+        cursor: pointer;
+    }
+}
+
+.o-sidemenu:hover {
+    left: 0;
 }
 
 .o-sidemenu__list {
@@ -285,6 +321,7 @@ h4, h5, h6 {
     padding: 0;
     list-style: none;
     padding-top: 4rem;
+    background-color: $white;
 }
 
 .o-sidemenu__list-element {
