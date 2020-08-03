@@ -5,6 +5,7 @@ import '../../css/pages/home.scss';
 import Header from '../parts/Header';
 import RegistrationForm from '../parts/RegistrationForm';
 import {BulbSVG} from "../utils/svg/Bulb";
+import Cookies from "../parts/Cookies";
 
 const Home = ({isUserLoggedIn}) => {
     return (
@@ -44,6 +45,7 @@ const Home = ({isUserLoggedIn}) => {
                     </section>
                 </div>
             </main>
+            <Cookies/>
         </React.Fragment>
     )
 }

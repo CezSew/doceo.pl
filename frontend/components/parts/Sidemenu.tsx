@@ -11,7 +11,7 @@ const Sidemenu = ({links}) => {
     });
 
     return (
-        <aside className="o-sidemenu">
+        <aside className={`o-sidemenu ${window.innerWidth < 1780 && 'o-sidemenu--hidden'}`}>
             <ul className="o-sidemenu__list">
                 {listElements}
             </ul>

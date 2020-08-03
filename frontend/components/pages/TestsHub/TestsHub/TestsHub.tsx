@@ -1,6 +1,5 @@
 import './../../../../css/pages/testHub.scss';
 import React, { useEffect } from "react";
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { requestTopQuizes } from '../../../../actions';
 import { Loader } from '../../../utils/Loader';

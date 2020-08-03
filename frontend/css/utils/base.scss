@@ -196,6 +196,7 @@ h4, h5, h6 {
     padding: 1.75rem 3.5rem;
     border-radius: 0.5rem;
     text-decoration: none;
+    border: 0;
 
     &--primary {
         color: $white;
@@ -271,14 +272,23 @@ h4, h5, h6 {
 
 .o-sidemenu {
     position: fixed;
-    left: -24rem;
+    left: 0;
     top: 7rem;
     background-color: $white;
-    height: 93rem;
+    height: 93vh;
     width: 24rem;
-    border-right: solid 0.1rem $blue;
-    transition: 0.3s left;
     box-sizing: border-box;
+    z-index: 0;
+}
+
+.o-sidemenu--hidden {
+    left: -24rem;
+    transition: 0.3s left;
+    border-right: solid 0.1rem $blue;
+
+    &:hover {
+        left: 0;
+    }
 
     &:after {
         content: "MENU";
@@ -308,10 +318,6 @@ h4, h5, h6 {
         z-index: -1;
         cursor: pointer;
     }
-}
-
-.o-sidemenu:hover {
-    left: 0;
 }
 
 .o-sidemenu__list {
