@@ -8,6 +8,7 @@ import Header from '../../../parts/Header';
 import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
 import Sidemenu from "../../../parts/Sidemenu";
+import Cookies from "../../../parts/Cookies";
 
 const TestsHub = (props: TestsHubProps) => {
     useEffect(() => {
@@ -53,6 +54,7 @@ const TestsHub = (props: TestsHubProps) => {
                     </section>
                 </div>
             </main>
+            <Cookies/>
         </React.Fragment>
     );
 }

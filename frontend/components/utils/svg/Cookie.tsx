@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cookie = () => {
+const CookieSVG = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="128.997" height="128.996" viewBox="0 0 128.997 128.996">
             <g id="cookie" transform="translate(0.001 -0.002)">
@@ -94,6 +94,6 @@ const Cookie = () => {
     );
 }
 
-export default Cookie;
+export default CookieSVG;
 
 
