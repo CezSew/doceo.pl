@@ -61,7 +61,7 @@ export const handleAcceptWizard = (forms) => {
     }
 
     const test = mapFormsIntoObject(forms);
-    console.log(test)
+
     const validation = isTestFileValid(test);
 
     if(validation.status) {

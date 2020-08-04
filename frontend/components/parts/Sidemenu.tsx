@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 
 const Sidemenu = ({links}) => {
     const listElements = links.map((item, key) => {
+        console.log(item[2])
         return (
             <li className="o-sidemenu__list-element" key={key}>
-                <Link to={item[0]} className="o-sidemenu__link">{item[1]}</Link>
+                <Link to={item[0]} className={`o-sidemenu__link ${item[2] ? 'o-sidemenu__link--current' : ''}`}>{item[1]}</Link>
             </li>
         )
     });

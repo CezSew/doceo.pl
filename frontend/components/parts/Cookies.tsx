@@ -30,8 +30,7 @@ const Cookies = () => {
                         <div className="c-cookies__content">
                             <b className="c-cookies__title">Pliki cookies</b>
                             <p className="c-cookies__text">
-                                Serwis funkcjonuje w oparciu o ciasteczka. Czy zgadzasz się na wykorzystywanie ciasteczek? Naszą politykę cookies możesz przejrzeć tutaj:
-                                <Link to='/' className="c-cookies__link">polityka cookies</Link>
+                                Serwis funkcjonuje w oparciu o ciasteczka aby zapewnić najlepsze doświadczenia użytkownikowi. Czy zgadzasz się na wykorzystywanie ciasteczek przez serwis?
                             </p>
                             <Button buttonText={`zgadzam się`} classList={`o-button--primary c-cookies__ok`} handleClick={setCookieConsent}/>
                             <Button buttonText={`zapytaj później`} classList={`c-cookies__ask-later`} handleClick={() => setCookieConsent(true)}/>

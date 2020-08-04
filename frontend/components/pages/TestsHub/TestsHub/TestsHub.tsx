@@ -18,14 +18,14 @@ const TestsHub = (props: TestsHubProps) => {
     const {quizes_all_by_rating} = props;
     const renderListContent = getTestHubListContent(quizes_all_by_rating);
     const shouldRender = shouldListContentRender(renderListContent);
-    const links = [['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
+    const links = [['/', "Dostępne testy", true], ['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
 
     return (
         <React.Fragment>
             <Header/>
-            <main className="c-test-hub o-main-content">
+            <main className="c-test-hub o-main-content o-main-content--two-col">
                 <Sidemenu links={links} />
-                <div className="o-container">
+                <div className="o-main-content__container">
                     <div className="c-test-hub__title-container">
                         <h1 className="o-title o-title--h2 c-test-hub__title">
                             Dostępne testy
