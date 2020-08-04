@@ -37,7 +37,7 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
     }, []);
     return (
         <header className="c-header">
-            <div className="o-container o-container--space-between">
+            <div className="c-header__wrapper">
                 <Link className="c-header__logo c-logo" to="/">
                    <Logo/>
                 </Link>

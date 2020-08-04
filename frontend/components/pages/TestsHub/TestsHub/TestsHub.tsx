@@ -25,7 +25,7 @@ const TestsHub = (props: TestsHubProps) => {
             <Header/>
             <main className="c-test-hub o-main-content o-main-content--two-col">
                 <Sidemenu links={links} />
-                <div className="o-main-content__container">
+                <div className="o-main-content__wrapper">
                     <div className="c-test-hub__title-container">
                         <h1 className="o-title o-title--h2 c-test-hub__title">
                             Dostępne testy

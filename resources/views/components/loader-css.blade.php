@@ -6,7 +6,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background: linear-gradient(90deg, #7F63F4 0%, #FF4F72 100%);
+		background: linear-gradient(90deg, #3B8BEB 0%, #FF4F72 100%);
 		background-size: 400% 400%;
 		animation: backgroundGradient 6s ease infinite;
 		width: 100vw;
