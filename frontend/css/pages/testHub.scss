@@ -62,7 +62,7 @@
 
 .c-test-hub__table-header {
     display: grid;
-    grid-template-columns: 5rem 2rem 10rem 1fr 1fr 1fr;
+    grid-template-columns: 5rem 15rem 1fr 1fr 1fr;
     align-items: start;
     margin-bottom: 1rem;
     background-color: $white;
@@ -78,19 +78,19 @@
     font-size: 1.4rem;
 
     &--name {
-        grid-column: 1/span 3;
+        grid-column: 1/span 2;
     }
 
     &--type {
-        grid-column: 4;
+        grid-column: 3;
     }
 
     &--score {
-        grid-column: 5;
+        grid-column: 4;
     }
 
     &--rating {
-        grid-column: 6;
+        grid-column: 5;
     }
 }
 
@@ -193,12 +193,16 @@
 
 .c-test-hub__quiz-link {
     display: grid;
-    grid-template-columns: 5rem 2rem 10rem 1fr 1fr 1fr;
+    grid-template-columns: 5rem 15rem 1fr 1fr 1fr;
     align-items: stretch;
     justify-items: stretch;
     text-decoration: none;
     color: initial;
     padding-left: 2rem;
+
+    &--user-panel {
+        grid-template-columns: 5rem 10rem 1fr 1fr 1fr 1fr;
+    }
 }
 
 .c-quiz-line__short {
@@ -228,16 +232,29 @@
     justify-content: flex-start;
     align-items: center;
     grid-column: 2;
+    position: relative;
+    overflow: visible;
 }
 
 .c-quiz-line__title {
-    display: block;
+    display: inline-block;
     white-space: nowrap;
     max-width: 100%;
     font-size: 1.6rem;
     text-overflow: ellipsis;
     overflow: hidden;
-    flex: 1;
+    min-width: 12rem;
+    min-height: 100%;
+    line-height: 5.5rem;
+
+    &:hover {
+        position: absolute;
+        width: auto;
+        max-width: 300px;
+        left: 0;
+        top: 0;
+        text-overflow: initial;
+    }
 }
 
 .c-quiz-line__type, .c-quiz-line__score, .c-quiz-line__rating {
@@ -248,15 +265,15 @@
 
 .c-quiz-line__type {
     font-size: 1.2rem;
-    grid-column: 4;
+    grid-column: 3;
 }
 
 .c-quiz-line__score {
     font-size: 1.2rem;
-    grid-column: 5;
+    grid-column: 4;
 }
 
 .c-quiz-line__rating {
     font-size: 1.2rem;
-    grid-column: 6;
+    grid-column: 5;
 }

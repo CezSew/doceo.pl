@@ -13,7 +13,7 @@ const ConditionalQuizLineWrapper = (props) => {
         )
     } else {
         renderElement = (
-            <div className="c-test-hub__quiz-link">
+            <div className="c-test-hub__quiz-link c-test-hub__quiz-link--user-panel">
                 {props.children}
             </div>
         )

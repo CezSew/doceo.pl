@@ -1,7 +1,6 @@
 import '../../css/parts/cookies.scss';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Button} from "../utils/Button";
-import {Link} from 'react-router-dom';
 import CookieSVG from "../utils/svg/Cookie";
 import {getCookie, setCookie} from '../../helpers/cookieUtils';
 

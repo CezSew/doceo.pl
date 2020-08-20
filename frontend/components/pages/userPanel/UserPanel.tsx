@@ -10,7 +10,7 @@ const UserPanel = (props) => {
     return (
         <React.Fragment>
             <Header/>
-            <section className="c-user-panel">
+            <section className="c-user-panel o-main-content">
                 <div className="o-container">
                     <h1 className="c-user-panel__title">Witaj, {props.user.name}</h1>
                     <main className="c-user-panel__tiles">
