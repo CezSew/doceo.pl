@@ -62,8 +62,14 @@ const requestStarted = () => {
 export const requestTopQuizes = () => {
     return (dispatch, getState) => {
         const host = store.getState().host;
+        const currentPage = 3;
         dispatch(requestStarted());
-        axios.post(`${host}/api/get-top-quizes`).then((res => {
+
+        axios.post(`${host}/api/get-top-quizes?page=${currentPage}`,{
+            perPage: 5,
+            currentPage: 1,
+            filter: "rating"
+        }).then((res => {
             dispatch(getTopQuizes(res.data));
         }));
     }

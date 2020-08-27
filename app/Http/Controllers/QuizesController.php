@@ -42,15 +42,40 @@ class QuizesController extends Controller
         return response()->json($quiz, 201);
     }
 
-    public function getBestQuizes() {
-        $quizes = Quiz::orderBy('rating', 'DESC')->get();
+    public function getBestQuizes(Request $request) {
+        $req_filter = $request->input('filter');
+        $req_quizes_per_page = (int)$request->input('perPage');
+        $req_current_page = (int)$request->input('currentPage');
+
+        if($req_quizes_per_page < 5) {
+            $quizes_per_page = 5;
+        } elseif($req_quizes_per_page > 30) {
+            $quizes_per_page = 30;
+        } else {
+            $quizes_per_page = $req_quizes_per_page;
+        }
+
+        $this->validate($request, [
+            'filter' => 'string'
+        ]);
+
+        // filter
+        if($req_filter == 'rating') {
+            $quizes = Quiz::orderBy('rating', 'DESC')->paginate($quizes_per_page);
+        } else {
+            $quizes = Quiz::orderBy('rating', 'ASC')->paginate($quizes_per_page);
+        }
+
+        // pagination
+        $records = $quizes;
+
         $parsedQuizes = [];
 
-        if(count($quizes) == 0) {
+        if(count($records) == 0) {
             $parsedQuizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
         } else {
             for($i = 0; $i < count($quizes); $i++) {
-                $quiz = $quizes[$i];
+                $quiz = $records[$i];
                 $userId = $quiz['authorId'];
                 $user = User::where('id', $userId)->get();
                 $quiz['authorName'] = $user[0]['name'];
