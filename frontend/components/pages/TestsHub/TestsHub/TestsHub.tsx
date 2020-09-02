@@ -23,8 +23,8 @@ const TestsHub = (props: TestsHubProps) => {
     const shouldRender = shouldListContentRender(renderListContent);
     const links = [['/', "Dostępne testy", true], ['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
 
-    const getQuizes = () => {
-
+    const getQuizes = (page) => {
+        console.log('get quizes from page ' + page)
     }
 
     return (
