@@ -67,7 +67,6 @@ export const requestTopQuizes = () => {
 
         axios.post(`${host}/api/get-top-quizes?page=${currentPage}`,{
             perPage: 5,
-            currentPage: 1,
             filter: "rating"
         }).then((res => {
             dispatch(getTopQuizes(res.data));

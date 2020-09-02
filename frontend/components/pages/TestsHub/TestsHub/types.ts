@@ -4,5 +4,6 @@ export interface TestsHubProps {
     },
     quizes_all_by_rating: Array<string>|undefined,
     request_in_progress: boolean,
-    onRequestTopQuizes: Function
+    onRequestTopQuizes: Function,
+    quizes_listing_last_page: undefined|string
 }

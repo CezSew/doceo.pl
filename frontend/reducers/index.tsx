@@ -38,8 +38,9 @@ function rootReducer(state = initialState, action) {
       })
     case GET_TOP_QUIZES:
       return Object.assign({}, state, {
-        quizes_all_by_rating: action.payload,
-        request_in_progress: false
+          quizes_all_by_rating: action.payload[1],
+          quizes_listing_last_page: action.payload[0],
+          request_in_progress: false
       })
     case GET_USER_QUIZES:
       return Object.assign({}, state, {

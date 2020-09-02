@@ -1,5 +1,5 @@
 import './../../../../css/pages/testHub.scss';
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from 'react-redux';
 import { requestTopQuizes } from '../../../../actions';
 import { Loader } from '../../../utils/Loader';
@@ -9,8 +9,11 @@ import getTestHubListContent from '../utils/getTestHubListContent';
 import shouldListContentRender from '../utils/shouldListContentRender';
 import Sidemenu from "../../../parts/Sidemenu";
 import Cookies from "../../../parts/Cookies";
+import Pagination from "./Pagination";
 
 const TestsHub = (props: TestsHubProps) => {
+    const [currPage, setCurrPage] = useState(1);
+
     useEffect(() => {
         props.onRequestTopQuizes();
     }, [])
@@ -19,6 +22,10 @@ const TestsHub = (props: TestsHubProps) => {
     const renderListContent = getTestHubListContent(quizes_all_by_rating);
     const shouldRender = shouldListContentRender(renderListContent);
     const links = [['/', "Dostępne testy", true], ['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
+
+    const getQuizes = () => {
+
+    }
 
     return (
         <React.Fragment>
@@ -31,6 +38,7 @@ const TestsHub = (props: TestsHubProps) => {
                             Dostępne testy
                         </h1>
                     </div>
+                    <Pagination totalPages={props.quizes_listing_last_page} currPage={currPage} setCurrPage={setCurrPage} getQuizes={getQuizes}/>
                     <section className="c-test-hub__main">
                         <div className="c-test-hub__table">
                             <div className="c-test-hub__table-header">
@@ -62,7 +70,8 @@ const TestsHub = (props: TestsHubProps) => {
 const mapStateToProps = state => ({
     user: state.user,
     quizes_all_by_rating: state.quizes_all_by_rating,
-    request_in_progress: state.request_in_progress
+    request_in_progress: state.request_in_progress,
+    quizes_listing_last_page: state.quizes_listing_last_page
 });
 
 const mapDispatchToProps = dispatch => {

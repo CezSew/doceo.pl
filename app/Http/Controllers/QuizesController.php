@@ -45,7 +45,6 @@ class QuizesController extends Controller
     public function getBestQuizes(Request $request) {
         $req_filter = $request->input('filter');
         $req_quizes_per_page = (int)$request->input('perPage');
-        $req_current_page = (int)$request->input('currentPage');
 
         if($req_quizes_per_page < 5) {
             $quizes_per_page = 5;
@@ -68,9 +67,9 @@ class QuizesController extends Controller
 
         // pagination
         $records = $quizes;
+        $response = [$records->lastPage()];
 
         $parsedQuizes = [];
-
         if(count($records) == 0) {
             $parsedQuizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
         } else {
@@ -83,7 +82,8 @@ class QuizesController extends Controller
             }
         }
 
-        return response()->json($parsedQuizes, 201);
+        array_push($response, $parsedQuizes);
+        return response()->json($response, 201);
     }
 
     public function getUserQuizes(Request $request) {
