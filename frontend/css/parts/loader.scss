@@ -1,3 +1,5 @@
+@import '../utils/variables';
+
 .o-loader-container {
     display: flex;
     height: 100%;
@@ -26,7 +28,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #7F63F4;
+    background: $blue;
     margin: -4px 0 0 -4px;
 }
 
@@ -110,4 +112,3 @@
         transform: rotate(360deg);
     }
 }
-  

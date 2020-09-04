@@ -24,9 +24,9 @@ const TestsHub = (props: TestsHubProps) => {
     const links = [['/', "Dostępne testy", true], ['/', "Strona główna"], ["/create-quiz", "Utwórz quiz"]];
 
     const getQuizes = (page) => {
-        console.log('get quizes from page ' + page)
+        props.onRequestTopQuizes(page);
     }
-
+    console.log(props.request_in_progress);
     return (
         <React.Fragment>
             <Header/>
@@ -56,10 +56,11 @@ const TestsHub = (props: TestsHubProps) => {
                                 </div>
                             </div>
                             <ul className="c-test-hub__quiz-list">
-                                {(shouldRender && renderListContent) || <Loader/>}
+                                {(!props.request_in_progress && shouldRender && renderListContent) || <Loader/>}
                             </ul>
                         </div>
                     </section>
+                    <Pagination totalPages={props.quizes_listing_last_page} currPage={currPage} setCurrPage={setCurrPage} getQuizes={getQuizes}/>
                 </div>
             </main>
             <Cookies/>
@@ -76,8 +77,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-      onRequestTopQuizes: () => {
-        dispatch(requestTopQuizes());
+      onRequestTopQuizes: (page) => {
+        dispatch(requestTopQuizes(page));
       }
     };
 };

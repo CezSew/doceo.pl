@@ -59,13 +59,12 @@ const requestStarted = () => {
     return { type: REQUEST_TOP_QUIZES_START }
 }
 
-export const requestTopQuizes = () => {
+export const requestTopQuizes = (page = 1) => {
     return (dispatch, getState) => {
         const host = store.getState().host;
-        const currentPage = 3;
         dispatch(requestStarted());
 
-        axios.post(`${host}/api/get-top-quizes?page=${currentPage}`,{
+        axios.post(`${host}/api/get-top-quizes?page=${page}`,{
             perPage: 5,
             filter: "rating"
         }).then((res => {

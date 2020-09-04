@@ -5,9 +5,11 @@ const Pagination = ({currPage, totalPages, setCurrPage, getQuizes}) => {
     const elements = getPaginationListElements(currPage, totalPages, setCurrPage, getQuizes);
 
     return (
-        <ul className="c-pagination">
-            {elements}
-        </ul>
+        <div className="c-pagination">
+            <ul className="c-pagination__list">
+                {elements}
+            </ul>
+        </div>
     )
 }
 

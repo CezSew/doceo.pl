@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import '../../../../css/parts/pagination.scss';
+import React from "react";
 
 let _currPage;
 let _setCurrPage;
@@ -12,7 +13,7 @@ const getPaginationListElements = (currPage, totalPages, setCurrPage, getQuizes)
     _getQuizes = getQuizes;
     _currPage = currPage;
 
-    if(currPage > 1) pushElement('-3', '<', elements);
+    if(currPage > 1) pushElement('-3', '<', elements, 'c-pagination__element--arrow');
 
     for(let i = -1; i < totalPages; i++) {
         if(currPage + i > 0 && currPage + i <= totalPages) {
@@ -20,10 +21,12 @@ const getPaginationListElements = (currPage, totalPages, setCurrPage, getQuizes)
 
             if(!reachedDots) {
                 if(current > currPage + 2) {
-                    pushElement(i, '...', elements);
+                    pushElement(i, '...', elements, 'c-pagination__element--dots');
                     reachedDots = true;
                 } else {
-                    pushElement(i, current, elements);
+                    let classes = '';
+                    if(_currPage === current)  classes = 'c-pagination__element--current';
+                    pushElement(i, current, elements, classes);
                 }
             } else {
                 pushElement(i, totalPages, elements);
@@ -32,15 +35,16 @@ const getPaginationListElements = (currPage, totalPages, setCurrPage, getQuizes)
         }
     }
 
-    if(currPage < totalPages) pushElement(totalPages + 1, '>', elements);
+    if(currPage < totalPages)
+        pushElement(totalPages + 1, '>', elements, 'c-pagination__element--arrow');
 
     return elements;
 }
 
-const pushElement = (id, content, array) => {
+const pushElement = (id, content, array, classes = '') => {
     const element = (
-        <li key={id}>
-            <button onClick={() => handlePaginationClick(content)}>
+        <li key={id} className="c-pagination__list-element">
+            <button className={`c-pagination__element ${classes}`} onClick={() => handlePaginationClick(content)}>
                 {content}
             </button>
         </li>
@@ -64,8 +68,6 @@ const handlePaginationClick = (content) => {
         _getQuizes(content);
         break;
     }
-
-
 }
 
 export default getPaginationListElements;
