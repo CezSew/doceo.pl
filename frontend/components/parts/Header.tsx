@@ -6,6 +6,7 @@ import { handleLogout } from '../../actions';
 import { getJwt } from '../../helpers';
 import Logo from '../utils/svg/Logo';
 import axios from "axios";
+import {toggleMobileMenu} from "./utils";
 
 interface HeaderProps {
     user: {
@@ -41,29 +42,40 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
                 <Link className="c-header__logo c-logo" to="/">
                    <Logo/>
                 </Link>
-                {isUserLoggedIn
-                ?   <div className="c-header__login-section">
-                        <p className="c-header__login-information">Witaj, {user.name}</p>
-                        <button className="c-header__logout" onClick={() => dispatchLogout()}>
-                            <Link className="c-header__link" to="/">
-                                wyloguj się
-                            </Link>
-                        </button>
-                        <button className="c-header__logout">
-                            <Link className="c-header__link" to="/user-panel">
-                                panel użytkownika
-                            </Link>
-                        </button>
-                    </div>
-                :  <div className="c-header__login-section">
-                        <Link className="c-header__link" to="/login">
-                            zaloguj się
-                        </Link>
-                        <Link className="c-header__link" to="/register">
-                            zarejestruj się
-                        </Link>
-                    </div>
-                }
+                <div className="c-header__menu-wrapper">
+                    <button className="c-header__hamburger c-header__hamburger--closed" onClick={toggleMobileMenu}>
+                        <span className="c-header__hamburger-line"></span>
+                        <span className="c-header__hamburger-line"></span>
+                        <span className="c-header__hamburger-line"></span>
+                    </button>
+                    {isUserLoggedIn
+                    ?   <div className="c-header__menu c-header__menu--mobile-hidden">
+                            <p className="c-header__login-information">Witaj, {user.name}</p>
+                            <button className="c-header__button c-header__button--logout" onClick={() => dispatchLogout()}>
+                                <Link className="c-header__link" to="/">
+                                    wyloguj się
+                                </Link>
+                            </button>
+                            <button className="c-header__button c-header__button--user-panel">
+                                <Link className="c-header__link" to="/user-panel">
+                                    panel użytkownika
+                                </Link>
+                            </button>
+                        </div>
+                    :  <div className="c-header__menu c-header__menu--mobile-hidden">
+                            <button className="c-header__button">
+                                <Link className="c-header__link" to="/login">
+                                    zaloguj się
+                                </Link>
+                            </button>
+                            <button className="c-header__button">
+                                <Link className="c-header__link" to="/register">
+                                    zarejestruj się
+                                </Link>
+                            </button>
+                        </div>
+                    }
+                </div>
             </div>
         </header>
     )

@@ -13,11 +13,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 24rem;
+    padding: 1rem;
     height: 5.5rem;
+
+    @media(min-width: $md) {
+        padding: 1rem 24rem;
+    }
 }
 
-.c-header__logout {
+.c-header__button {
     border: none;
     background: none;
 }
@@ -39,20 +43,113 @@
 
 .c-header__login-information {
     color: $white;
-    font-size: 1.6rem;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10rem;
+
+    @media(min-width: $md) {
+        text-align: left;
+        font-size: 1.6rem;
+        margin-bottom: 0;
+    }
 }
 
 .c-header__link {
     display: block;
-    margin-right: 1rem;
-    color: $black;
-    font-size: 1.4rem;
+    margin-bottom: 3rem;
+    margin-right: 0;
+    color: $white;
+    font-size: 2rem;
+    text-decoration: underline;
 
     &:last-of-type {
         margin-right: 0;
     }
+
+    @media(min-width: $md) {
+        margin-bottom: 0;
+        margin-right: 1rem;
+        color: $black;
+        font-size: 1.4rem;
+    }
 }
 
-.c-header__login-section {
+.c-header__menu-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+
+    @media(min-width: $md) {
+        position: relative;
+        padding-top: 0;
+        height: auto;
+        width: auto;
+        pointer-events: all;
+    }
+}
+
+.c-header__menu {
     display: flex;
+    flex-direction: column;
+    padding-top: 20vh;
+    height: 100%;
+    background-color: $blue;
+    opacity: 1;
+    transition: 0.3s opacity;
+    color: $white;
+    pointer-events: all;
+
+    @media(min-width: $md) {
+        flex-direction: row;
+        padding-top: 0;
+        background-color: transparent;
+        color: $black;
+    }
+
+    &--mobile-hidden {
+        pointer-events: none;
+        opacity: 0;
+
+        @media(min-width: $md) {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+}
+
+.c-header__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    padding: 1rem;
+    margin: 0;
+    height: 5rem;
+    border: 0;
+    background-color: transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    pointer-events: all;
+
+    @media(min-width: $md) {
+        display: none;
+    }
+
+    &--closed {
+        .c-header__hamburger-line {
+            background-color: $black;
+        }
+    }
+}
+
+.c-header__hamburger-line {
+    display: block;
+    width: 4rem;
+    height: .3rem;
+    background-color: $white;
 }

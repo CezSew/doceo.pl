@@ -1,5 +1,4 @@
 import axios from "axios";
-import {clearInputs} from "../../actions/utils";
 
 export const handleSubmitRegisterForm = (e, history, setLoading, host) => {
     e.preventDefault();
@@ -24,23 +23,26 @@ export const handleSubmitRegisterForm = (e, history, setLoading, host) => {
         return false;
     }
 
-    console.log( loginInput.value)
-    console.log(emailInput.value);
-    console.log(passwordInput.value);
-    console.log(password2Input.value);
     axios.post(`${host}/api/register`, {
         name: loginInput.value,
         email: emailInput.value,
         password: passwordInput.value,
         password_confirmation: password2Input.value
     }).then(res => {
-       console.log(res);
         alert('Konto zostało pomyślnie utworzone, zostaniesz przekierowany na stronę logowania')
         history.push("/login")
     }).catch(e => {
         console.log(e)
         alert('Wystąpił błąd, spróbuj ponownie.')
     });
+}
+
+export const toggleMobileMenu = () => {
+    const menuElement = document.querySelector('.c-header__menu');
+    const hamburgerElement = document.querySelector('.c-header__hamburger');
+
+    menuElement.classList.toggle('c-header__menu--mobile-hidden');
+    hamburgerElement.classList.toggle('c-header__hamburger--closed');
 }
 
 const arePasswordsTheSame = (pass1, pass2) => {
