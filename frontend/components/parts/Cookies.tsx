@@ -1,5 +1,6 @@
 import '../../css/parts/cookies.scss';
 import React, {useState} from "react";
+import { Link } from 'react-router-dom';
 import {Button} from "../utils/Button";
 import CookieSVG from "../utils/svg/Cookie";
 import {getCookie, setCookie} from '../../helpers/cookieUtils';
@@ -29,7 +30,7 @@ const Cookies = () => {
                         <div className="c-cookies__content">
                             <b className="c-cookies__title">Pliki cookies</b>
                             <p className="c-cookies__text">
-                                Serwis funkcjonuje w oparciu o ciasteczka aby zapewnić najlepsze doświadczenia użytkownikowi. Czy zgadzasz się na wykorzystywanie ciasteczek przez serwis?
+                                Serwis funkcjonuje w oparciu o ciasteczka aby zapewnić najlepsze doświadczenia użytkownikowi. Z polityką cookies serwisu deceo możesz zapoznać się <Link className="c-cookies__link" to="/cookies-terms">tutaj</Link>. Czy zgadzasz się na wykorzystywanie ciasteczek przez serwis?
                             </p>
                             <Button buttonText={`zgadzam się`} classList={`o-button--primary c-cookies__ok`} handleClick={setCookieConsent}/>
                             <Button buttonText={`zapytaj później`} classList={`c-cookies__ask-later`} handleClick={() => setCookieConsent(true)}/>

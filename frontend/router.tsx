@@ -13,6 +13,7 @@ import { WithAuthGuard } from "./components/hoc/withAuthGuard";
 import UserPanel from "./components/pages/userPanel/UserPanel";
 import UserTests from "./components/pages/userPanel/UserTests";
 import Register from "./components/pages/Register/Register";
+import CookieTerms from "./components/pages/CookieTerms";
 
 export const RouterComponent = () => (
     <BrowserRouter>
@@ -23,6 +24,7 @@ export const RouterComponent = () => (
                 <Route exact path='/tests-main'     component={TestsHub} />
                 <Route exact path='/test-page'      component={SingleTest} />
                 <Route exact path='/register'       component={Register} />
+                <Route exact path='/cookies-terms'  component={CookieTerms} />
                 <Route exact path='/protected'      component={WithAuthGuard(Protected)} />
                 <Route exact path='/create-quiz'    component={WithAuthGuard(QuizCreator)} />
                 <Route exact path='/user-panel'     component={WithAuthGuard(UserPanel)} />

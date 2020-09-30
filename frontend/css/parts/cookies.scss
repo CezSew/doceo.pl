@@ -43,6 +43,10 @@
     box-shadow: 0px 2px 30px -10px rgba(0,0,0,0.75);
 }
 
+.c-cookies__link {
+    display: inline;
+}
+
 .c-cookies__content {
     display: flex;
     flex-direction: column;
@@ -73,10 +77,6 @@
 }
 
 .c-cookies__text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     color: $darkgray;
     font-size: 1.8rem;
     text-align: center;

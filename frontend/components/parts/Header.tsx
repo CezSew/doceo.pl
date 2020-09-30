@@ -48,8 +48,10 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
                         <span className="c-header__hamburger-line"></span>
                         <span className="c-header__hamburger-line"></span>
                     </button>
+                    <div className="c-header__menu c-header__menu--mobile-hidden">
                     {isUserLoggedIn
-                    ?   <div className="c-header__menu c-header__menu--mobile-hidden">
+                    ?
+                        <React.Fragment>
                             <p className="c-header__login-information">Witaj, {user.name}</p>
                             <button className="c-header__button c-header__button--logout" onClick={() => dispatchLogout()}>
                                 <Link className="c-header__link" to="/">
@@ -61,8 +63,9 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
                                     panel użytkownika
                                 </Link>
                             </button>
-                        </div>
-                    :  <div className="c-header__menu c-header__menu--mobile-hidden">
+                        </React.Fragment>
+
+                    :  <React.Fragment>
                             <button className="c-header__button">
                                 <Link className="c-header__link" to="/login">
                                     zaloguj się
@@ -73,8 +76,9 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
                                     zarejestruj się
                                 </Link>
                             </button>
-                        </div>
+                        </React.Fragment>
                     }
+                    </div>
                 </div>
             </div>
         </header>
