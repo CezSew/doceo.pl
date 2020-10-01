@@ -1,7 +1,11 @@
-import { getOccurrence } from "./getOccurence";
-
+/**
+ * Should generate next question
+ *
+ * generate next question, IF
+ * length of probability array is 1 or higher
+ */
 export const shouldGenerateNextQuestion = (array: Array<number>, lastIndex: number) : boolean => {
-    return array.length > 1 && !(getOccurrence(array, array[0]) === array.length && lastIndex === array[0]);
+    return array.length >= 1;
 }
 
 export const isQuestionEliminated = (lastQuestionIndex: number, arrayOfIndexes: Array<number|string>) => {
