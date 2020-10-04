@@ -9,7 +9,7 @@ import {
     GET_TOP_QUIZES,
     REQUEST_TOP_QUIZES_START,
     HANDLE_LOGIN,
-    GET_USER_QUIZES
+    GET_USER_QUIZES, GET_USER_FINISHED_QUIZES
 } from '../constants/action-types';
 
 
@@ -55,6 +55,10 @@ const getUserQuizes = data => {
     return { type: GET_USER_QUIZES, payload: { ...data }}
 }
 
+const getUserFinishedQuizes = data => {
+    return { type: GET_USER_FINISHED_QUIZES, payload: { ...data }}
+}
+
 const requestStarted = () => {
     return { type: REQUEST_TOP_QUIZES_START }
 }
@@ -83,6 +87,22 @@ export const requestUserQuizes = (userId) => {
             { headers: { Authorization: getJwt() } }
         ).then(res => {
             dispatch(getUserQuizes(res.data));
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+}
+
+export const requestUserFinishedQuizes = (userId) => {
+    return (dispatch, getState) => {
+        const host = store.getState().host;
+        dispatch(requestStarted());
+        axios.post(`${host}/api/user-tests-finished`, {
+                userId: userId
+            },
+            { headers: { Authorization: getJwt() } }
+        ).then(res => {
+            dispatch(getUserFinishedQuizes(res.data));
         }).catch(e => {
             console.log(e)
         })

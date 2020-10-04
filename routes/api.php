@@ -28,5 +28,6 @@ Route::post('get-top-quizes', 'QuizesController@getBestQuizes');
 
 Route::post('quiz_result','QuizesResultsController@store');
 Route::post('user-tests','QuizesController@getUserQuizes');
+Route::post('user-tests-finished','QuizesController@getUserFinishedQuizes');
 
 Route::delete('delete-test','QuizesController@deleteQuiz');

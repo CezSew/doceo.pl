@@ -104,7 +104,7 @@ class QuizesController extends Controller
         $request_user_id = $request->input('userId');
         $user_id = strval($user->id);
 
-        $quizes = [$user_id, $request_user_id];
+        $quizes = [];
 
         if($request_user_id == $user_id) {
             $quizes = Quiz::where('authorId', $user_id)->get();
@@ -115,6 +115,47 @@ class QuizesController extends Controller
         }
 
         return response()->json($quizes, 201);
+    }
+
+    // get all quizes finished by user
+    public function getUserFinishedQuizes(Request $request) {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+        } catch (JWTException $e) {
+            return response()->json('User not found', 403);
+        } catch (TokenExpiredException $e) {
+            return response()->json('User not found', 403);
+        } catch (TokenInvalidException $e) {
+            return response()->json('User not found', 403);
+        }
+
+        $this->validate($request, [
+            'userId' => 'int'
+        ]);
+
+        $request_user_id = $request->input('userId');
+        $user_id = strval($user->id);
+
+        $finished_quizes = [];
+
+        if($request_user_id == $user_id) {
+            $finished_quizes_obj = User::where('id', $user_id)->get('finished_quizes')[0];
+            $finished_quizes_raw = $finished_quizes_obj['finished_quizes'];
+            $finished_quizes_ids_array = json_decode(urldecode($finished_quizes_raw));
+            $index = 0;
+
+            foreach ($finished_quizes_ids_array as $quiz_id) {
+                $quiz = Quiz::where('id', $quiz_id)->get();
+                array_push($finished_quizes, $quiz[0]);
+                $index++;
+            }
+        }
+
+        if(count($finished_quizes) == 0) {
+            $finished_quizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
+        }
+
+        return response()->json($finished_quizes, 201);
     }
 
     public function deleteQuiz(Request $request) {

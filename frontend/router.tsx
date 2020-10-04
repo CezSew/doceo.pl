@@ -14,6 +14,7 @@ import UserPanel from "./components/pages/userPanel/UserPanel";
 import UserTests from "./components/pages/userPanel/UserTests";
 import Register from "./components/pages/Register/Register";
 import CookieTerms from "./components/pages/CookieTerms";
+import Stats from "./components/pages/userPanel/Stats";
 
 export const RouterComponent = () => (
     <BrowserRouter>
@@ -29,6 +30,7 @@ export const RouterComponent = () => (
                 <Route exact path='/create-quiz'    component={WithAuthGuard(QuizCreator)} />
                 <Route exact path='/user-panel'     component={WithAuthGuard(UserPanel)} />
                 <Route exact path='/user-tests'     component={WithAuthGuard(UserTests)}/>
+                <Route exact path='/user-stats'     component={WithAuthGuard(Stats)}/>
                 <Route                              component={PageNotFound} />
             </Switch>
         </ErrorBoundary>

@@ -28,9 +28,9 @@ const UserPanel = (props) => {
                         <button className="c-user-panel__tile c-user-panel__tile--dark">
                             <p className="c-user-panel__tile-text">Usuń konto</p>
                         </button>
-                        <button className="c-user-panel__tile">
+                        <Link className="c-user-panel__tile" to="/user-stats">
                             <p className="c-user-panel__tile-text">Statystyki</p>
-                        </button>
+                        </Link>
                     </main>
                 </div>
             </section>
