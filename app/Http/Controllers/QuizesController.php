@@ -46,6 +46,7 @@ class QuizesController extends Controller
         $req_filter = $request->input('filter');
         $req_quizes_per_page = (int)$request->input('perPage');
 
+        // set min and max items per page
         if($req_quizes_per_page < 5) {
             $quizes_per_page = 5;
         } elseif($req_quizes_per_page > 30) {
@@ -65,19 +66,28 @@ class QuizesController extends Controller
             $quizes = Quiz::orderBy('rating', 'ASC')->paginate($quizes_per_page);
         }
 
-        // pagination
         $records = $quizes;
         $response = [$records->lastPage()];
-
         $parsedQuizes = [];
+
         if(count($records) == 0) {
+            // handle lack of items
             $parsedQuizes['msg'] = 'Nie znaleziono żadnych quizów. Dodaj quiz i spróbuj ponownie.';
         } else {
             for($i = 0; $i < count($quizes); $i++) {
                 $quiz = $records[$i];
+
+                // get name of author based on author ID
                 $userId = $quiz['authorId'];
                 $user = User::where('id', $userId)->get();
                 $quiz['authorName'] = $user[0]['name'];
+
+                // get current user stats
+                //***********************
+                //***********************
+                //***********************
+
+                // push modified quiz item
                 array_push($parsedQuizes, $quiz);
             }
         }

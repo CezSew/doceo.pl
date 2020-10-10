@@ -1,7 +1,7 @@
 import { QuizLine } from "../QuizLine";
 import React from "react";
 
-const getTestHubListContent = (data, userPanel = false, onHandleRemoveQuiz = () => {}) => {
+const getTestHubListContent = (data, userPanel = false, onHandleRemoveQuiz = undefined) => {
     let renderData;
     const quizesNotFound = typeof data['msg'] !== 'undefined';
 
