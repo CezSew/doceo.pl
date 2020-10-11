@@ -42,7 +42,16 @@ class QuizesController extends Controller
         return response()->json($quiz, 201);
     }
 
+    /*
+     * Get quizes paginated list based on rating order
+     */
     public function getBestQuizes(Request $request) {
+        $this->validate($request, [
+            'filter' => 'string',
+            'userId' => 'string',
+            'perPage' => 'int'
+        ]);
+
         $req_filter = $request->input('filter');
         $req_quizes_per_page = (int)$request->input('perPage');
 
@@ -54,10 +63,6 @@ class QuizesController extends Controller
         } else {
             $quizes_per_page = $req_quizes_per_page;
         }
-
-        $this->validate($request, [
-            'filter' => 'string'
-        ]);
 
         // filter
         if($req_filter == 'rating') {
@@ -83,9 +88,23 @@ class QuizesController extends Controller
                 $quiz['authorName'] = $user[0]['name'];
 
                 // get current user stats
-                //***********************
-                //***********************
-                //***********************
+                $user_finished_quizes_encoded = $user[0]['finished_quizes'];
+                $user_finished_quizes_decoded = [];
+                $quiz['userScore'] = '-';
+
+                if(!empty($user_finished_quizes_encoded)) {
+                    $user_finished_quizes_decoded = json_decode(urldecode($user_finished_quizes_encoded));
+
+                    foreach ($user_finished_quizes_decoded as $key=>$value) {
+                        $finished_quiz = $user_finished_quizes_decoded[$key];
+                        $finished_quiz_id = $finished_quiz[0];
+                        $finished_quiz_score = $finished_quiz[1];
+
+                        if((int)$finished_quiz_id == (int)$quiz['id']) {
+                            $quiz['userScore'] = (string)$finished_quiz_score;
+                        }
+                    }
+                }
 
                 // push modified quiz item
                 array_push($parsedQuizes, $quiz);

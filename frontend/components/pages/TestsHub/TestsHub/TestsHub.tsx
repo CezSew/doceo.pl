@@ -15,8 +15,10 @@ const TestsHub = (props: TestsHubProps) => {
     const [currPage, setCurrPage] = useState(1);
 
     useEffect(() => {
-        props.onRequestTopQuizes();
-    }, [])
+        if(props.user !== null && props.quizes_all_by_rating.length === 0){
+            props.onRequestTopQuizes();
+        }
+    }, [props.user])
 
     const {quizes_all_by_rating} = props;
     const renderListContent = getTestHubListContent(quizes_all_by_rating);
@@ -26,7 +28,7 @@ const TestsHub = (props: TestsHubProps) => {
     const getQuizes = (page) => {
         props.onRequestTopQuizes(page);
     }
-    console.log(props.request_in_progress);
+
     return (
         <React.Fragment>
             <Header/>

@@ -1,7 +1,7 @@
 @import '../utils/variables.scss';
 
 .c-test {
-    background-color: $lightgray;
+    background-color: $white;
 
     .o-container {
         box-sizing: border-box;
@@ -116,6 +116,10 @@
     color: $blue;
     transition: 0.3s background-color;
 
+    path {
+        fill: $blue;
+    }
+
     &:hover {
         color: $white;
         background-color: $blue;
@@ -138,8 +142,12 @@
     border: none;
     margin-bottom: 8.5rem;
     text-decoration: underline;
-    color: $purple;
+    color: $blue;
     cursor: pointer;
+
+    path {
+        fill: $blue;
+    }
 }
 
 .c-test__go-back-text {
@@ -172,7 +180,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    color: $green;
+    color: $black;
     box-sizing: border-box;
     padding: 2rem 1rem;
     border: 1px solid rgba($blue, 0.3);

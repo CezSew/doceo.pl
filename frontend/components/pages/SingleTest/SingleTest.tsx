@@ -66,8 +66,9 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         } else {
             const quizId = this.props.location.state.quiz['id'];
             const userId = getUserId(this.props.user);
+            const accuracy = getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven);
 
-            sendQuizFinishedByUser(userId, quizId);
+            sendQuizFinishedByUser(userId, quizId, accuracy);
 
             this.setState({
                finished: true
@@ -190,7 +191,7 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
                 </React.Fragment>
             );
         } else if(this.state.finished) {
-            return <Results/>
+            return <Results score={getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven)}/>
         } else {
             return (
                 <React.Fragment>

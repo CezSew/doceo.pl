@@ -1,3 +1,4 @@
+import '../../../css/pages/userStats.scss';
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";

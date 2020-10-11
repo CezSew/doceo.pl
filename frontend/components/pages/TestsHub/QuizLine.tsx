@@ -11,6 +11,7 @@ interface QuizLineInterface {
         type: string,
         rating: string,
         votes: string,
+        userScore: string,
         msg?: string
     },
     userPanel: boolean,
@@ -18,8 +19,6 @@ interface QuizLineInterface {
 }
 
 export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel, handleRemoveQuiz = undefined}) => {
-    console.log(!!handleRemoveQuiz)
-
     const link = userPanel
         ? {}
         : {
@@ -35,7 +34,7 @@ export const QuizLine: React.FC<QuizLineInterface> = ({quiz, userPanel, handleRe
                 <div className="c-quiz-line__short"><span className="c-quiz-line__circle">{testNameLetters(quiz.title)}</span></div>
                 <div className="c-quiz-line__title-container"><span className="c-quiz-line__title">{quiz.title}</span></div>
                 <div className="c-quiz-line__type">{quiz.type}</div>
-                <div className="c-quiz-line__score">-</div>
+                <div className="c-quiz-line__score">{quiz.userScore}</div>
                 <div className="c-quiz-line__rating">{quiz.rating} ({quiz.votes} głosów)</div>
                 {handleRemoveQuiz &&
                  (<div className="c-quiz-line__remove">
