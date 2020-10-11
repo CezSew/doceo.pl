@@ -33,7 +33,7 @@ function rootReducer(state = initialState, action) {
         }
     case USER_LOGOUT:
       return Object.assign({}, state, {
-        user: undefined,
+        user: null,
         isUserLoggedIn: false
       })
     case GET_TOP_QUIZES:
