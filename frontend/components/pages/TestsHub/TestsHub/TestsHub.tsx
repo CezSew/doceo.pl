@@ -15,7 +15,7 @@ const TestsHub = (props: TestsHubProps) => {
     const [currPage, setCurrPage] = useState(1);
 
     useEffect(() => {
-        if(props.user !== null && props.quizes_all_by_rating.length === 0){
+        if(props.user !== undefined && props.quizes_all_by_rating.length === 0){
             props.onRequestTopQuizes();
         }
     }, [props.user])

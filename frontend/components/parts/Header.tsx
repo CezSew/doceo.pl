@@ -29,9 +29,7 @@ const Header: React.FC <HeaderProps>= ({user, isUserLoggedIn, dispatchLogout, ho
 
         if (isUserLoggedIn === null) {
             axios.get(`${host}/api/user`, {headers: {Authorization: jwt}}).then(res => {
-                if(res.data.user) {
-                    setUser(res.data.user);
-                }
+                setUser(res.data.user);
             })
             .catch(error => {
                 console.log(error);

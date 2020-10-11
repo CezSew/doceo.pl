@@ -65,9 +65,9 @@ const requestStarted = () => {
 
 export const requestTopQuizes = (page = 1) => {
     const user = store.getState().user;
-    let activeUserId = '';
+    let activeUserId = 'none';
 
-    if(user) activeUserId = user.id;
+    if(user && user.hasOwnProperty('id')) activeUserId = user.id.toString();
 
     return (dispatch, getState) => {
         const host = store.getState().host;
@@ -76,7 +76,7 @@ export const requestTopQuizes = (page = 1) => {
         axios.post(`${host}/api/get-top-quizes?page=${page}`,{
             perPage: 5,
             filter: "rating",
-            userID: activeUserId
+            userId: activeUserId
         }).then((res => {
             dispatch(getTopQuizes(res.data));
         }));

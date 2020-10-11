@@ -53,6 +53,7 @@ class QuizesController extends Controller
         ]);
 
         $req_filter = $request->input('filter');
+        $active_user_id = $request->input('userId');
         $req_quizes_per_page = (int)$request->input('perPage');
 
         // set min and max items per page
@@ -88,20 +89,23 @@ class QuizesController extends Controller
                 $quiz['authorName'] = $user[0]['name'];
 
                 // get current user stats
-                $user_finished_quizes_encoded = $user[0]['finished_quizes'];
-                $user_finished_quizes_decoded = [];
                 $quiz['userScore'] = '-';
 
-                if(!empty($user_finished_quizes_encoded)) {
-                    $user_finished_quizes_decoded = json_decode(urldecode($user_finished_quizes_encoded));
+                if($active_user_id != 'none') {
+                    $active_user = User::where('id', (int)$active_user_id)->get();
+                    $user_finished_quizes_encoded = $active_user[0]['finished_quizes'];
 
-                    foreach ($user_finished_quizes_decoded as $key=>$value) {
-                        $finished_quiz = $user_finished_quizes_decoded[$key];
-                        $finished_quiz_id = $finished_quiz[0];
-                        $finished_quiz_score = $finished_quiz[1];
+                    if(!empty($user_finished_quizes_encoded)) {
+                        $user_finished_quizes_decoded = json_decode(urldecode($user_finished_quizes_encoded));
 
-                        if((int)$finished_quiz_id == (int)$quiz['id']) {
-                            $quiz['userScore'] = (string)$finished_quiz_score;
+                        foreach ($user_finished_quizes_decoded as $key=>$value) {
+                            $finished_quiz = $user_finished_quizes_decoded[$key];
+                            $finished_quiz_id = $finished_quiz[0];
+                            $finished_quiz_score = $finished_quiz[1];
+
+                            if((int)$finished_quiz_id == (int)$quiz['id']) {
+                                $quiz['userScore'] = (string)$finished_quiz_score;
+                            }
                         }
                     }
                 }

@@ -6,7 +6,7 @@ import {
 import { getHost } from './utils';
 
 const initialState = {
-    user: null,
+    user: undefined,
     isUserLoggedIn: null,
     quizes_all_by_rating: [],
     userTests: [],
