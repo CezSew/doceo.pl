@@ -177,8 +177,26 @@ class QuizesController extends Controller
             $finished_quizes_ids_array = json_decode(urldecode($finished_quizes_raw));
             $index = 0;
 
-            foreach ($finished_quizes_ids_array as $quiz_id) {
+            $debug = [];
+
+            foreach ($finished_quizes_ids_array as $quiz_data) {
+                $quiz_id = $quiz_data[0];
                 $quiz = Quiz::where('id', $quiz_id)->get();
+                $quiz[0]['userScore'] = '-';
+
+                // get current user stats
+                foreach ($finished_quizes_ids_array as $key=>$value) {
+                    $finished_quiz = $finished_quizes_ids_array[$key];
+                    $finished_quiz_id = $finished_quiz[0];
+                    $finished_quiz_score = $finished_quiz[1];
+
+                    array_push($debug, [(int)$finished_quiz_id, (int)$quiz_id]);
+
+                    if((int)$finished_quiz_id == (int)$quiz_id) {
+                        $quiz[0]['userScore'] = (string)$finished_quiz_score;
+                    }
+                }
+
                 array_push($finished_quizes, $quiz[0]);
                 $index++;
             }
