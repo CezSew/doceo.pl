@@ -14,7 +14,7 @@
         "@babel/preset-typescript": "^7.8.3",
         "@testing-library/jest-dom": "^5.0.0",
         "@testing-library/react": "^9.4.0",
-        "axios": "^0.19.1",
+        "axios": "^0.21.1",
         "babel-jest": "^24.9.0",
         "babel-loader": "^8.0.6",
         "css-loader": "^3.4.2",
