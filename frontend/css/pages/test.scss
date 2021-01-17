@@ -28,17 +28,17 @@
     display: block;
     padding: 1rem;
     margin: 1rem 0;
-    background-color: $blue;
+    background-color: $white;
     border: 1px solid $blue;
     list-style: none;
     font-size: 1.6rem;
-    color: $white;
+    color: $blue;
     transition: 0.1s background-color, color;
     cursor: pointer;
 
     &:hover {
-        color: $blue;
-        background-color: $white;
+        color: $white;
+        background-color: $blue;
     }
 
     &.correct {
