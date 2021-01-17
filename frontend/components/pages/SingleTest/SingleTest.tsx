@@ -1,102 +1,98 @@
-import React from "react";
+import '../../../css/pages/test.scss';
+import React, {useEffect, useState} from "react";
 import Header from "../../parts/Header";
+import { SingleTestProps, SingleTestState } from './utils/types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { decodeQuestions } from './utils/decodeQuestions';
-import { SingleTestProps, SingleTestState } from './utils/types';
+import { Link } from 'react-router-dom';
+import { getAnwerAccuracyPercent, isQuestionEliminated, shouldGenerateNextQuestion } from './utils/utils';
+import decodeQuestions from './utils/decodeQuestions';
 import getQuestion from './utils/getQuestion';
 import highlightAnswerElement from './utils/highlightAnswerElement';
 import Answers from "./Question/Answers";
-import '../../../css/pages/test.scss';
-import { Loader } from "../../utils/Loader";
-import { sendQuizFinishedByUser } from "./utils/sendQuizFinishedByUser";
-import {getAnwerAccuracyPercent, isQuestionEliminated, shouldGenerateNextQuestion} from './utils/utils';
-import { getQuestionsArray } from "./utils/getQuestionsArray";
-import { getUserId } from "./utils/getUserId";
+import Loader from "../../utils/Loader";
+import sendQuizFinishedByUser from "./utils/sendQuizFinishedByUser";
+import getQuestionsArray from "./utils/getQuestionsArray";
+import getUserId from "./utils/getUserId";
 import Results from "./Results/Results";
-import { Link } from 'react-router-dom';
 import HomeSVG from '../../utils/svg/Home';
 import RetrySVG from "../../utils/svg/Retry";
 import ChangeSVG from "../../utils/svg/Change";
 import ArrowLeftSVG from "../../utils/svg/ArrowLeft";
 
-class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
-    constructor(props) {
-        super(props);
+const SingleTest = (props: SingleTestProps) => {
+    const [state, setState] = useState({
+        stats: {},
+        lastQuestionIndex: 0,
+        questionsProbabilityArray: [],
+        currentQuestion: [],
+        questions: [],
+        finished: false,
+        questionsEliminated: 0,
+        answersGiven: 0,
+        answersCorrect: 0
+    } as SingleTestState);
 
-        this.state = {
-            stats: {},
-            lastQuestionIndex: 0,
-            questionsProbabilityArray: [],
-            currentQuestion: [],
-            questions: [],
-            finished: false,
-            questionsEliminated: 0,
-            answersGiven: 0,
-            answersCorrect: 0
-        };
+    useEffect(() => {
+        initModule();
+    }, []);
 
-        this.goToTheNextQuestion = this.goToTheNextQuestion.bind(this);
-        this.handleAnswer = this.handleAnswer.bind(this);
-    }
-
-    shouldRender() {
-        if(typeof this.props.location === 'undefined' || typeof this.props.location.state === 'undefined') {
+    const shouldRender = () => {
+        if(typeof props.location === 'undefined' || typeof props.location.state === 'undefined') {
             return false;
         }
         return true;
     }
 
-    goToTheNextQuestion(isCorrect) {
-        let newQuestionsProbabilityArray = getQuestionsArray(this.state.questionsProbabilityArray, isCorrect, this.state.lastQuestionIndex);
+    const goToTheNextQuestion = (isCorrect) => {
+        let newQuestionsProbabilityArray = getQuestionsArray(state.questionsProbabilityArray, isCorrect, state.lastQuestionIndex);
+        if(shouldGenerateNextQuestion(newQuestionsProbabilityArray, state.lastQuestionIndex)) {
+            const nextQuestion = getQuestion(state.questions, state.lastQuestionIndex, newQuestionsProbabilityArray);
+            const questionsEliminatedModifier: number = Number(isQuestionEliminated(state.lastQuestionIndex, newQuestionsProbabilityArray));
 
-        if(shouldGenerateNextQuestion(newQuestionsProbabilityArray, this.state.lastQuestionIndex)) {
-            const nextQuestion = getQuestion(this.state.questions, this.state.lastQuestionIndex, newQuestionsProbabilityArray);
-            const questionsEliminatedModifier: number = Number(isQuestionEliminated(this.state.lastQuestionIndex, newQuestionsProbabilityArray));
             const correctAnswersModifier = Number(isCorrect);
 
-            this.setState({
+            setState({
+                ...state,
                 questionsProbabilityArray: newQuestionsProbabilityArray,
                 currentQuestion: nextQuestion,
                 lastQuestionIndex: nextQuestion[1],
-                questionsEliminated: this.state.questionsEliminated + questionsEliminatedModifier,
-                answersGiven: this.state.answersGiven + 1,
-                answersCorrect: this.state.answersCorrect + correctAnswersModifier
+                questionsEliminated: state.questionsEliminated + questionsEliminatedModifier,
+                answersGiven: state.answersGiven + 1,
+                answersCorrect: state.answersCorrect + correctAnswersModifier
             })
         } else {
-            const quizId = this.props.location.state.quiz['id'];
-            const userId = getUserId(this.props.user);
-            const accuracy = getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven);
+            const quizId = props.location.state.quiz['id'];
+            const userId = getUserId(props.user);
+
+            const accuracy = getAnwerAccuracyPercent(state.answersCorrect, state.answersGiven);
 
             sendQuizFinishedByUser(userId, quizId, accuracy);
-
-            this.setState({
+            setState({
+                ...state,
                finished: true
             })
         }
     }
 
-    handleAnswer(target, isCorrect) {
+    const handleAnswer = (target, isCorrect) => {
         highlightAnswerElement(target, isCorrect);
-
         setTimeout(() => {
-            this.goToTheNextQuestion(isCorrect);
+            goToTheNextQuestion(isCorrect);
         }, 1500);
+
     }
 
-    componentDidMount(): void {
-        this.initModule();
-    }
-
-    initModule() {
-        if(!this.state.currentQuestion.length && this.shouldRender()) {
-            const quiz = this.props.location.state.quiz;
+    const initModule = () => {
+        if(!state.currentQuestion.length && shouldRender()) {
+            const quiz = props.location.state.quiz;
             const questions = decodeQuestions(quiz.questions);
             const keys = Object.keys(questions).map(key => Number(key) - 1).filter(num => { return !isNaN(num)});
             const questionsProbabilityArray = [...keys,...keys];
-            const currentQuestion = getQuestion(questions, this.state.lastQuestionIndex, this.state.questionsProbabilityArray);
+            const currentQuestion = getQuestion(questions, state.lastQuestionIndex, state.questionsProbabilityArray);
 
-            this.setState({
+            setState({
+                ...state,
                 questionsProbabilityArray: questionsProbabilityArray,
                 currentQuestion: currentQuestion,
                 questions: questions
@@ -104,106 +100,108 @@ class SingleTest extends React.Component<SingleTestProps, SingleTestState> {
         }
     }
 
-    render() {
-        if(!this.shouldRender()) return <Redirect to="tests-main" />;
+    if(!shouldRender()) return <Redirect to="tests-main" />;
 
-        if(this.state.currentQuestion.length && !this.state.finished) {
-            const quiz = this.props.location.state.quiz;
-            const date = quiz['created_at'].split(' ')[0].replace(/-/g, '.');
-            const accuracy = getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven);
+    if(state.currentQuestion.length && !state.finished) {
+        const quiz = props.location.state.quiz;
+        const date = quiz['created_at'].split(' ')[0].replace(/-/g, '.');
+        const accuracy = getAnwerAccuracyPercent(state.answersCorrect, state.answersGiven);
 
-            return (
-                <React.Fragment>
-                    <Header/>
-                    <section className="c-test">
-                        <div className="o-container">
-                            <div className="c-test__header">
-                                <div className="c-test__data-container">
-                                    <h1 className="c-test__title o-title o-title--h2 o-title--line">{quiz['title']} <span className="c-test__id">(#{quiz['id']})</span></h1>
-                                    <p className="c-test__data-author o-text o-text--light o-text--gray o-text--semi-large">autor: {quiz['authorName']}</p>
-                                </div>
-                                <div className="c-test__data-container">
-                                    <p className="o-text o-text--light o-text--gray o-text--semi-large">data dodania:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">{date}</p>
-                                </div>
-                                <div className="c-test__data-container">
-                                    <p className="o-text o-text--light o-text--gray o-text--semi-large">typ testu:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">{quiz['type']}</p>
-                                </div>
-                                <div className="c-test__data-container">
-                                    <p className="o-text o-text--light o-text--gray o-text--semi-large">ocena:</p>
-                                    <p className="o-text o-text--light o-text--light-gray">{quiz['rating']}/5 (głosów: {quiz['votes']})</p>
-                                </div>
+        return (
+            <React.Fragment>
+                <Header/>
+                <section className="c-test">
+                    <div className="o-container">
+                        <div className="c-test__header">
+                            <div className="c-test__data-container">
+                                <h1 className="c-test__title o-title o-title--h2 o-title--line">{quiz['title']} <span className="c-test__id">(#{quiz['id']})</span></h1>
+                                <p className="c-test__data-author o-text o-text--light o-text--gray o-text--semi-large">autor: {quiz['authorName']}</p>
                             </div>
-                            <main className="c-test__main">
-                                <aside className="c-test__aside-menu">
-                                    <button className="c-test__go-back">
-                                        <ArrowLeftSVG />
-                                        <span className="c-test__go-back-text">poprzednia strona</span>
-                                    </button>
-                                    <Link className="c-test__aside-button" to="/">
-                                        <HomeSVG />
-                                        <span className="c-test__aside-button-value">Strona główna</span>
-                                    </Link>
-                                    <Link className="c-test__aside-button" to="/">
-                                        <RetrySVG />
-                                        <span className="c-test__aside-button-value">Zacznij od nowa</span>
-                                    </Link>
-                                    <Link className="c-test__aside-button" to="/tests-main">
-                                        <ChangeSVG />
-                                        <span className="c-test__aside-button-value">Wybierz inny test</span>
-                                    </Link>
-                                </aside>
-                                <section className="c-test__test">
-                                    <h2 className="c-test__test-questions-header">Pytania</h2>
-                                    <h3 className="c-test__question-title">{this.state.currentQuestion[0]['question']}</h3>
-                                    <Answers question={this.state.currentQuestion[0]} handleAnswer={this.handleAnswer}/>
-                                </section>
-                                <aside className="c-test__aside-stats c-test-stats">
-                                    <div className="c-test-stats__box">
-                                        <div className="c-test-stats__header">
-                                            Pozostałe pytania:
-                                        </div>
-                                        <div className="c-test-stats__value">
-                                            {Object.keys(this.state.questions).length - 1 - this.state.questionsEliminated}
-                                        </div>
-                                    </div>
-                                    <div className="c-test-stats__box">
-                                        <div className="c-test-stats__header">
-                                            Wyeliminowane:
-                                        </div>
-                                        <div className="c-test-stats__value">
-                                            {this.state.questionsEliminated}
-                                        </div>
-                                    </div>
-                                    <div className="c-test-stats__box">
-                                        <div className="c-test-stats__header">
-                                            Skuteczność:
-                                        </div>
-                                        <div className="c-test-stats__value">
-                                            {accuracy}%
-                                        </div>
-                                    </div>
-                                </aside>
-                            </main>
+                            <div className="c-test__data-container">
+                                <p className="o-text o-text--light o-text--gray o-text--semi-large">data dodania:</p>
+                                <p className="o-text o-text--light o-text--light-gray">{date}</p>
+                            </div>
+                            <div className="c-test__data-container">
+                                <p className="o-text o-text--light o-text--gray o-text--semi-large">typ testu:</p>
+                                <p className="o-text o-text--light o-text--light-gray">{quiz['type']}</p>
+                            </div>
+                            <div className="c-test__data-container">
+                                <p className="o-text o-text--light o-text--gray o-text--semi-large">ocena:</p>
+                                <p className="o-text o-text--light o-text--light-gray">{quiz['rating']}/5 (głosów: {quiz['votes']})</p>
+                            </div>
                         </div>
-                    </section>
-                </React.Fragment>
-            );
-        } else if(this.state.finished) {
-            return <Results score={getAnwerAccuracyPercent(this.state.answersCorrect, this.state.answersGiven)}/>
-        } else {
-            return (
-                <React.Fragment>
-                    <Header/>
-                    <main className="c-test">
-                        <div className="o-container">
-                            <Loader />
-                        </div>
-                    </main>
-                </React.Fragment>
-            )
-        }
+                        <main className="c-test__main">
+                            <aside className="c-test__aside-menu">
+                                <button className="c-test__go-back">
+                                    <ArrowLeftSVG />
+                                    <span className="c-test__go-back-text" onClick={() => props.history.goBack()}>poprzednia strona</span>
+                                </button>
+                                <Link className="c-test__aside-button" to="/">
+                                    <HomeSVG />
+                                    <span className="c-test__aside-button-value">Strona główna</span>
+                                </Link>
+                                <Link className="c-test__aside-button" to="/">
+                                    <RetrySVG />
+                                    <span className="c-test__aside-button-value">Zacznij od nowa</span>
+                                </Link>
+                                <Link className="c-test__aside-button" to="/tests-main">
+                                    <ChangeSVG />
+                                    <span className="c-test__aside-button-value">Wybierz inny test</span>
+                                </Link>
+                                <button className="c-test__aside-button" onClick={() => {console.log(`${window.location.href}?testId=${quiz['id']}`)}}>
+                                    <ChangeSVG />
+                                    <span className="c-test__aside-button-value">Udostępnij</span>
+                                </button>
+                            </aside>
+                            <section className="c-test__test">
+                                <h2 className="c-test__test-questions-header">Pytania</h2>
+                                <h3 className="c-test__question-title">{state.currentQuestion[0]['question']}</h3>
+                                <Answers question={state.currentQuestion[0]} handleAnswer={handleAnswer}/>
+                            </section>
+                            <aside className="c-test__aside-stats c-test-stats">
+                                <div className="c-test-stats__box">
+                                    <div className="c-test-stats__header">
+                                        Pozostałe pytania:
+                                    </div>
+                                    <div className="c-test-stats__value">
+                                        {Object.keys(state.questions).length - 1 - state.questionsEliminated}
+                                    </div>
+                                </div>
+                                <div className="c-test-stats__box">
+                                    <div className="c-test-stats__header">
+                                        Wyeliminowane:
+                                    </div>
+                                    <div className="c-test-stats__value">
+                                        {state.questionsEliminated}
+                                    </div>
+                                </div>
+                                <div className="c-test-stats__box">
+                                    <div className="c-test-stats__header">
+                                        Skuteczność:
+                                    </div>
+                                    <div className="c-test-stats__value">
+                                        {accuracy}%
+                                    </div>
+                                </div>
+                            </aside>
+                        </main>
+                    </div>
+                </section>
+            </React.Fragment>
+        );
+    } else if(state.finished) {
+        return <Results score={getAnwerAccuracyPercent(state.answersCorrect, state.answersGiven)}/>
+    } else {
+        return (
+            <React.Fragment>
+                <Header/>
+                <main className="c-test">
+                    <div className="o-container">
+                        <Loader />
+                    </div>
+                </main>
+            </React.Fragment>
+        )
     }
 }
 

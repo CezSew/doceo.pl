@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";
 import {requestDeleteQuiz, requestUserQuizes} from "../../../actions";
-import { Loader } from "../../utils/Loader";
+import Loader from "../../utils/Loader";
 import getTestHubListContent from "../TestsHub/utils/getTestHubListContent";
 import shouldListContentRender from "../TestsHub/utils/shouldListContentRender";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import '../../css/parts/loader.scss';
 
-export const Loader: React.FC = () => {
+const Loader: React.FC = () => {
     return (
         <div className="o-loader-container">
             <div className="o-loader">
@@ -17,3 +17,5 @@ export const Loader: React.FC = () => {
         </div>
     )
 }
+
+export default Loader;

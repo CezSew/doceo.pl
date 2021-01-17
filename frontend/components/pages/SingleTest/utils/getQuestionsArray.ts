@@ -6,7 +6,7 @@
  * @returns {Array} updated array of questions
  */
 
-export function getQuestionsArray(array: Array<number>, isCorrect: boolean, lastQuestionIndex: number) : Array<number> {
+function getQuestionsArray(array: Array<number>, isCorrect: boolean, lastQuestionIndex: number) : Array<number> {
     let updatedArray: Array<number> = [...array];
 
     if(!isCorrect) {
@@ -18,3 +18,5 @@ export function getQuestionsArray(array: Array<number>, isCorrect: boolean, last
 
     return updatedArray;
 }
+
+export default getQuestionsArray;

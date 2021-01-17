@@ -2,7 +2,7 @@ import axios from "axios";
 import store from '../../../../store';
 import { getJwt } from '../../../../helpers';
 
-export const sendQuizFinishedByUser = (userId, quizId, score) => {
+const sendQuizFinishedByUser = (userId, quizId, score) => {
     const host = store.getState().host;
 
     axios.post(`${host}/api/set-user-score`, {
@@ -13,3 +13,5 @@ export const sendQuizFinishedByUser = (userId, quizId, score) => {
         console.log(e);
     });
 }
+
+export default sendQuizFinishedByUser;

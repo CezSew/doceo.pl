@@ -25,10 +25,9 @@
     background: none;
     border: 0;
     color: $blue;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 600;
     cursor: pointer;
-
 
     &--dots {
         color: $black;
@@ -43,6 +42,6 @@
     }
 
     &:hover {
-        text-decoration: none;
+        text-decoration: underline;
     }
 }

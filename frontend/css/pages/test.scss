@@ -44,21 +44,13 @@
     &.correct {
         pointer-events: none;
         background-color: $green;
-
-        &:hover {
-            color: $white;
-            background-color: $green;
-        }
+        color: $white;
     }
 
     &.incorrect {
         pointer-events: none;
         background-color: $lightred;
-
-        &:hover {
-            color: $white;
-            background-color: $lightred;
-        }
+        color: $white;
     }
 }
 

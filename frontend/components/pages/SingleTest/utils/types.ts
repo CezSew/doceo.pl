@@ -13,6 +13,9 @@ export interface SingleTestProps {
     },
     user: {
         name: string|undefined
+    },
+    history: {
+        goBack: Function
     }
 }
 

@@ -2,7 +2,7 @@ import '../../../css/pages/userStats.scss';
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";
-import {Loader} from "../../utils/Loader";
+import Loader from "../../utils/Loader";
 import getTestHubListContent from "../TestsHub/utils/getTestHubListContent";
 import shouldListContentRender from "../TestsHub/utils/shouldListContentRender";
 import {requestUserFinishedQuizes} from "../../../actions";
