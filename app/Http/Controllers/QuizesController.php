@@ -45,7 +45,7 @@ class QuizesController extends Controller
     /*
      * Get quizes paginated list based on rating order
      */
-    public function getBestQuizes(Request $request) {
+    public function getQuizes(Request $request) {
         $this->validate($request, [
             'filter' => 'string',
             'userId' => 'string',
@@ -110,13 +110,26 @@ class QuizesController extends Controller
                     }
                 }
 
-                // push modified quiz item
+                unset($quiz['questions']); // we don't want to send questions
+
                 array_push($parsedQuizes, $quiz);
             }
         }
 
         array_push($response, $parsedQuizes);
         return response()->json($response, 201);
+    }
+
+    public function getQuizByID(Request$request) {
+        $this->validate($request, [
+            'quizId' => 'string'
+        ]);
+
+        $quiz_id =  $request->input('quizId');
+
+        $quiz = Quiz::where('id', $quiz_id)->get();
+
+        return response()->json($quiz, 201);
     }
 
     public function getUserQuizes(Request $request) {

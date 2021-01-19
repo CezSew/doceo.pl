@@ -38,7 +38,11 @@ const SingleTest = (props: SingleTestProps) => {
     }, []);
 
     const shouldRender = () => {
-        if(typeof props.location === 'undefined' || typeof props.location.state === 'undefined') {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const idParam = urlParams.get('testId');
+
+        if((typeof props.location === 'undefined' || typeof props.location.state === 'undefined') && !idParam) {
             return false;
         }
         return true;
@@ -85,6 +89,12 @@ const SingleTest = (props: SingleTestProps) => {
 
     const initModule = () => {
         if(!state.currentQuestion.length && shouldRender()) {
+            // const queryString = window.location.search;
+            // const urlParams = new URLSearchParams(queryString);
+            // const idParam = urlParams.get('testId');
+
+            // if idParam, request quiz information by ID
+
             const quiz = props.location.state.quiz;
             const questions = decodeQuestions(quiz.questions);
             const keys = Object.keys(questions).map(key => Number(key) - 1).filter(num => { return !isNaN(num)});

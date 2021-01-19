@@ -48,6 +48,7 @@ function setUser(user) {
 }
 
 const getTopQuizes = data => {
+    console.log(data)
     return { type: GET_TOP_QUIZES, payload: { ...data }}
 }
 
@@ -73,7 +74,15 @@ export const requestTopQuizes = (page = 1) => {
         const host = store.getState().host;
         dispatch(requestStarted());
 
-        axios.post(`${host}/api/get-top-quizes?page=${page}`,{
+        // axios.post(`${host}/api/get-top-quizes?page=${page}`,{
+        //     perPage: 5,
+        //     filter: "rating",
+        //     userId: activeUserId
+        // }).then((res => {
+        //     dispatch(getTopQuizes(res.data));
+        // }));
+
+        axios.post(`${host}/api/get-quizes?page=${page}`,{
             perPage: 5,
             filter: "rating",
             userId: activeUserId
