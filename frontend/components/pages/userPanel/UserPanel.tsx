@@ -4,7 +4,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import Header from "../../parts/Header";
 import { Link } from 'react-router-dom';
-import {handleLogout} from "../../../actions";
+import { handleLogout } from "../../../actions/user";
 
 const UserPanel = (props) => {
     return (

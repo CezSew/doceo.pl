@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../../../css/pages/login.scss';
 import Header from '../../parts/Header';
 import InputLine from '../../parts/InputLine';
-import { requestLogin } from "../../../actions";
+import { requestLogin } from "../../../actions/user";
 import { connect } from 'react-redux';
 import { LoginProps } from "./types";
 

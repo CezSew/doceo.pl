@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
+import axios from "axios";
+import '../../css/parts/header.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../../css/parts/header.scss';
-import { handleLogout } from '../../actions';
+import { handleLogout } from '../../actions/user';
 import { getJwt } from '../../helpers';
 import Logo from '../utils/svg/Logo';
-import axios from "axios";
-import {toggleMobileMenu} from "./utils";
+import { toggleMobileMenu } from "./utils";
 
 interface HeaderProps {
     user: {

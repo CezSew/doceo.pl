@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { testNameLetters } from '../../../helpers/testNameLetters';
 import ConditionalQuizLineWrapper from "./ConditionalQuizLineWrapper";
-import {requestTopQuizes} from "../../../actions";
+import { requestTopQuizes } from "../../../actions/quiz";
 
 interface QuizLineInterface {
     quiz: {

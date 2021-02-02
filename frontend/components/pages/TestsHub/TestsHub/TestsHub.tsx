@@ -1,7 +1,7 @@
 import './../../../../css/pages/testHub.scss';
 import React, {useEffect, useState} from "react";
 import { connect } from 'react-redux';
-import { requestTopQuizes } from '../../../../actions';
+import { requestTopQuizes } from '../../../../actions/quiz';
 import Loader from '../../../utils/Loader';
 import { TestsHubProps } from "./types";
 import Header from '../../../parts/Header';

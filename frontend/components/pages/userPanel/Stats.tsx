@@ -5,7 +5,7 @@ import Header from "../../parts/Header";
 import Loader from "../../utils/Loader";
 import getTestHubListContent from "../TestsHub/utils/getTestHubListContent";
 import shouldListContentRender from "../TestsHub/utils/shouldListContentRender";
-import {requestUserFinishedQuizes} from "../../../actions";
+import { requestUserFinishedQuizes } from "../../../actions/user";
 
 const Stats = ({user, isUserLoggedIn, userFinishedTests, onRequestQuizesFinishedByUser}) => {
     useEffect(() => {
